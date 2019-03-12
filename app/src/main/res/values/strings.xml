@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">Pet Lovers</string>
+    <string name="app_title_login">Login</string>
+
+    <!--Login-->
+    <string name="edtUsername">Username</string>
+    <string name="edtPassword">Password</string>
+    <string name="btnLogin">Confirm</string>
+    <string name="txtSignUp">Sign Up to be a Pet Lovers</string>
+    <string name="txtBuyer">Pet Lovers</string>
+    <string name="txtStaff">Executive Staff</string>
+
+    <!--Staff-->
+    <string name="title_activity_staff">Staff</string>
+    <string name="title_pet_addition">Pet Addition</string>
+    <string name="title_pet_list">Pet In Stocks</string>
+    <string name="title_user_list">Users List</string>
+    <string name="title_order_list">Orders List</string>
+    <string name="edtAnimalName">Animal Name</string>
+    <string name="txtAnimalGender">Gender:</string>
+    <string name="txtMale">Male</string>
+    <string name="txtFemale">Female</string>
+    <string name="edtAnimalPrice">Animal Price</string>
+    <string name="edtAnimalAmount">Animal Amount</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="errorNumberFormat">Animal Price and Amount must be a Number</string>
+    <string name="errorAnimalNameRestrict">Animal Name must have more than 5 characters</string>
+    <string name="errorPrice">Animal Price must cost more than 10.000 VND</string>
+    <string name="errorAmount">Animal Amount must be more than 0</string>
+    <string name="completeAnimalAdded">Insert Animal Complete</string>
+    <string name="failedAnimalAdded">Insert Animal Failed</string>
+
+    <!--User-->
+    <string name="title_activity_user">Pet Lovers</string>
+    <string name="titleUserMain">Main Screen</string>
+    <string name="titleUserNewFeed">New Feeds</string>
+    <string name="titleUserProfile">My Profile</string>
+
+    <!--User Market-->
+    <string name="txtUserPetMarket">Pet Market</string>
+    <string name="txtUserPetOrder">Pet Order</string>
+    <string name="txtUserPetLocation">Pet Lovers Store Location</string>
+    <string name="txtUserPetTrade">Trade My Pet</string>
+    <string name="txtUserPetCommunity">Pet Lovers Community</string>
+    <string name="txtUserMarketPetName">Pet Name:</string>
+    <string name="txtUserMarketPetGender">Pet Gender:</string>
+    <string name="txtUserMarketPrice">Cost per 1 pet:</string>
+    <string name="txtUserMarketPetAmount">Amount:</string>
+    <string name="titleDialogUserMarket">Pet Information</string>
+    <string name="dialogPrice">VND</string>
+    <string name="dialogAmount">remain</string>
+    <string name="btnUserMarketFind">Find</string>
+    <string name="edtUserMarketFind">Do you want to find some pet?</string>
+    <string name="errorUserMarketFind">Cannot find your pet</string>
+    <string name="txtUserMarketPetSeller">Seller:</string>
+    <string name="dialogBuy">Select amount you want to buy:</string>
+    <string name="alertDialogUserMarket">Order information</string>
+
+    <!--User Trade-->
+    <string name="menuCamera">Take a picture</string>
+    <string name="menuFolder">Use picture from folder</string>
+    <string name="menuTitle">Select your picture input type</string>
+    <string name="dialogTotalCost">Total cost you have to pay:</string>
+
+</resources>

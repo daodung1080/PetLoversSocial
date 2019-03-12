@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingBottom="60dp"
+        android:background="@color/colorBackground">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:id="@+id/imgUserBuy"
+                    android:src="@drawable/img_buy"/>
+            <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/imgUserOrder"
+                    android:src="@drawable/img_buyer_order"
+                    android:layout_weight="1"/>
+
+        </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:paddingRight="8dp"
+                android:text="@string/txtUserPetMarket"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/txtUserPetOrder"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+
+        <ImageView
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:id="@+id/imgUserTrade"
+                android:src="@drawable/img_pet_trade"/>
+        <ImageView
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:id="@+id/imgUserLocation"
+                android:src="@drawable/img_location"
+                android:layout_weight="1"/>
+
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:paddingRight="8dp"
+                android:text="@string/txtUserPetTrade"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/txtUserPetLocation"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+    </LinearLayout>
+
+    <ImageView
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:src="@drawable/img_pet_community"
+            android:id="@+id/imgUserCommunity"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txtUserPetCommunity"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+</LinearLayout>
