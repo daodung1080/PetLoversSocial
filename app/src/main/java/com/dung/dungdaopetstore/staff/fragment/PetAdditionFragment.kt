@@ -15,12 +15,9 @@ import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
+import android.widget.*
 import com.dung.dungdaopetstore.R
 import com.dung.dungdaopetstore.base.BaseFragment
-import android.widget.ImageView
-import android.widget.RadioButton
 import com.dung.dungdaopetstore.firebase.PetDatabase
 import kotlinx.android.synthetic.main.fragment_staff_pet_addition.view.*
 import java.io.FileNotFoundException
@@ -38,10 +35,16 @@ class PetAdditionFragment: BaseFragment() {
     lateinit var tilAnimalName: TextInputLayout
     lateinit var tilAnimalPrice: TextInputLayout
     lateinit var tilAnimalAmount: TextInputLayout
+    lateinit var tilAnimalWeight: TextInputLayout
 
     lateinit var edtAnimalName: EditText
     lateinit var edtAnimalPrice: EditText
     lateinit var edtAnimalAmount: EditText
+    lateinit var edtAnimalWeight: EditText
+
+    lateinit var spnAnimalCategory: Spinner
+    lateinit var spnList: List<String>
+    lateinit var spnAdapter: ArrayAdapter<String>
 
     lateinit var btnAnimalConfirm: Button
     lateinit var rdMale: RadioButton
@@ -57,8 +60,19 @@ class PetAdditionFragment: BaseFragment() {
         rootview = inflater.inflate(R.layout.fragment_staff_pet_addition, container,false)
 
         initView()
+        initSpinner()
 
         return rootview
+    }
+
+    private fun initSpinner() {
+        spnAnimalCategory = rootview.spnAnimalCategory
+        spnList = listOf(resources.getString(R.string.dog),resources.getString(R.string.cat),resources.getString(R.string.fish),
+            resources.getString(R.string.turtle),resources.getString(R.string.mouse),resources.getString(R.string.bird),
+            resources.getString(R.string.another))
+        spnAdapter = ArrayAdapter(context, R.layout.spinner_custom_text, spnList)
+        spnAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spnAnimalCategory.adapter = spnAdapter
     }
 
     fun validationAnimal(){
@@ -66,6 +80,8 @@ class PetAdditionFragment: BaseFragment() {
             var aName = edtAnimalName.text.toString()
             var aPrice = (edtAnimalPrice.text.toString()).toDouble()
             var aAmount = (edtAnimalAmount.text.toString()).toInt()
+            var aWeight = (edtAnimalWeight.text.toString()).toInt()
+            var aCategory = spnList.get(spnAnimalCategory.selectedItemPosition)
             var aGender = "Female"
             if(rdMale.isChecked){
                 aGender = "Male"
@@ -80,12 +96,17 @@ class PetAdditionFragment: BaseFragment() {
             }else if(aAmount < 0){
                 tilAnimalPrice.error = null
                 tilAnimalAmount.error = resources.getString(R.string.errorAmount)
-            }else if(petDatabase.insertAnimal(aName, aGender, aPrice, aAmount, imgAddition, true, "Pet Lovers headquarters Store") == true){
+            }else if(aWeight < 0){
+                tilAnimalAmount.error = null
+                tilAnimalWeight.error = resources.getString(R.string.errorWeight)
+            }else if(petDatabase.insertAnimal(aName, aGender, aPrice, aAmount, imgAddition, true
+                    , "Pet Lovers headquarters Store",aWeight,aCategory) == true){
                 clearAllEditText()
                 clearAllTextInputLayout()
                 imgAddition.setImageResource(R.drawable.img_addition)
                 showMessage(resources.getString(R.string.completeAnimalAdded),true)
-            }else if(petDatabase.insertAnimal(aName, aGender, aPrice, aAmount, imgAddition,true,"abc") == false){
+            }else if(petDatabase.insertAnimal(aName, aGender, aPrice, aAmount, imgAddition,true
+                    ,"abc",aWeight,aCategory) == false){
                 clearAllTextInputLayout()
                 showMessage(resources.getString(R.string.failedAnimalAdded),false)
             }
@@ -107,6 +128,7 @@ class PetAdditionFragment: BaseFragment() {
     }
 
     fun initView(){
+        edtAnimalWeight = rootview.edtAnimalWeight
         petDatabase = PetDatabase(context!!)
         imgAddition = rootview.imgAddition
         imgCamera = rootview.imgCamera

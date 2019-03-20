@@ -2,27 +2,27 @@ package com.dung.dungdaopetstore.user.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.widget.CardView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import com.dung.dungdaopetstore.R
 import com.dung.dungdaopetstore.base.BaseFragment
 import com.dung.dungdaopetstore.user.userbuy.UserBuyActivity
 import com.dung.dungdaopetstore.user.usercommunity.UserCommunityActivity
 import com.dung.dungdaopetstore.user.userorder.UserOrderActivity
-import com.dung.dungdaopetstore.user.usersell.UserSellActivity
+import com.dung.dungdaopetstore.user.useraddpet.UserAddPetActivity
 import kotlinx.android.synthetic.main.fragment_user_main_screen.view.*
 
 class UserMainScreenFragment: BaseFragment() {
 
     lateinit var rootview: View
 
-    lateinit var imgUserBuy: ImageView
-    lateinit var imgUserOrder: ImageView
-    lateinit var imgUserTrade: ImageView
-    lateinit var imgUserLocation: ImageView
-    lateinit var imgUserCommunity: ImageView
+    lateinit var cvMCMarket: CardView
+    lateinit var cvMCOrder: CardView
+    lateinit var cvMCSell: CardView
+    lateinit var cvMCLocation: CardView
+    lateinit var cvMCSocial: CardView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -36,21 +36,17 @@ class UserMainScreenFragment: BaseFragment() {
     }
 
     private fun onClickView() {
-        imgUserBuy.setOnClickListener {
-            startActivity(Intent(context, UserBuyActivity::class.java))
-        }
-        imgUserOrder.setOnClickListener { startActivity(Intent(context, UserOrderActivity::class.java)) }
-        imgUserTrade.setOnClickListener { startActivity(Intent(context, UserSellActivity::class.java)) }
-        imgUserLocation.setOnClickListener {  }
-        imgUserCommunity.setOnClickListener { startActivity(Intent(context, UserCommunityActivity::class.java)) }
+        cvMCMarket.setOnClickListener { startActivity(Intent(context, UserBuyActivity::class.java)) }
+        cvMCOrder.setOnClickListener { startActivity(Intent(context, UserOrderActivity::class.java)) }
+        cvMCSocial.setOnClickListener { startActivity(Intent(context, UserCommunityActivity::class.java)) }
     }
 
     fun initView(){
-        imgUserBuy = rootview.imgUserBuy
-        imgUserOrder = rootview.imgUserOrder
-        imgUserTrade = rootview.imgUserTrade
-        imgUserLocation = rootview.imgUserLocation
-        imgUserCommunity = rootview.imgUserCommunity
+        cvMCMarket = rootview.cvMCMarket
+        cvMCOrder = rootview.cvMCOrder
+        cvMCSell = rootview.cvMCSell
+        cvMCLocation = rootview.cvMCLocation
+        cvMCSocial = rootview.cvMCSocial
     }
 
 }

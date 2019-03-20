@@ -5,23 +5,69 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.util.Log
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import com.dung.dungdaopetstore.adapter.UserMarketAdapter
+import com.dung.dungdaopetstore.base.BaseActivity
 import com.dung.dungdaopetstore.model.Animal
+import com.dung.dungdaopetstore.model.User
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
 import es.dmoral.toasty.Toasty
 import java.io.ByteArrayOutputStream
 import java.lang.Exception
+import java.lang.IndexOutOfBoundsException
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class PetDatabase(var context: Context) {
+class PetDatabase(var context: Context){
+
+//    fun remainAmount(petID: String, bAmount: Int, pAmount: Int, totalPetMoney: Int, username: String): Boolean{
+//        var result = true
+//        var mData = FirebaseDatabase.getInstance().reference
+//        mData.child(Constants().userTable).orderByChild("username").equalTo(username)
+//            .addChildEventListener(object: ChildEventListener{
+//                override fun onCancelled(p0: DatabaseError) {
+//                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//                }
+//
+//                override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+//                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//                }
+//
+//                override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+//
+//                }
+//
+//                override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+//                    var user = p0.getValue(User::class.java)
+//                    var money = user!!.money
+//                    Toasty.success(context, "money: ${money} - username: $username - totalCost: $totalPetMoney").show()
+//                    if(money < totalPetMoney){
+//                        Toasty.error(context, "You dont have enough money to buy").show()
+////                        resource.getString(R.string.errorNotEnoughMoney) --- String dont recreate
+//                    }else {
+//                        mData.child(Constants().userTable).child(username).child("money")
+//                            .setValue(money - totalPetMoney)
+//                        mData.child(Constants().petTable).child(petID).child("amount")
+//                            .setValue(pAmount - bAmount)
+//                    }
+//                }
+//
+//                override fun onChildRemoved(p0: DataSnapshot) {
+//
+//                }
+//            })
+//        return result
+//    }
 
     fun insertAnimal(aName: String, aGender: String, aPrice: Double,
-                     aAmount: Int, img: ImageView, confirm: Boolean, seller: String): Boolean{
+                     aAmount: Int, img: ImageView, confirm: Boolean, seller: String
+                     ,petWeight: Int, aCategory: String): Boolean{
         var result: Boolean = true
         var mData: DatabaseReference = FirebaseDatabase.getInstance().reference
         var mStorage: FirebaseStorage = FirebaseStorage.getInstance("gs://dungdaopetstore.appspot.com")
@@ -47,7 +93,7 @@ class PetDatabase(var context: Context) {
                 var id = "animal$timetoMiliis"
                 var downloadURL = it.toString()
                 mData.child(Constants().petTable).child(id).setValue(
-                    Animal(id,aName, aGender, aPrice, aAmount, downloadURL,confirm,seller))
+                    Animal(id,aName, aGender, aPrice, aAmount, downloadURL,confirm,seller,petWeight,aCategory))
                     .addOnFailureListener {
                         result = false
                         Log.e("UserMarketError",it.toString())
@@ -61,8 +107,9 @@ class PetDatabase(var context: Context) {
     fun getAllAnimals(adapter: UserMarketAdapter,list: ArrayList<Animal>){
         var mData = FirebaseDatabase.getInstance().reference
 
-        mData.child(Constants().petTable).addChildEventListener(object : ChildEventListener{
-            var totalChild = -1
+        mData.child(Constants().petTable).orderByChild("confirm").equalTo(true)
+            .addChildEventListener(object : ChildEventListener{
+                var totalChild = -1
             override fun onCancelled(p0: DatabaseError) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
@@ -102,43 +149,34 @@ class PetDatabase(var context: Context) {
                 adapter.notifyDataSetChanged()
 
                 totalChild++
-
             }
         })
     }
 
-    fun findPet(adapter:UserMarketAdapter,list: ArrayList<Animal>, petName: String, error: String){
+    fun getInformationByName(petID: String, img: ImageView, name: TextView,
+                             gender: TextView, seller: TextView, amount: TextView, price: TextView
+                             , left: String,weight: TextView,category: TextView){
         var mData = FirebaseDatabase.getInstance().reference
-        mData.child(Constants().petTable).orderByChild("name").startAt(petName).endAt(petName)
-            .addChildEventListener(object: ChildEventListener{
+        mData.child(Constants().petTable).child(petID)
+            .addValueEventListener(object : ValueEventListener{
                 override fun onCancelled(p0: DatabaseError) {
-                    Toasty.error(context, error).show()
+
                 }
 
-                override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                }
-
-                override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                }
-
-                override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                        if (p0.childrenCount > 0){
-                            list.clear()
-                            var animal = p0.getValue(Animal::class.java)
-                            list.add(animal!!)
-                            adapter.notifyDataSetChanged()
-                        }else{
-                            Toasty.error(context, error).show()
-                        }
-                }
-
-                override fun onChildRemoved(p0: DataSnapshot) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                override fun onDataChange(p0: DataSnapshot) {
+                    var animal = p0.getValue(Animal::class.java)
+                    Picasso.get().load(animal!!.image).into(img)
+                    name.setText(animal.name)
+                    gender.setText(animal.gender)
+                    seller.setText(animal.seller)
+                    amount.setText("${animal.amount} ${left}")
+                    var fm = DecimalFormat("###,###,###")
+                    price.setText("${fm.format(animal.price)} VND")
+                    weight.setText("${animal.weight} kg")
+                    category.setText(animal.category)
                 }
 
             })
-    }
+        }
 
 }

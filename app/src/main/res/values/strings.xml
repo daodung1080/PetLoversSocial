@@ -6,9 +6,13 @@
     <string name="edtUsername">Username</string>
     <string name="edtPassword">Password</string>
     <string name="btnLogin">Confirm</string>
-    <string name="txtSignUp">Sign Up to be a Pet Lovers</string>
+    <string name="txtSignUp"><u>Sign Up to be a Pet Lovers</u></string>
     <string name="txtBuyer">Pet Lovers</string>
-    <string name="txtStaff">Executive Staff</string>
+    <string name="txtStaff">Supervisors Staff</string>
+    <string name="errorLoginComplete">Login Successfully</string>
+    <string name="errorLoginFailed">Login Failed because Username or Password does not exists</string>
+    <string name="errorLoginBanned">Your Account have been Banned by Supervisors please wait 5 days to take it back</string>
+
 
     <!--Staff-->
     <string name="title_activity_staff">Staff</string>
@@ -16,12 +20,22 @@
     <string name="title_pet_list">Pet In Stocks</string>
     <string name="title_user_list">Users List</string>
     <string name="title_order_list">Orders List</string>
-    <string name="edtAnimalName">Animal Name</string>
+    <string name="edtAnimalName">Pet Name</string>
     <string name="txtAnimalGender">Gender:</string>
     <string name="txtMale">Male</string>
     <string name="txtFemale">Female</string>
-    <string name="edtAnimalPrice">Animal Price</string>
-    <string name="edtAnimalAmount">Animal Amount</string>
+    <string name="edtAnimalPrice">Pet Price(VND)</string>
+    <string name="edtAnimalAmount">Pet Amount</string>
+    <string name="edtAnimalWeight">Pet Weight(Kg)</string>
+    <string name="edtAnimalCategory">Pet Category</string>
+
+    <string name="txtFullName">Fullname:</string>
+    <string name="txtPassword">Password:</string>
+    <string name="txtPhone">Phone:</string>
+    <string name="txtBannedTime">Banned Time:</string>
+    <string name="txtTradeTime">Trade Time:</string>
+    <string name="txtMoney">Money:</string>
+    <string name="txtTimes">times</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -29,43 +43,104 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
 
-    <string name="errorNumberFormat">Animal Price and Amount must be a Number</string>
-    <string name="errorAnimalNameRestrict">Animal Name must have more than 5 characters</string>
-    <string name="errorPrice">Animal Price must cost more than 10.000 VND</string>
-    <string name="errorAmount">Animal Amount must be more than 0</string>
-    <string name="completeAnimalAdded">Insert Animal Complete</string>
-    <string name="failedAnimalAdded">Insert Animal Failed</string>
+    <string name="errorNumberFormat">Pet Price, Amount and Weight must be a Number</string>
+    <string name="errorNumberFormat1">Pet Weight must be a Number</string>
+    <string name="errorAnimalNameRestrict">Pet Name must have more than 5 characters</string>
+    <string name="errorPrice">Pet Price must cost more than 10.000 VND</string>
+    <string name="errorAmount">Pet Amount must be bigger than 0</string>
+    <string name="errorWeight">Pet Weight must be bigger than 0</string>
+    <string name="completeAnimalAdded">Insert Pet Complete</string>
+    <string name="failedAnimalAdded">Insert Pet Failed</string>
 
     <!--User-->
     <string name="title_activity_user">Pet Lovers</string>
     <string name="titleUserMain">Main Screen</string>
     <string name="titleUserNewFeed">New Feeds</string>
     <string name="titleUserProfile">My Profile</string>
+    <string name="txtProfileSurplus">Surplus Money:</string>
+
+    <string name="vpPetBuy">My Pets Order</string>
+    <string name="vpPetSell">Pets I have Sold</string>
+
+    <string name="titleMCMarket">Click here to see and buy pet</string>
+    <string name="titleMCOrder">Click here to see all of your order</string>
+    <string name="titleMCSell">Click here to sell your pet</string>
+    <string name="titleMCLocation">Click here to see Pet Lovers Store Location</string>
+    <string name="titleMCSocial">Click here share your pet information or find someone</string>
 
     <!--User Market-->
     <string name="txtUserPetMarket">Pet Market</string>
-    <string name="txtUserPetOrder">Pet Order</string>
-    <string name="txtUserPetLocation">Pet Lovers Store Location</string>
+    <string name="txtUserPetOrder">My Order</string>
+    <string name="txtUserPetLocation">Store Location</string>
     <string name="txtUserPetTrade">Trade My Pet</string>
-    <string name="txtUserPetCommunity">Pet Lovers Community</string>
+    <string name="txtUserPetCommunity">Pet Lovers Social</string>
     <string name="txtUserMarketPetName">Pet Name:</string>
     <string name="txtUserMarketPetGender">Pet Gender:</string>
     <string name="txtUserMarketPrice">Cost per 1 pet:</string>
     <string name="txtUserMarketPetAmount">Amount:</string>
     <string name="titleDialogUserMarket">Pet Information</string>
     <string name="dialogPrice">VND</string>
-    <string name="dialogAmount">remain</string>
+    <string name="dialogAmount">left</string>
     <string name="btnUserMarketFind">Find</string>
     <string name="edtUserMarketFind">Do you want to find some pet?</string>
     <string name="errorUserMarketFind">Cannot find your pet</string>
     <string name="txtUserMarketPetSeller">Seller:</string>
     <string name="dialogBuy">Select amount you want to buy:</string>
     <string name="alertDialogUserMarket">Order information</string>
+    <string name="errorNotEnoughMoney">You dont have enough money to buy. Please purchase more money then try it again</string>
+
+    <string name="dialogMarketWarning">Do you really want to buy this pet?. You can write down your comment bellow this warning or not</string>
+    <string name="edtUserMarketComment">Write your comment...</string>
+    <string name="edtUserMarketComplete">Complete your order</string>
+    <string name="errorUserMarketBuyOwnPet">You cannot buy your own pet</string>
+    <string name="titleUserMarketBuyNewFeed">I just bought a new</string>
+    <string name="commentUserMarketBuyNewFeed">You can chat with me if you want to know about price, amount, health or anything about my new pet</string>
+
+    <string name="UserMarketBuyComplete">Your order will be delivered soon</string>
+    <string name="txtAnimalName">Name: </string>
 
     <!--User Trade-->
     <string name="menuCamera">Take a picture</string>
     <string name="menuFolder">Use picture from folder</string>
     <string name="menuTitle">Select your picture input type</string>
     <string name="dialogTotalCost">Total cost you have to pay:</string>
+
+    <!--Sign Up-->
+    <string name="edtUserFullName">Full name</string>
+    <string name="edtUserUsername">Username</string>
+    <string name="edtUserPassword">Password</string>
+    <string name="edtUserPhone">Phone number</string>
+    <string name="errorSignUpFullname">Full Name characters length Min is 5 and Max is 30</string>
+    <string name="errorSignUpUsername">Username characters length Min is 5 and Max is 30</string>
+    <string name="errorSignUpPassword">Password characters length Min is 5 and Max is 30</string>
+    <string name="errorSignUpPhone">Phone Number must only have 5 characters</string>
+    <string name="errorSignUpComplete">Sign up Successfully, for now you can login with this Account</string>
+    <string name="errorSignUpFailed1">Sign up Failed please check your internet connection again</string>
+    <string name="errorSignUpFailed">Cannot Sign Up because this Username have been used before</string>
+    <string name="cbUserMarketComment">Comment about this pet or something?</string>
+    <string name="txtUserOrderBuyID">Order ID:</string>
+    <string name="txtUserOrderBuyIDPet">Pet ID:</string>
+    <string name="txtUserOrderBuyAmount">Amount:</string>
+    <string name="txtUserOrderBuyMoney">Total Cost:</string>
+
+    <!--Order Buy-->
+    <string name="animals">pet</string>
+    <string name="txtUserMarketPetPrice">Price:</string>
+    <string name="txtMarketBuyNow">Buy Now</string>
+    <string name="txtUserUpdateInformation">Update your information</string>
+    <string name="txtUserPurchaseMoney">Purchase more money</string>
+    <string name="txtUserAddPet">Your Pet</string>
+    <string name="txtOrderAccept">is Accepted?</string>
+
+    <!--Pet name-->
+    <string name="dog">Dog</string>
+    <string name="cat">Cat</string>
+    <string name="turtle">Turtle</string>
+    <string name="fish">Fish</string>
+    <string name="mouse">Mouse</string>
+    <string name="bird">Bird</string>
+    <string name="another">Difference</string>
+    <string name="txtAnimalWeight">Weight:</string>
+    <string name="txtAnimalCategory">Category:</string>
 
 </resources>

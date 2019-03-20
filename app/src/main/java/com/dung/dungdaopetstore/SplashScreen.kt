@@ -4,7 +4,10 @@ import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import com.dung.dungdaopetstore.base.BaseActivity
+import com.dung.dungdaopetstore.firebase.Constants
 import com.dung.dungdaopetstore.loginsignup.LoginActivity
+import com.dung.dungdaopetstore.model.Headquaters
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 import java.util.*
 import kotlin.concurrent.schedule
@@ -20,8 +23,6 @@ class SplashScreen : BaseActivity() {
     }
 
     fun startAnim(){
-        var anim: AnimationDrawable = imgSplashScreen.background as AnimationDrawable
-        anim.start()
 
         var timer = Timer()
         timer.schedule(100){

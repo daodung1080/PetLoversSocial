@@ -9,17 +9,6 @@
         android:background="@color/colorBackground">
 
     <ImageView
-            android:layout_width="53.7dp"
-            android:layout_height="47.1dp"
-            android:id="@+id/imgSplashScreen"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@drawable/img_dog"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"/>
-
-    <ImageView
             android:layout_width="350dp"
             android:layout_height="200dp"
             app:srcCompat="@drawable/img_logo"

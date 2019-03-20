@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".user.userbuy.UserBuyInformationActivity"
+        android:background="@color/colorBackground"
+        android:padding="@dimen/layout_padding_size">
+
+    <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="1dp"
+            app:cardCornerRadius="0dp">
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginTop="@dimen/margin_layout_size"
+                android:src="@drawable/img_animal"
+                android:id="@+id/imgMarketImage"/>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            app:cardElevation="3dp"
+            app:cardCornerRadius="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="185dp">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_margin="10dp">
+
+                <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/img_category"
+                        android:layout_weight="2"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.1"
+                        android:layout_gravity="center"
+                        android:text="@string/txtAnimalCategory"
+                        android:textSize="@dimen/edt_txt_size"
+                        android:textStyle="bold"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Dog"
+                        android:layout_weight="5.9"
+                        android:textSize="@dimen/edt_txt_size"
+                        android:id="@+id/txtMarketCategory"
+                        android:layout_gravity="center"/>
+
+            </LinearLayout>
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="10"
+                        android:layout_margin="10dp">
+
+                        <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="25dp"
+                                android:src="@drawable/img_pet_name"
+                                android:layout_weight="2"/>
+                        <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2.1"
+                                android:layout_gravity="center"
+                                android:text="@string/txtAnimalName"
+                                android:textSize="@dimen/edt_txt_size"
+                                android:textStyle="bold"/>
+                        <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="White Coggi"
+                                android:layout_weight="5.9"
+                                android:textSize="@dimen/edt_txt_size"
+                                android:id="@+id/txtMarketName"
+                                android:layout_gravity="center"/>
+
+                </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_margin="10dp">
+
+                <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/img_gender"
+                        android:layout_weight="2"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.1"
+                        android:layout_gravity="center"
+                        android:text="@string/txtAnimalGender"
+                        android:textSize="@dimen/edt_txt_size"
+                        android:textStyle="bold"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Male"
+                        android:textSize="@dimen/edt_txt_size"
+                        android:layout_weight="5.9"
+                        android:id="@+id/txtMarketGender"
+                        android:layout_gravity="center"/>
+
+            </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_margin="10dp">
+
+                <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/img_weight"
+                        android:layout_weight="2"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.1"
+                        android:layout_gravity="center"
+                        android:text="@string/txtAnimalWeight"
+                        android:textSize="@dimen/edt_txt_size"
+                        android:textStyle="bold"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Male"
+                        android:textSize="@dimen/edt_txt_size"
+                        android:layout_weight="5.9"
+                        android:id="@+id/txtMarketWeight"
+                        android:layout_gravity="center"/>
+
+            </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_margin="10dp">
+
+                <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/img_seller"
+                        android:layout_weight="2"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.1"
+                        android:layout_gravity="center"
+                        android:text="@string/txtUserMarketPetSeller"
+                        android:textSize="@dimen/edt_txt_size"
+                        android:textStyle="bold"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="dung123"
+                        android:textSize="@dimen/edt_txt_size"
+                        android:layout_weight="5.9"
+                        android:id="@+id/txtMarketSeller"
+                        android:layout_gravity="center"/>
+
+            </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_margin="10dp">
+
+                <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/img_amount"
+                        android:layout_weight="2"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.1"
+                        android:layout_gravity="center"
+                        android:text="@string/txtUserMarketPetAmount"
+                        android:textSize="@dimen/edt_txt_size"
+                        android:textStyle="bold"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="11 left"
+                        android:textSize="@dimen/edt_txt_size"
+                        android:layout_weight="5.9"
+                        android:id="@+id/txtMarketAmount"
+                        android:layout_gravity="center"/>
+
+            </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_margin="10dp">
+
+                <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/img_price"
+                        android:layout_weight="2"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.1"
+                        android:layout_gravity="center"
+                        android:text="@string/txtUserMarketPetPrice"
+                        android:textSize="@dimen/edt_txt_size"
+                        android:textStyle="bold"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="2,400,000 VND"
+                        android:textSize="@dimen/edt_txt_size"
+                        android:layout_weight="5.9"
+                        android:id="@+id/txtMarketPrice"
+                        android:layout_gravity="center"
+                        />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/margin_layout_size"
+            android:clickable="true"
+            android:id="@+id/cvMarketBuy"
+            app:cardBackgroundColor="#f1f1f1"
+            android:foreground="?android:attr/selectableItemBackground">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/layout_padding_size"
+                android:weightSum="10">
+
+                <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/img_shopping_cart_1"
+                        android:layout_weight="3"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="7"
+                        android:gravity="center"
+                        android:text="@string/txtMarketBuyNow"
+                        android:textStyle="bold"
+                        android:paddingRight="30dp"
+                        android:textColor="#c20303"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</RelativeLayout>

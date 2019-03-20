@@ -7,4 +7,6 @@ data class Animal(var id: String = "",
                   var amount: Int = 0,
                   var image: String = "",
                   var confirm: Boolean = true,
-                  var seller: String = "")
+                  var seller: String = "",
+                  var weight: Int = 0,
+                  var category: String = "")

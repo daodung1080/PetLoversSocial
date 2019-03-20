@@ -1,13 +1,16 @@
 package com.dung.dungdaopetstore.adapter
 
+import android.content.Context
 import android.support.transition.FragmentTransitionSupport
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
+import com.dung.dungdaopetstore.R
+import com.dung.dungdaopetstore.user.userorder.UserOrderActivity
 import com.dung.dungdaopetstore.user.userorder.fragment.UserOrderBuyFragment
 import com.dung.dungdaopetstore.user.userorder.fragment.UserOrderSellFragment
 
-class ViewPagerUserOrderAdapter(fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
+class ViewPagerUserOrderAdapter(fm: FragmentManager?, var context: UserOrderActivity) : FragmentStatePagerAdapter(fm) {
 
     override fun getItem(p0: Int): Fragment {
         var fragment: Fragment? = null
@@ -26,8 +29,8 @@ class ViewPagerUserOrderAdapter(fm: FragmentManager?) : FragmentStatePagerAdapte
         var title = ""
 
         when(position){
-            0 -> title = "Your Pet Buy Order"
-            1 -> title = "Your Pet Trade Order"
+            0 -> title = context.resources.getString(R.string.vpPetBuy)
+            1 -> title = context.resources.getString(R.string.vpPetSell)
         }
 
         return title

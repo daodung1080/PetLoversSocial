@@ -34,7 +34,7 @@
         </activity>
         <activity android:name=".user.userorder.UserOrderActivity">
         </activity>
-        <activity android:name=".user.usersell.UserSellActivity">
+        <activity android:name=".user.useraddpet.UserAddPetActivity">
         </activity>
         <activity android:name=".user.usercommunity.UserCommunityActivity">
         </activity>
@@ -44,6 +44,10 @@
                 android:name=".staff.StaffActivity"
                 android:label="@string/title_activity_staff"
                 android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".user.userbuy.UserBuyInformationActivity">
+        </activity>
+        <activity android:name=".user.useraddpet.UserPetListActivity">
         </activity>
     </application>
 

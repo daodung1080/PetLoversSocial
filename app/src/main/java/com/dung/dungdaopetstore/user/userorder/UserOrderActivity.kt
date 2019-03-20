@@ -13,6 +13,8 @@ class UserOrderActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_order)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
+        supportActionBar!!.setIcon(R.drawable.img_back)
 
         viewPagerControl()
 
@@ -20,7 +22,7 @@ class UserOrderActivity : AppCompatActivity() {
 
     private fun viewPagerControl() {
 
-        adapterViewPager = ViewPagerUserOrderAdapter(supportFragmentManager)
+        adapterViewPager = ViewPagerUserOrderAdapter(supportFragmentManager,this)
         vpUserOrder.adapter = adapterViewPager
         tlUserOrder.setupWithViewPager(vpUserOrder)
 

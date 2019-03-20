@@ -1,47 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:padding="10dp"
-        android:background="@color/colorBackground">
+        android:padding="@dimen/layout_padding_size">
+
+    <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="2dp"
+            android:layout_margin="5dp"
+            android:id="@+id/cvUserMarket"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground">
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="10">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="2"
-                    app:civ_border_width="2dp"
-                    android:id="@+id/imgUserMarketProfile"
-                    app:civ_border_color="@color/colorStartBtn"
-                    android:src="@drawable/img_animal"/>
-            <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txtUserMarketPetName"
-                    android:layout_weight="2.2"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"/>
-            <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="4.3"
-                    android:text="White pitbull"
-                    android:id="@+id/txtUserMarketPetName"/>
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_margin="10dp">
             <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:id="@+id/imgUserMarketBuy"
-                    android:src="@drawable/img_buyer_buy"
-                    android:layout_weight="1.5"/>
+                    android:layout_width="180dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/img_animal"
+                    android:id="@+id/imgUserMarketProfile"/>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_marginTop="@dimen/layout_padding_size">
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3.5"
+                        android:text="@string/txtUserMarketPetName"
+                        android:textSize="@dimen/userorderbuy_txt_size"
+                        android:textStyle="bold"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6.5"
+                        android:text="order1141343424"
+                        android:id="@+id/txtUserMarketPetName"
+                        android:gravity="center"
+                        android:textSize="@dimen/userorderbuy_txt_size"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3.5"
+                        android:text="@string/txtUserMarketPetGender"
+                        android:textSize="@dimen/userorderbuy_txt_size"
+                        android:textStyle="bold"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6.5"
+                        android:text="order1141343424"
+                        android:gravity="center"
+                        android:id="@+id/txtUserMarketPetGender"
+                        android:textSize="@dimen/userorderbuy_txt_size"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3.5"
+                        android:text="@string/txtUserMarketPetPrice"
+                        android:textSize="@dimen/userorderbuy_txt_size"
+                        android:textStyle="bold"/>
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6.5"
+                        android:text="order1141343424"
+                        android:gravity="center"
+                        android:id="@+id/txtUserMarketPetPrice"
+                        android:textSize="@dimen/userorderbuy_txt_size"/>
+            </LinearLayout>
 
         </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
