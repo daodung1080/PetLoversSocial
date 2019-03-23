@@ -1,7 +1,6 @@
 package com.dung.dungdaopetstore.model
 
-data class NewFeed(var userImage: String = "",
-                   var petImage: String = "",
+data class NewFeed(var petImage: String = "",
                    var title: String = "",
                    var userComment: String = "",
                    var date: String = "",

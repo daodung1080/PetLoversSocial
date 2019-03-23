@@ -2,6 +2,7 @@ package com.dung.dungdaopetstore.firebase
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.util.Log
 import android.widget.ImageView
@@ -155,7 +156,7 @@ class PetDatabase(var context: Context){
 
     fun getInformationByName(petID: String, img: ImageView, name: TextView,
                              gender: TextView, seller: TextView, amount: TextView, price: TextView
-                             , left: String,weight: TextView,category: TextView){
+                             , left: String,weight: TextView,category: TextView,soldOut: String){
         var mData = FirebaseDatabase.getInstance().reference
         mData.child(Constants().petTable).child(petID)
             .addValueEventListener(object : ValueEventListener{
@@ -169,7 +170,13 @@ class PetDatabase(var context: Context){
                     name.setText(animal.name)
                     gender.setText(animal.gender)
                     seller.setText(animal.seller)
-                    amount.setText("${animal.amount} ${left}")
+                    if(animal.amount > 0){
+                        amount.setTextColor(Color.GRAY)
+                        amount.setText("${animal.amount} ${left}")
+                    }else{
+                        amount.setTextColor(Color.RED)
+                        amount.setText(soldOut)
+                    }
                     var fm = DecimalFormat("###,###,###")
                     price.setText("${fm.format(animal.price)} VND")
                     weight.setText("${animal.weight} kg")

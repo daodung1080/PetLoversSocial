@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".user.userupdate.UserUpdateActivity"
+        android:background="@color/colorBackground"
+        android:padding="@dimen/layout_padding_size"
+        android:orientation="vertical">
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:src="@drawable/img_full_name"
+                android:layout_margin="@dimen/margin_layout_size"/>
+
+        <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="2dp"
+                app:cardCornerRadius="0dp"
+                android:layout_margin="@dimen/margin_cv_size"
+                android:id="@+id/cvUpdateFullname"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="@dimen/margin_layout_size">
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txtFullName"
+                        android:textSize="@dimen/edt_txt_size"
+                        android:textColor="@color/colorStartBtn"/>
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorCardView"
+                        android:layout_marginTop="@dimen/margin_cv_size"
+                        android:layout_marginBottom="@dimen/margin_cv_size"
+                        ></View>
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Dao Viet Dung"
+                        android:textSize="@dimen/edt_txt_size"
+                        android:id="@+id/txtUpdateFullname"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="2dp"
+            app:cardCornerRadius="0dp"
+            android:layout_margin="@dimen/margin_cv_size"
+            android:clickable="true"
+            android:id="@+id/cvUpdateAddress"
+            android:foreground="?android:attr/selectableItemBackground">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/margin_layout_size">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txtAddress"
+                    android:textSize="@dimen/edt_txt_size"
+                    android:textColor="@color/colorStartBtn"/>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorCardView"
+                    android:layout_marginTop="@dimen/margin_cv_size"
+                    android:layout_marginBottom="@dimen/margin_cv_size"
+                    ></View>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Yen Hoa Street - Ha Noi"
+                    android:textSize="@dimen/edt_txt_size"
+                    android:id="@+id/txtUpdateAddress"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="2dp"
+            app:cardCornerRadius="0dp"
+            android:layout_margin="@dimen/margin_cv_size"
+            android:id="@+id/cvUpdatePhone"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/margin_layout_size">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txtPhone"
+                    android:textSize="@dimen/edt_txt_size"
+                    android:textColor="@color/colorStartBtn"/>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorCardView"
+                    android:layout_marginTop="@dimen/margin_cv_size"
+                    android:layout_marginBottom="@dimen/margin_cv_size"
+                    ></View>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0987826698"
+                    android:id="@+id/txtUpdatePhone"
+                    android:textSize="@dimen/edt_txt_size"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="2dp"
+            app:cardCornerRadius="0dp"
+            android:layout_margin="@dimen/margin_cv_size"
+            android:clickable="true"
+            android:id="@+id/cvUpdatePassword"
+            android:foreground="?android:attr/selectableItemBackground">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/margin_layout_size">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txtPassword"
+                    android:textSize="@dimen/edt_txt_size"
+                    android:textColor="@color/colorStartBtn"/>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorCardView"
+                    android:layout_marginTop="@dimen/margin_cv_size"
+                    android:layout_marginBottom="@dimen/margin_cv_size"
+                    ></View>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dao Viet Dung"
+                    android:inputType="textPassword"
+                    android:id="@+id/txtUpdatePassword"
+                    android:textSize="@dimen/edt_txt_size"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

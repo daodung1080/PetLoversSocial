@@ -45,12 +45,15 @@
 
     <string name="errorNumberFormat">Pet Price, Amount and Weight must be a Number</string>
     <string name="errorNumberFormat1">Pet Weight must be a Number</string>
+    <string name="errorNumberFormat2">Pet Price must be a Number</string>
     <string name="errorAnimalNameRestrict">Pet Name must have more than 5 characters</string>
     <string name="errorPrice">Pet Price must cost more than 10.000 VND</string>
     <string name="errorAmount">Pet Amount must be bigger than 0</string>
     <string name="errorWeight">Pet Weight must be bigger than 0</string>
-    <string name="completeAnimalAdded">Insert Pet Complete</string>
+    <string name="completeAnimalAdded">Insert Pet Completed</string>
     <string name="failedAnimalAdded">Insert Pet Failed</string>
+    <string name="errorUserSellPetComplete">Completed step 1. Now you need to wait Pet Lovers store accept your order, you can see your bill status in Order Screen</string>
+    <string name="errorUserSellPetFailed">You cannot sell your pet. Please your internet connection then try it again</string>
 
     <!--User-->
     <string name="title_activity_user">Pet Lovers</string>
@@ -96,7 +99,7 @@
     <string name="titleUserMarketBuyNewFeed">I just bought a new</string>
     <string name="commentUserMarketBuyNewFeed">You can chat with me if you want to know about price, amount, health or anything about my new pet</string>
 
-    <string name="UserMarketBuyComplete">Your order will be delivered soon</string>
+    <string name="UserMarketBuyComplete">is your pet now</string>
     <string name="txtAnimalName">Name: </string>
 
     <!--User Trade-->
@@ -113,7 +116,8 @@
     <string name="errorSignUpFullname">Full Name characters length Min is 5 and Max is 30</string>
     <string name="errorSignUpUsername">Username characters length Min is 5 and Max is 30</string>
     <string name="errorSignUpPassword">Password characters length Min is 5 and Max is 30</string>
-    <string name="errorSignUpPhone">Phone Number must only have 5 characters</string>
+    <string name="errorSignUpPhone">Phone Number must have 5 characters</string>
+    <string name="errorSignUpAddress">Address characters length Min is 5 and Max is 40</string>
     <string name="errorSignUpComplete">Sign up Successfully, for now you can login with this Account</string>
     <string name="errorSignUpFailed1">Sign up Failed please check your internet connection again</string>
     <string name="errorSignUpFailed">Cannot Sign Up because this Username have been used before</string>
@@ -122,15 +126,26 @@
     <string name="txtUserOrderBuyIDPet">Pet ID:</string>
     <string name="txtUserOrderBuyAmount">Amount:</string>
     <string name="txtUserOrderBuyMoney">Total Cost:</string>
+    <string name="updateComplete">Update information completed</string>
+    <string name="updateFailed">Update information failed. Please recheck your internet connection</string>
 
     <!--Order Buy-->
     <string name="animals">pet</string>
     <string name="txtUserMarketPetPrice">Price:</string>
     <string name="txtMarketBuyNow">Buy Now</string>
     <string name="txtUserUpdateInformation">Update your information</string>
+    <string name="txtUserUpdateFullname">Update your Fullname</string>
+    <string name="txtUserUpdateAddress">Update your Address</string>
+    <string name="txtUserUpdatePhoneNumber">Update your Phone number</string>
+    <string name="txtUserUpdatePassword">Update your Password</string>
+    <string name="errorEmpty">Information characters length max is 40 and min is 5</string>
     <string name="txtUserPurchaseMoney">Purchase more money</string>
     <string name="txtUserAddPet">Your Pet</string>
     <string name="txtOrderAccept">is Accepted?</string>
+    <string name="txtUserMarketPetStatus">Status:</string>
+    <string name="txtAvailable">Available</string>
+    <string name="txtSoldOut">Sold Out</string>
+    <string name="txtUserMarketSoldOut">This pet is out of stock. You can buy it next time</string>
 
     <!--Pet name-->
     <string name="dog">Dog</string>
@@ -142,5 +157,29 @@
     <string name="another">Difference</string>
     <string name="txtAnimalWeight">Weight:</string>
     <string name="txtAnimalCategory">Category:</string>
+
+    <!--User Sell-->
+    <string name="txtUserSellValuation">Typing Pet price</string>
+    <string name="titleUserSellValuation">Pet Valuation</string>
+    <string name="txtAddress">Address:</string>
+    <string name="txtUpdateInformation">Typing your information</string>
+    <string name="txtUserAddress">Address</string>
+    <string name="valuePurchase">Choose value you want to purchase</string>
+    <string name="txtMarketContact">Contact</string>
+
+    <string name="txtUserUpdatePetName">Update your Pet name</string>
+    <string name="txtUserUpdatePetGender">Update your Pet gender</string>
+    <string name="txtUserUpdatePetWeight">Update your Pet weight</string>
+
+    <string name="removePet">Are you really want to remove</string>
+    <string name="imgProfileFailed">Update profile avatar failed. Please check your internet connection then try update again</string>
+    <string name="petRemoveFailed">Remove pet failed. Please check your internet connection then try it again</string>
+    <string name="txtWriteTitle">Write your title...</string>
+    <string name="txtWriteDescription">Write your desciption...</string>
+
+    <string name="errorShareTitle">Title characters length Min is 0 and Max is 40</string>
+    <string name="errorShareDescribe">Desciption characters length Min is 0 and Max is 250</string>
+    <string name="errorShareComplete">Share completed</string>
+    <string name="errorShareFailed">Share Failed. Please check your internet connection then try it again</string>
 
 </resources>

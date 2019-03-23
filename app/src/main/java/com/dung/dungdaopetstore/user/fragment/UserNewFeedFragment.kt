@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import com.dung.dungdaopetstore.R
 import com.dung.dungdaopetstore.adapter.NewFeedAdapter
 import com.dung.dungdaopetstore.base.BaseFragment
@@ -66,7 +67,13 @@ class UserNewFeedFragment: BaseFragment() {
         var dialog = alertDialog.create()
         dialog.window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
+        dissmissDialog(dialog,imgDialogNewFeedPetImage)
     }
 
+    fun dissmissDialog(alertDialog: AlertDialog, img: ImageView){
+        img.setOnClickListener {
+            alertDialog.dismiss()
+        }
+    }
 
 }

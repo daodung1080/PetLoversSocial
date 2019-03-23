@@ -74,7 +74,6 @@ class LoginActivity : BaseActivity() {
                     if (p0.childrenCount > 0){
                         clearAllEDT()
                         clearAllTIL()
-                        showMessage(resources.getString(R.string.errorLoginComplete),true)
                         var intent = Intent(this@LoginActivity, UserActivity::class.java)
                         startActivity(intent)
                         rememberUser(username)

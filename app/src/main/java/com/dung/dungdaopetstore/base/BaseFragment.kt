@@ -14,7 +14,7 @@ open class BaseFragment: Fragment() {
         if(switch == true){
             Toasty.success(context!!, message).show()
         }else{
-            Toasty.error(context!!, message).show()
+            Toasty.info(context!!, message).show()
         }
     }
 

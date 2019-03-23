@@ -49,6 +49,16 @@
         </activity>
         <activity android:name=".user.useraddpet.UserPetListActivity">
         </activity>
+        <activity android:name=".user.usersell.UserSellPetActivity">
+        </activity>
+        <activity android:name=".user.userupdate.UserUpdateActivity">
+        </activity>
+        <activity android:name=".user.userpurchase.UserPurchaseActivity">
+        </activity>
+        <activity android:name=".user.useraddpet.UserPetUpdateActivity">
+        </activity>
+        <activity android:name=".user.useraddpet.UserPetShareActivity">
+        </activity>
     </application>
 
 </manifest>

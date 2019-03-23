@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+    <ImageView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="2"
+            android:layout_gravity="center"
+            android:src="@drawable/img_gender"/>
+    <RadioGroup
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/rdMale"
+            android:layout_weight="8"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:background="@drawable/ic_bg_pink"
+            android:weightSum="10">
+
+        <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_bg_toggle"
+                android:layout_weight="5"
+                android:id="@+id/rdMale"
+                android:text="@string/txtMale"
+                android:gravity="center"
+                android:textColor="@color/colorBackground"
+                android:button="@null"
+                />
+
+        <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_bg_toggle"
+                android:layout_weight="5"
+                android:id="@+id/rdFemale"
+                android:text="@string/txtFemale"
+                android:gravity="center"
+                android:textColor="@color/colorBackground"
+                android:button="@null"
+                />
+    </RadioGroup>
+
+</LinearLayout>

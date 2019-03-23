@@ -7,8 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dung.dungdaopetstore.R
+import com.dung.dungdaopetstore.firebase.Constants
 import com.dung.dungdaopetstore.model.NewFeed
 import com.dung.dungdaopetstore.user.fragment.UserNewFeedFragment
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.list_item_user_new_feed.view.*
@@ -31,13 +36,26 @@ class NewFeedAdapter(var context: Context, var list: ArrayList<NewFeed>,var frag
         holder.txtNewFeedTitle.text = newFeed.title
         holder.txtNewFeedComment.text = newFeed.userComment
         Picasso.get().load(newFeed.petImage).into(holder.imgNewFeedBackground)
-        Picasso.get().load(newFeed.userImage).into(holder.imgNewFeedProfile)
         holder.cvNewFeed.setOnClickListener {
             Toasty.success(context, "You need to chat with ${newFeed.username}? please wait for the next version").show()
         }
         holder.cvNewFeedImageClick.setOnClickListener {
             fragment.getPetImage(p1)
         }
+
+        var mData = FirebaseDatabase.getInstance().reference
+        mData.child(Constants().userTable).child(newFeed.username).child("image")
+            .addValueEventListener(object: ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {
+
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    var image = p0.value as String
+                    Picasso.get().load(image).into(holder.imgNewFeedProfile)
+                }
+
+            })
 
     }
 

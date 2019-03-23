@@ -31,6 +31,15 @@ class UserPetListAdapter(var context: UserPetListActivity, var list: ArrayList<O
         holder.cvUserPetListShow.setOnClickListener {
             context.getPetImage(p1)
         }
+        holder.cvPetRemove.setOnClickListener {
+            context.removePet(p1)
+        }
+        holder.cvPetConfig.setOnClickListener {
+            context.configPet(p1)
+        }
+        holder.cvPetShare.setOnClickListener {
+            context.sharePet(p1)
+        }
     }
 
     class UserHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -40,5 +49,8 @@ class UserPetListAdapter(var context: UserPetListActivity, var list: ArrayList<O
         var txtUserPetListGender = view.txtUserPetListGender
         var txtUserPetListWeight = view.txtUserPetListWeight
         var imgUserPetListShow = view.imgUserPetListShow
+        var cvPetRemove = view.cvPetRemove
+        var cvPetConfig = view.cvPetConfig
+        var cvPetShare = view.cvPetShare
     }
 }

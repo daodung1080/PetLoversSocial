@@ -6,12 +6,15 @@ import android.support.v7.widget.CardView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import com.dung.dungdaopetstore.R
 import com.dung.dungdaopetstore.base.BaseFragment
 import com.dung.dungdaopetstore.user.userbuy.UserBuyActivity
 import com.dung.dungdaopetstore.user.usercommunity.UserCommunityActivity
 import com.dung.dungdaopetstore.user.userorder.UserOrderActivity
 import com.dung.dungdaopetstore.user.useraddpet.UserAddPetActivity
+import com.dung.dungdaopetstore.user.usersell.UserSellPetActivity
 import kotlinx.android.synthetic.main.fragment_user_main_screen.view.*
 
 class UserMainScreenFragment: BaseFragment() {
@@ -36,17 +39,27 @@ class UserMainScreenFragment: BaseFragment() {
     }
 
     private fun onClickView() {
+
         cvMCMarket.setOnClickListener { startActivity(Intent(context, UserBuyActivity::class.java)) }
+        cvMCSell.setOnClickListener { startActivity(Intent(context, UserSellPetActivity::class.java)) }
         cvMCOrder.setOnClickListener { startActivity(Intent(context, UserOrderActivity::class.java)) }
         cvMCSocial.setOnClickListener { startActivity(Intent(context, UserCommunityActivity::class.java)) }
     }
 
     fun initView(){
+        var anim = AnimationUtils.loadAnimation(context,R.anim.anim_main_screen)
         cvMCMarket = rootview.cvMCMarket
         cvMCOrder = rootview.cvMCOrder
         cvMCSell = rootview.cvMCSell
         cvMCLocation = rootview.cvMCLocation
         cvMCSocial = rootview.cvMCSocial
+
+//        cvMCMarket.startAnimation(anim)
+//        cvMCOrder.startAnimation(anim)
+//        cvMCSell.startAnimation(anim)
+//        cvMCLocation.startAnimation(anim)
+//        cvMCSocial.startAnimation(anim)
+
     }
 
 }

@@ -64,6 +64,7 @@ class SignUpActivity : BaseActivity() {
         var username = edtUserUsername.text.toString()
         var password = edtUserPassword.text.toString()
         var phone = edtUserPhone.text.toString()
+        var address = edtUserAddress.text.toString()
 
         if(fullname.length < 5 || fullname.length > 30){
             clearAllTIL()
@@ -77,12 +78,15 @@ class SignUpActivity : BaseActivity() {
         }else if (phone.length != 10){
             tilUserPassword.error = null
             tilUserPhone.error = resources.getString(R.string.errorSignUpPhone)
+        }else if(address.length < 5 || address.length > 40){
+            tilUserPhone.error = null
+            tilUserAddress.error = resources.getString(R.string.errorSignUpAddress)
         }else{
-            checkSignUp(username,fullname,password,phone)
+            checkSignUp(username,fullname,password,phone,address)
         }
     }
 
-    fun checkSignUp(username: String,fullname: String,password: String, phone: String){
+    fun checkSignUp(username: String,fullname: String,password: String, phone: String,address: String){
         var mData = FirebaseDatabase.getInstance().reference
         var query = mData.child(Constants().userTable).orderByChild("username").equalTo(username)
 
@@ -98,7 +102,7 @@ class SignUpActivity : BaseActivity() {
                     showMessage(resources.getString(R.string.errorSignUpFailed), false)
                 }else{
                     if(userDatabase.insertUser(imgUserAddition,fullname,username,password
-                            , 0, 0 ,0, phone) == true){
+                            , 10000, 0 ,0, phone,address) == true){
                         clearAllEDT()
                         clearAllTIL()
                         showMessage(resources.getString(R.string.errorSignUpComplete), true)
@@ -116,6 +120,7 @@ class SignUpActivity : BaseActivity() {
         tilUserUsername.error = null
         tilUserPassword.error = null
         tilUserPhone.error = null
+        tilUserAddress.error = null
     }
 
     fun clearAllEDT(){
@@ -123,6 +128,7 @@ class SignUpActivity : BaseActivity() {
         edtUserUsername.setText("")
         edtUserPassword.setText("")
         edtUserPhone.setText("")
+        edtUserAddress.setText("")
     }
 
     fun registerContextMenu(){

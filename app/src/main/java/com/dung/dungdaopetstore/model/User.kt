@@ -9,4 +9,5 @@ data class User(var fullname: String = "",
                 var tradeTime: Int = 1,
                 var phoneNumber: String = "",
                 var username_password:String = "",
-                var ban: Boolean = true)
+                var ban: Boolean = true,
+                var address: String = "")

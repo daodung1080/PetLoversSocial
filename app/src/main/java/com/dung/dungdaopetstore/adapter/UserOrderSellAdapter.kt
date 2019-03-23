@@ -31,6 +31,13 @@ class UserOrderSellAdapter(var context: Context, var list: ArrayList<Animal>)
         var format = DecimalFormat("###,###,###")
         holder.txtUserOrderSellPrice.setText("${format.format(animal.price)} VND")
         holder.cbUserOrderSell.isChecked = animal.confirm
+        if(animal.amount <= 0){
+            holder.txtUserOrderSellStatus.setTextColor(context.resources.getColor(R.color.colorEndBtn1))
+            holder.txtUserOrderSellStatus.text = context.resources.getString(R.string.txtSoldOut)
+        }else{
+            holder.txtUserOrderSellStatus.setTextColor(context.resources.getColor(R.color.colorStartBtn))
+            holder.txtUserOrderSellStatus.text = context.resources.getString(R.string.txtAvailable)
+        }
     }
 
     class UserHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -41,6 +48,7 @@ class UserOrderSellAdapter(var context: Context, var list: ArrayList<Animal>)
         var txtUserOrderSellGender = itemView.txtUserOrderSellGender
         var txtUserOrderSellPrice = itemView.txtUserOrderSellPrice
         var cbUserOrderSell = itemView.cbUserOrderSell
+        var txtUserOrderSellStatus = itemView.txtUserOrderSellStatus
 
     }
 }

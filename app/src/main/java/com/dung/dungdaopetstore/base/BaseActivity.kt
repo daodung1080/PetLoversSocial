@@ -17,7 +17,7 @@ open class BaseActivity: AppCompatActivity() {
         if(switch == true){
             Toasty.success(applicationContext, message).show()
         }else{
-            Toasty.error(applicationContext, message).show()
+            Toasty.info(applicationContext, message).show()
         }
     }
 

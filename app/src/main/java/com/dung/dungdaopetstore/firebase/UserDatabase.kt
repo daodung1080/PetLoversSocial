@@ -44,7 +44,7 @@ class UserDatabase(var context: Context) {
 //    }
 
     fun insertUser(img: CircleImageView, fullname: String, username: String,
-                   password: String, money: Int, bannedTime: Int, tradeTime: Int, phoneNumber: String): Boolean{
+                   password: String, money: Int, bannedTime: Int, tradeTime: Int, phoneNumber: String, address: String): Boolean{
         var result = true
 
         var mData = FirebaseDatabase.getInstance().reference
@@ -70,7 +70,7 @@ class UserDatabase(var context: Context) {
                 var downloadURL = it.toString()
                 mData.child(Constants().userTable).child(username).setValue(
                     User(fullname,username,password,downloadURL, money,
-                        bannedTime, tradeTime,phoneNumber,"$username-$password",false)
+                        bannedTime, tradeTime,phoneNumber,"$username-$password",false, address)
                 ).addOnFailureListener { result = false }
             }
         }
@@ -126,7 +126,7 @@ class UserDatabase(var context: Context) {
     }
 
     fun getUserInformation(rUsername: String, u: TextView, img: ImageView, m: TextView,
-                           f: TextView, p: TextView, t: TextView, times: String){
+                           f: TextView, p: TextView, t: TextView,a: TextView, times: String){
         var mData = FirebaseDatabase.getInstance().reference
         mData.child(Constants().userTable).child(rUsername)
             .addValueEventListener(object: ValueEventListener{
@@ -143,6 +143,27 @@ class UserDatabase(var context: Context) {
                     f.text = user.fullname
                     p.text = user.phoneNumber
                     t.text = "${user.tradeTime} $times"
+                    a.text = user.address
+                }
+
+            })
+    }
+
+
+    fun getUserInformation1(f: TextView, a: TextView, p: TextView, pw: TextView, rUsername: String){
+        var mData = FirebaseDatabase.getInstance().reference
+        mData.child(Constants().userTable).child(rUsername)
+            .addValueEventListener(object: ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {
+
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    var user = p0.getValue(User::class.java)
+                    f.setText(user!!.fullname)
+                    a.setText(user.address)
+                    p.setText(user.phoneNumber)
+                    pw.setText(user.password)
                 }
 
             })

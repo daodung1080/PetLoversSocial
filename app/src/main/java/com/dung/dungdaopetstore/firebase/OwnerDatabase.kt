@@ -5,7 +5,9 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.util.Log
 import android.widget.ImageView
+import android.widget.TextView
 import com.dung.dungdaopetstore.adapter.UserPetListAdapter
+import com.dung.dungdaopetstore.adapter.UserSellAdapter
 import com.dung.dungdaopetstore.model.Animal
 import com.dung.dungdaopetstore.model.Owner
 import com.google.firebase.database.*
@@ -52,6 +54,16 @@ class OwnerDatabase(var context: Context) {
         return result
     }
 
+    fun addOwner(rUsername: String,petName: String,petGender: String
+                 ,petWeight: Int, petCategory: String,img: String){
+        var timetoMiliis = Calendar.getInstance().timeInMillis
+        var ownerID = "owner$timetoMiliis"
+        var mData: DatabaseReference = FirebaseDatabase.getInstance().reference
+        mData.child(Constants().ownerTable).child(ownerID).setValue(
+            Owner(rUsername,petName,petGender,petWeight,petCategory,img,ownerID)
+        )
+    }
+
     fun getAllMyOwner(list: ArrayList<Owner>,adapter: UserPetListAdapter, rUsername: String){
         var mData = FirebaseDatabase.getInstance().reference
         mData.child(Constants().ownerTable).orderByChild("username").equalTo(rUsername)
@@ -83,6 +95,63 @@ class OwnerDatabase(var context: Context) {
                     var owner = p0.getValue(Owner::class.java)
                     list.add(owner!!)
                     adapter.notifyDataSetChanged()
+
+                    totalCount++
+                }
+
+                override fun onChildRemoved(p0: DataSnapshot) {
+                    var owner = p0.getValue(Owner::class.java)
+                    for(i in 0..totalCount){
+                        var same = list.get(i)
+                        if((owner!!.ownerID).equals(same.ownerID) ){
+                            var position = i
+                            list.removeAt(position)
+                            adapter.notifyDataSetChanged()
+                            totalCount--
+                        }
+                    }
+                }
+
+            })
+    }
+
+    fun getAllMyOwner1(list: ArrayList<Owner>,adapter: UserSellAdapter, rUsername: String,checkList: TextView){
+        var mData = FirebaseDatabase.getInstance().reference
+        mData.child(Constants().ownerTable).orderByChild("username").equalTo(rUsername)
+            .addChildEventListener(object: ChildEventListener{
+                var totalCount = -1
+                override fun onCancelled(p0: DatabaseError) {
+
+                }
+
+                override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+
+                }
+
+                override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+
+                    var owner = p0.getValue(Owner::class.java)
+                    for(i in 0..totalCount){
+                        var same = list.get(i)
+                        if((owner!!.ownerID).equals(same.ownerID) ){
+                            var position = i
+                            list.set(position, owner)
+                            adapter.notifyDataSetChanged()
+                        }
+                    }
+
+                }
+
+                override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+                    var owner = p0.getValue(Owner::class.java)
+                    list.add(owner!!)
+                    adapter.notifyDataSetChanged()
+
+                    if(p0.childrenCount <= 0){
+                        checkList.text = "Please add pet first then you can sell it"
+                    }else{
+                        checkList.text = "Select a pet you wanna sell"
+                    }
 
                     totalCount++
                 }

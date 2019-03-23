@@ -9,9 +9,11 @@ import android.widget.ArrayAdapter
 import com.dung.dungdaopetstore.R
 import com.dung.dungdaopetstore.base.BaseActivity
 import com.dung.dungdaopetstore.firebase.Constants
+import com.dung.dungdaopetstore.firebase.OwnerDatabase
 import com.dung.dungdaopetstore.firebase.PetDatabase
 import com.dung.dungdaopetstore.model.*
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_user_add_pet.*
 import kotlinx.android.synthetic.main.activity_user_buy_information.*
 import kotlinx.android.synthetic.main.dialog_user_market_buy.view.*
 import java.text.DecimalFormat
@@ -24,6 +26,7 @@ class UserBuyInformationActivity : BaseActivity() {
     lateinit var petDatabase: PetDatabase
     lateinit var petID: String
     lateinit var mData: DatabaseReference
+    lateinit var ownerDatabase: OwnerDatabase
 
     // spinner amount pet
     lateinit var spnList: ArrayList<Int>
@@ -35,6 +38,7 @@ class UserBuyInformationActivity : BaseActivity() {
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setIcon(R.drawable.img_back)
 
+        ownerDatabase = OwnerDatabase(this)
         rUsername = getRootUsername()
         getPetInformation()
         clickBuyPet()
@@ -42,8 +46,13 @@ class UserBuyInformationActivity : BaseActivity() {
     }
 
     private fun clickBuyPet() {
-        cvMarketBuy.setOnClickListener {
-            showOrder()
+        llMarketBuy.setOnClickListener {
+            var status = txtMarketAmount.text.toString()
+            if(status.equals(resources.getString(R.string.txtSoldOut))){
+                showMessage(resources.getString(R.string.txtUserMarketSoldOut),false)
+            }else {
+                showOrder()
+            }
         }
     }
 
@@ -57,7 +66,8 @@ class UserBuyInformationActivity : BaseActivity() {
         var intent = getIntent()
         petID = intent.getStringExtra("petID")
         petDatabase.getInformationByName(petID,imgMarketImage,txtMarketName
-            ,txtMarketGender,txtMarketSeller,txtMarketAmount,txtMarketPrice,resources.getString(R.string.dialogAmount),txtMarketWeight,txtMarketCategory)
+            ,txtMarketGender,txtMarketSeller,txtMarketAmount,txtMarketPrice,resources.getString(R.string.dialogAmount)
+            ,txtMarketWeight,txtMarketCategory,resources.getString(R.string.txtSoldOut))
     }
 
     private fun showOrder() {
@@ -85,7 +95,7 @@ class UserBuyInformationActivity : BaseActivity() {
                         // create dialog
                         var alertDialog = AlertDialog.Builder(this@UserBuyInformationActivity)
                         alertDialog.setTitle(resources.getString(R.string.alertDialogUserMarket))
-                        alertDialog.setIcon(R.drawable.img_shopping_cart_1)
+                        alertDialog.setIcon(R.drawable.img_shoping_cart)
                         var view = layoutInflater.inflate(R.layout.dialog_user_market_buy,null)
 
                         // init Dialog View
@@ -141,7 +151,7 @@ class UserBuyInformationActivity : BaseActivity() {
                                 comment = mComment
                             }
                             step1Buy(totalCost,animal.seller,totalAmount,animal.amount,animal.image,
-                                animal.name, comment)
+                                animal.name, comment, animal.gender, animal.weight, animal.category)
                         })
                         alertDialog.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, which ->
                             dialog.dismiss()
@@ -158,7 +168,7 @@ class UserBuyInformationActivity : BaseActivity() {
 
     /// Step 1: check User money and Update User Money after buy Pet - Update Amount Pet left
     private fun step1Buy(totalCost: Int,seller: String,buyAmount: Int, totalPetAmount: Int,petImage: String
-                         ,petName: String,userComment: String) {
+                         ,petName: String,userComment: String,petGender: String,petWeight: Int, petCategory: String) {
         mData.child(Constants().userTable).orderByChild("username").equalTo(rUsername)
             .addChildEventListener(object: ChildEventListener{
                 override fun onCancelled(p0: DatabaseError) {
@@ -185,6 +195,7 @@ class UserBuyInformationActivity : BaseActivity() {
                         mData.child(Constants().petTable).child(petID).child("amount")
                             .setValue(totalPetAmount - buyAmount)
                         step2Buy(seller,totalCost,buyAmount,petImage,user.image,petName,userComment)
+                        ownerDatabase.addOwner(rUsername,petName,petGender,petWeight,petCategory,petImage)
                     }
                 }
 
@@ -264,9 +275,9 @@ class UserBuyInformationActivity : BaseActivity() {
         var newfeedDate = SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(Calendar.getInstance().time)
         var title  = "${resources.getString(R.string.titleUserMarketBuyNewFeed)} $petName"
         mData.child(Constants().newfeedTable).child(newfeedDate)
-            .setValue(NewFeed(imageUser,imagePet,title,userComment,newfeedDate,rUsername))
+            .setValue(NewFeed(imagePet,title,userComment,newfeedDate,rUsername))
 
-        showMessage(resources.getString(R.string.UserMarketBuyComplete),true)
+        showMessage("$petName ${resources.getString(R.string.UserMarketBuyComplete)}",true)
 
     }
 }

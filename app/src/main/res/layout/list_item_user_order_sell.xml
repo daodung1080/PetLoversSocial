@@ -88,6 +88,27 @@
                         android:textSize="@dimen/userorderbuy_txt_size"/>
             </LinearLayout>
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10">
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3.5"
+                    android:text="@string/txtUserMarketPetPrice"
+                    android:textSize="@dimen/userorderbuy_txt_size"
+                    android:textStyle="bold"/>
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6.5"
+                    android:text="order1141343424"
+                    android:gravity="center"
+                    android:id="@+id/txtUserOrderSellPrice"
+                    android:textSize="@dimen/userorderbuy_txt_size"/>
+        </LinearLayout>
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -96,16 +117,17 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3.5"
-                        android:text="@string/txtUserMarketPetPrice"
+                        android:text="@string/txtUserMarketPetStatus"
                         android:textSize="@dimen/userorderbuy_txt_size"
                         android:textStyle="bold"/>
                 <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="6.5"
-                        android:text="order1141343424"
+                        android:text="@string/txtAvailable"
                         android:gravity="center"
-                        android:id="@+id/txtUserOrderSellPrice"
+                        android:textColor="@color/colorStartBtn"
+                        android:id="@+id/txtUserOrderSellStatus"
                         android:textSize="@dimen/userorderbuy_txt_size"/>
             </LinearLayout>
 
