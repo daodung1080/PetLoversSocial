@@ -45,6 +45,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/edtUserFullName"
                 android:inputType="textPersonName"
+                android:imeOptions="actionNext"
                 android:hint="@string/edtUserFullName"
                 android:textSize="@dimen/edt_txt_size"/>
     </android.support.design.widget.TextInputLayout>
@@ -69,6 +70,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:id="@+id/edtUserUsername"
+                android:imeOptions="actionNext"
                 android:hint="@string/edtUserUsername"
                 android:textSize="@dimen/edt_txt_size"/>
     </android.support.design.widget.TextInputLayout>
@@ -93,6 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
+                android:imeOptions="actionNext"
                 android:id="@+id/edtUserPassword"
                 android:hint="@string/edtUserPassword"
                 android:textSize="@dimen/edt_txt_size"/>
@@ -117,6 +120,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
+                android:imeOptions="actionNext"
                 android:hint="@string/edtUserPhone"
                 android:id="@+id/edtUserPhone"
                 android:textSize="@dimen/edt_txt_size"/>
@@ -160,6 +164,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/txtUserAddress"
+                android:imeOptions="actionDone"
                 android:id="@+id/edtUserAddress"
                 android:textSize="@dimen/edt_txt_size"/>
     </android.support.design.widget.TextInputLayout>

@@ -1,17 +1,15 @@
-package com.dung.dungdaopetstore.adapter
+package com.dung.dungdaopetstore.adapter.user
 
-import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
+import android.view.animation.Animation
+import android.view.animation.ScaleAnimation
 import com.dung.dungdaopetstore.R
 import com.dung.dungdaopetstore.model.Animal
 import com.dung.dungdaopetstore.user.userbuy.UserBuyActivity
 import com.squareup.picasso.Picasso
-import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.list_item_user_market.view.*
 import java.text.DecimalFormat
 
@@ -36,6 +34,7 @@ class UserMarketAdapter(var context: UserBuyActivity, var list: ArrayList<Animal
         holder.cvUserMarket.setOnClickListener {
             context.showPetInformation(p1)
         }
+        setAnimation(holder.itemView,p1)
     }
 
     class UserHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -44,6 +43,18 @@ class UserMarketAdapter(var context: UserBuyActivity, var list: ArrayList<Animal
         var txtUserMarketPetGender = view.txtUserMarketPetGender
         var cvUserMarket = view.cvUserMarket
         var txtUserMarketPetPrice = view.txtUserMarketPetPrice
+    }
+
+    private fun setAnimation(viewToAnimate: View, position: Int) {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        var lastPosition = -1
+        if (position > lastPosition) {
+            val anim = ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f,
+                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+            anim.duration = 700
+            viewToAnimate.startAnimation(anim)
+            lastPosition = position
+        }
     }
 
 }

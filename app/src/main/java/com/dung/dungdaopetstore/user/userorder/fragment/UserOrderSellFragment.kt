@@ -7,8 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dung.dungdaopetstore.R
-import com.dung.dungdaopetstore.adapter.UserOrderBuyAdapter
-import com.dung.dungdaopetstore.adapter.UserOrderSellAdapter
+import com.dung.dungdaopetstore.adapter.user.UserOrderSellAdapter
 import com.dung.dungdaopetstore.base.BaseFragment
 import com.dung.dungdaopetstore.firebase.OrderDatabase
 import com.dung.dungdaopetstore.model.Animal
@@ -44,6 +43,7 @@ class UserOrderSellFragment: BaseFragment() {
 
     fun startRecycleView(){
         rvUserOrderSell.layoutManager = GridLayoutManager(context!!, 2)
+        rvUserOrderSell.setHasFixedSize(true)
         rvUserOrderSell.adapter = adapter
     }
 

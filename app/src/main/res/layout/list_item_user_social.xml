@@ -11,6 +11,7 @@
                 android:layout_height="match_parent"
                 app:cardElevation="2dp"
                 android:clickable="true"
+                android:id="@+id/cvSocialBackground"
                 android:layout_margin="@dimen/margin_cv_size"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="@dimen/margin_cv_size">
@@ -21,7 +22,8 @@
 
                 <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="250dp"
+                        android:id="@+id/clSocialBackground"
                         android:background="@drawable/bg_mix_color">
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -38,7 +40,7 @@
                             android:layout_marginStart="8dp"
                             app:layout_constraintStart_toStartOf="parent"
                             android:layout_marginLeft="8dp"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="32dp"
                             app:layout_constraintTop_toTopOf="parent"/>
 
                 </android.support.constraint.ConstraintLayout>
@@ -48,7 +50,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginTop="153dp"
+                        android:layout_marginTop="170dp"
                         app:cardCornerRadius="@dimen/margin_cv_size"
                         app:cardElevation="2dp">
 
@@ -149,7 +151,17 @@
 
                     </LinearLayout>
 
+
                 </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="235dp"
+                        android:id="@+id/rvSocial"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="7dp"
+                        android:layout_margin="@dimen/margin_layout_size"
+                        android:paddingLeft="@dimen/margin_cv_size"></android.support.v7.widget.RecyclerView>
 
             </RelativeLayout>
 

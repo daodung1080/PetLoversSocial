@@ -10,6 +10,10 @@
             android:id="@+id/navigationUserNewFeed"
             android:icon="@drawable/img_news"
             android:title="@string/titleUserNewFeed"/>
+    <item
+            android:id="@+id/navigationUserRecentChat"
+            android:icon="@drawable/img_recent_chat"
+            android:title="@string/titleUserRecentChat"/>
 
     <item
             android:id="@+id/navigationProfile"

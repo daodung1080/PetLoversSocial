@@ -6,9 +6,8 @@ import android.graphics.drawable.BitmapDrawable
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
-import com.dung.dungdaopetstore.adapter.UserPetListAdapter
-import com.dung.dungdaopetstore.adapter.UserSellAdapter
-import com.dung.dungdaopetstore.model.Animal
+import com.dung.dungdaopetstore.adapter.user.UserPetListAdapter
+import com.dung.dungdaopetstore.adapter.user.UserSellAdapter
 import com.dung.dungdaopetstore.model.Owner
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
@@ -64,112 +63,50 @@ class OwnerDatabase(var context: Context) {
         )
     }
 
-    fun getAllMyOwner(list: ArrayList<Owner>,adapter: UserPetListAdapter, rUsername: String){
+    fun getAllMyOwner(list: ArrayList<Owner>, adapter: UserPetListAdapter, rUsername: String){
         var mData = FirebaseDatabase.getInstance().reference
-        mData.child(Constants().ownerTable).orderByChild("username").equalTo(rUsername)
-            .addChildEventListener(object: ChildEventListener{
-                var totalCount = -1
-                override fun onCancelled(p0: DatabaseError) {
+        mData.child(Constants().ownerTable).addValueEventListener(object: ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
 
-                }
+            }
 
-                override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-
-                }
-
-                override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-
-                    var owner = p0.getValue(Owner::class.java)
-                    for(i in 0..totalCount){
-                        var same = list.get(i)
-                        if((owner!!.ownerID).equals(same.ownerID) ){
-                            var position = i
-                            list.set(position, owner)
-                            adapter.notifyDataSetChanged()
-                        }
-                    }
-
-                }
-
-                override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                    var owner = p0.getValue(Owner::class.java)
-                    list.add(owner!!)
-                    adapter.notifyDataSetChanged()
-
-                    totalCount++
-                }
-
-                override fun onChildRemoved(p0: DataSnapshot) {
-                    var owner = p0.getValue(Owner::class.java)
-                    for(i in 0..totalCount){
-                        var same = list.get(i)
-                        if((owner!!.ownerID).equals(same.ownerID) ){
-                            var position = i
-                            list.removeAt(position)
-                            adapter.notifyDataSetChanged()
-                            totalCount--
-                        }
+            override fun onDataChange(p0: DataSnapshot) {
+                list.clear()
+                p0.children.forEach {
+                    var owner = it.getValue(Owner::class.java)
+                    if(owner!!.username.equals(rUsername)){
+                        list.add(owner)
                     }
                 }
+                adapter.notifyDataSetChanged()
+            }
 
-            })
+        })
     }
 
-    fun getAllMyOwner1(list: ArrayList<Owner>,adapter: UserSellAdapter, rUsername: String,checkList: TextView){
+    fun getAllMyOwner1(list: ArrayList<Owner>, adapter: UserSellAdapter, rUsername: String, checkList: TextView,
+                       allowSell: String){
         var mData = FirebaseDatabase.getInstance().reference
-        mData.child(Constants().ownerTable).orderByChild("username").equalTo(rUsername)
-            .addChildEventListener(object: ChildEventListener{
-                var totalCount = -1
-                override fun onCancelled(p0: DatabaseError) {
+        mData.child(Constants().ownerTable).addValueEventListener(object: ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
 
-                }
+            }
 
-                override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-
-                }
-
-                override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-
-                    var owner = p0.getValue(Owner::class.java)
-                    for(i in 0..totalCount){
-                        var same = list.get(i)
-                        if((owner!!.ownerID).equals(same.ownerID) ){
-                            var position = i
-                            list.set(position, owner)
-                            adapter.notifyDataSetChanged()
-                        }
-                    }
-
-                }
-
-                override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                    var owner = p0.getValue(Owner::class.java)
-                    list.add(owner!!)
-                    adapter.notifyDataSetChanged()
-
-                    if(p0.childrenCount <= 0){
-                        checkList.text = "Please add pet first then you can sell it"
-                    }else{
-                        checkList.text = "Select a pet you wanna sell"
-                    }
-
-                    totalCount++
-                }
-
-                override fun onChildRemoved(p0: DataSnapshot) {
-                    var owner = p0.getValue(Owner::class.java)
-                    for(i in 0..totalCount){
-                        var same = list.get(i)
-                        if((owner!!.ownerID).equals(same.ownerID) ){
-                            var position = i
-                            list.removeAt(position)
-                            adapter.notifyDataSetChanged()
-                            totalCount--
-                        }
+            override fun onDataChange(p0: DataSnapshot) {
+                list.clear()
+                p0.children.forEach {
+                    var owner = it.getValue(Owner::class.java)
+                    if(owner!!.username.equals(rUsername)){
+                        list.add(owner)
                     }
                 }
+                if (list.size > 0){
+                    checkList.text = allowSell
+                }
+                adapter.notifyDataSetChanged()
+            }
 
-            })
+        })
     }
 
 }

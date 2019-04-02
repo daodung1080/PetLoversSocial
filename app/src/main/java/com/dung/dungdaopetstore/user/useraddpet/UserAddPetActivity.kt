@@ -54,6 +54,7 @@ class UserAddPetActivity : BaseActivity() {
         registerContextMenu()
         onClickConfirm()
         initSpinner()
+        imeOption(edtUserSellWeight,btnUserSellConfirm)
 
     }
 
@@ -61,7 +62,8 @@ class UserAddPetActivity : BaseActivity() {
         spnList = listOf(resources.getString(R.string.dog),resources.getString(R.string.cat),resources.getString(R.string.fish),
             resources.getString(R.string.turtle),resources.getString(R.string.mouse),resources.getString(R.string.bird),
             resources.getString(R.string.another))
-        spnAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, spnList)
+        spnAdapter = ArrayAdapter(this, R.layout.spinner_custom_text, spnList)
+        spnAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spnUserSellCategory.setAdapter(spnAdapter)
     }
 
@@ -82,7 +84,7 @@ class UserAddPetActivity : BaseActivity() {
         try {
             var aName = edtUserSellName.text.toString()
             var aWeight = (edtUserSellWeight.text.toString()).toInt()
-            var aCategory = spnList.get(spnUserSellCategory.selectedIndex)
+            var aCategory = spnList.get(spnUserSellCategory.selectedItemPosition)
             var aGender = "Female"
             if(rdMale.isChecked){
                 aGender = "Male"
@@ -99,6 +101,8 @@ class UserAddPetActivity : BaseActivity() {
                 clearAllTextInputLayout()
                 imgUserSellAddition.setImageResource(R.drawable.img_addition)
                 showMessage(resources.getString(R.string.completeAnimalAdded),true)
+                startActivity(Intent(this@UserAddPetActivity, UserPetListActivity::class.java))
+                this.finish()
             }else if(ownerDatabase.insertOwner(username,aName,aGender,aWeight,aCategory,imgUserSellAddition) == false){
                 clearAllTextInputLayout()
                 showMessage(resources.getString(R.string.failedAnimalAdded),false)

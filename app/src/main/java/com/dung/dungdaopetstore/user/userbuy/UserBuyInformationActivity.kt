@@ -2,6 +2,7 @@ package com.dung.dungdaopetstore.user.userbuy
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -12,6 +13,7 @@ import com.dung.dungdaopetstore.firebase.Constants
 import com.dung.dungdaopetstore.firebase.OwnerDatabase
 import com.dung.dungdaopetstore.firebase.PetDatabase
 import com.dung.dungdaopetstore.model.*
+import com.dung.dungdaopetstore.user.userchat.UserChatActivity
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_user_add_pet.*
 import kotlinx.android.synthetic.main.activity_user_buy_information.*
@@ -54,11 +56,24 @@ class UserBuyInformationActivity : BaseActivity() {
                 showOrder()
             }
         }
+        llMarketContact.setOnClickListener {
+            var rSeller = txtMarketSeller.text.toString()
+            var intent = Intent(this@UserBuyInformationActivity, UserChatActivity::class.java)
+            if(rSeller.equals("Pet Lovers headquarters Store")){
+                intent.putExtra("people","hqt")
+                startActivity(intent)
+            }else if(rSeller.equals(rUsername)){
+                showMessage(resources.getString(R.string.errorChat),false)
+            }else{
+                intent.putExtra("people",rSeller)
+                startActivity(intent)
+            }
+        }
     }
 
     private fun getPetInformation() {
         spnList = ArrayList()
-        spnAdapter = ArrayAdapter(this@UserBuyInformationActivity, R.layout.spinner_custom_text, spnList)
+        spnAdapter = ArrayAdapter(this@UserBuyInformationActivity, R.layout.spinner_custom_text_buy, spnList)
         spnAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         mData = FirebaseDatabase.getInstance().reference

@@ -50,6 +50,8 @@ class UserProfileFragment: BaseFragment() {
     lateinit var cvProfileAddPet: CardView
     lateinit var cvProfileUpdate: CardView
     lateinit var cvProfilePurchase: CardView
+    lateinit var imgProfileHide: ImageView
+    var hideshow = true
 
     lateinit var mData: DatabaseReference
 
@@ -70,6 +72,16 @@ class UserProfileFragment: BaseFragment() {
 
         return rootview
 
+    }
+
+    private fun onclickHideShow() {
+        imgProfileHide.setOnClickListener {
+            if(hideshow == true){
+                hideshow = false
+            }else{
+                hideshow = true
+            }
+        }
     }
 
     private fun registerContextMenu() {
@@ -206,7 +218,8 @@ class UserProfileFragment: BaseFragment() {
 
     private fun getUserInformation() {
         userDatabase.getUserInformation(rUsername,txtProfileUsername,imgProfileUser,txtProfileMoney,
-            txtProfileFullname,txtProfilePhone,txtProfileTradeTime,txtProfileLocation,context!!.resources.getString(R.string.txtTimes))
+            txtProfileFullname,txtProfilePhone,txtProfileTradeTime,txtProfileLocation,context!!.resources.getString(R.string.txtTimes),imgProfileHide,
+            R.drawable.img_show, R.drawable.img_hide)
     }
 
     private fun initView() {
@@ -222,6 +235,7 @@ class UserProfileFragment: BaseFragment() {
         cvProfileAddPet = rootview.cvProfleAddPet
         cvProfileUpdate = rootview.cvProfileUpdate
         cvProfilePurchase = rootview.cvProfilePurchase
+        imgProfileHide = rootview.imgProfileHide
         mData = FirebaseDatabase.getInstance().reference
     }
 

@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dung.dungdaopetstore.R
-import com.dung.dungdaopetstore.adapter.UserOrderBuyAdapter
+import com.dung.dungdaopetstore.adapter.user.UserOrderBuyAdapter
 import com.dung.dungdaopetstore.base.BaseFragment
 import com.dung.dungdaopetstore.firebase.OrderDatabase
 import com.dung.dungdaopetstore.model.Order
@@ -41,6 +41,7 @@ class UserOrderBuyFragment: BaseFragment() {
 
     fun startRecycleView(){
         rvUserOrderBuy.layoutManager = GridLayoutManager(context!!, 2)
+        rvUserOrderBuy.setHasFixedSize(true)
         rvUserOrderBuy.adapter = adapter
     }
 

@@ -3,20 +3,15 @@ package com.dung.dungdaopetstore.firebase
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
-import com.dung.dungdaopetstore.R
-import com.dung.dungdaopetstore.adapter.StaffUserAdapter
-import com.dung.dungdaopetstore.loginsignup.SignUpActivity
+import com.dung.dungdaopetstore.adapter.staff.StaffUserAdapter
 import com.dung.dungdaopetstore.model.User
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
-import es.dmoral.toasty.Toasty
-import kotlinx.android.synthetic.main.activity_sign_up.*
 import java.io.ByteArrayOutputStream
 import java.text.DecimalFormat
 import java.util.*
@@ -80,53 +75,26 @@ class UserDatabase(var context: Context) {
 
     fun getAllUser(list: ArrayList<User>, adapter: StaffUserAdapter){
         var mData = FirebaseDatabase.getInstance().reference
-        mData.child(Constants().userTable).addChildEventListener(object: ChildEventListener{
-            var totalChild = -1
+        mData.child(Constants().userTable).addValueEventListener(object: ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
             }
 
-            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-                var user = p0.getValue(User::class.java)
-                for(i in 0..totalChild){
-                    var same = list.get(i)
-                    if((user!!.username).equals(same.username) ){
-                        var position = i
-                        list.set(position, user)
-                        adapter.notifyDataSetChanged()
-                    }
+            override fun onDataChange(p0: DataSnapshot) {
+                list.clear()
+                p0.children.forEach {
+                    var user = it.getValue(User::class.java)
+                    list.add(user!!)
                 }
-            }
-
-            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                var user = p0.getValue(User::class.java)
-                list.add(user!!)
                 adapter.notifyDataSetChanged()
-                totalChild++
-            }
-
-            override fun onChildRemoved(p0: DataSnapshot) {
-                var user = p0.getValue(User::class.java)
-                for(i in 0..totalChild){
-                    var same = list.get(i)
-                    if((user!!.username).equals(same.username) ){
-                        var position = i
-                        list.removeAt(position)
-                        adapter.notifyDataSetChanged()
-                        totalChild--
-                    }
-                }
             }
 
         })
     }
 
     fun getUserInformation(rUsername: String, u: TextView, img: ImageView, m: TextView,
-                           f: TextView, p: TextView, t: TextView,a: TextView, times: String){
+                           f: TextView, p: TextView, t: TextView,a: TextView, times: String,
+                           hideshowimg: ImageView,background: Int,background1: Int){
         var mData = FirebaseDatabase.getInstance().reference
         mData.child(Constants().userTable).child(rUsername)
             .addValueEventListener(object: ValueEventListener{
@@ -136,10 +104,27 @@ class UserDatabase(var context: Context) {
 
                 override fun onDataChange(p0: DataSnapshot) {
                     var user = p0.getValue(User::class.java)
+                    var money = "*"
                     u.text = user!!.username
                     Picasso.get().load(user.image).into(img)
+                    for(i in 2..user.money.toString().length){
+                        money = money + "*"
+                    }
                     var fm = DecimalFormat("###,###,###")
                     m.text = "${fm.format(user.money)} VND"
+                    var hideshow = true
+                    hideshowimg.setOnClickListener {
+                        if(hideshow == true){
+                            hideshow = false
+                            m.text = "${money} VND"
+                            hideshowimg.setImageResource(background)
+                        }else{
+                            hideshow = true
+                            m.text = "${fm.format(user.money)} VND"
+                            hideshowimg.setImageResource(background1)
+                            m.text = "${fm.format(user.money)} VND"
+                        }
+                    }
                     f.text = user.fullname
                     p.text = user.phoneNumber
                     t.text = "${user.tradeTime} $times"

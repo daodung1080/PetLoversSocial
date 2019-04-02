@@ -3,49 +3,54 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:padding="20dp"
         android:orientation="horizontal"
         android:weightSum="10">
 
-    <ImageView
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_weight="2"
-            android:layout_gravity="center"
-            android:src="@drawable/img_gender"/>
-    <RadioGroup
-            android:layout_width="0dp"
+    <co.ceryle.radiorealbutton.RadioRealButtonGroup
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checkedButton="@id/rdMale"
-            android:layout_weight="8"
-            android:layout_gravity="center"
             android:orientation="horizontal"
-            android:background="@drawable/ic_bg_pink"
-            android:weightSum="10">
+            android:layout_weight="8"
+            android:weightSum="10"
+            android:background="@drawable/ic_bg_toggle"
+            app:rrbg_animateDrawables_enter="overshoot"
+            app:rrbg_animateTexts_enter="overshoot"
+            app:rrbg_dividerColor="@color/colorCardView"
+            app:rrbg_dividerSize="1dp"
+            app:rrbg_radius="10dp"
+            app:rrbg_selectorColor="@color/colorStartBtn"
+            app:rrbg_selectorSize="6dp">
 
-        <RadioButton
+        <co.ceryle.radiorealbutton.RadioRealButton
                 android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:background="@drawable/ic_bg_toggle"
+                android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:id="@+id/rdMale"
-                android:text="@string/txtMale"
-                android:gravity="center"
-                android:textColor="@color/colorBackground"
-                android:button="@null"
+                app:rrb_drawable="@drawable/img_male"
+                app:rrb_drawableHeight="25dp"
+                app:rrb_drawablePadding="@dimen/margin_layout_size"
+                app:rrb_drawableWidth="25dp"
+                app:rrb_ripple="true"
+                app:rrb_rippleColor="@color/colorCardView"
+                app:rrb_textColor="@color/colorStartBtn"
                 />
 
-        <RadioButton
+        <co.ceryle.radiorealbutton.RadioRealButton
                 android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:background="@drawable/ic_bg_toggle"
+                android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:id="@+id/rdFemale"
-                android:text="@string/txtFemale"
-                android:gravity="center"
-                android:textColor="@color/colorBackground"
-                android:button="@null"
+                app:rrb_drawable="@drawable/img_female"
+                app:rrb_drawableHeight="25dp"
+                app:rrb_drawablePadding="@dimen/margin_layout_size"
+                app:rrb_drawableWidth="25dp"
+                app:rrb_ripple="true"
+                app:rrb_rippleColor="@color/colorCardView"
+                app:rrb_textColor="@color/colorStartBtn"
                 />
-    </RadioGroup>
+    </co.ceryle.radiorealbutton.RadioRealButtonGroup>
 
 </LinearLayout>

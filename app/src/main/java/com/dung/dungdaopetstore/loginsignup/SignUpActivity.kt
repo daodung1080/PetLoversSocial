@@ -45,6 +45,7 @@ class SignUpActivity : BaseActivity() {
 
         registerContextMenu()
         confirmRegistration()
+        imeOption(edtUserAddress,btnUserConfirm)
 
     }
 

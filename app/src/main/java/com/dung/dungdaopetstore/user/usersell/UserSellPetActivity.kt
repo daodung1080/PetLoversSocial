@@ -2,23 +2,21 @@ package com.dung.dungdaopetstore.user.usersell
 
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import com.dung.dungdaopetstore.R
-import com.dung.dungdaopetstore.adapter.UserSellAdapter
+import com.dung.dungdaopetstore.adapter.user.UserSellAdapter
 import com.dung.dungdaopetstore.base.BaseActivity
 import com.dung.dungdaopetstore.firebase.Constants
 import com.dung.dungdaopetstore.firebase.OwnerDatabase
-import com.dung.dungdaopetstore.firebase.PetDatabase
 import com.dung.dungdaopetstore.model.Animal
 import com.dung.dungdaopetstore.model.Owner
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_user_sell_pet.*
 import kotlinx.android.synthetic.main.dialog_user_sell_valuation.view.*
 import java.lang.NumberFormatException
+import java.text.DecimalFormat
 import java.util.*
 
 class UserSellPetActivity : BaseActivity() {
@@ -38,16 +36,17 @@ class UserSellPetActivity : BaseActivity() {
     }
 
     private fun addList() {
-        ownerDatabase.getAllMyOwner1(list,adapter,rUsername,txtUserSellInform)
+        ownerDatabase.getAllMyOwner1(list,adapter,rUsername,txtUserSellInform,resources.getString(R.string.warningSellPet1))
     }
 
     private fun initView() {
         rUsername = getRootUsername()
         ownerDatabase = OwnerDatabase(this)
         list = ArrayList()
-        adapter = UserSellAdapter(this,list)
+        adapter = UserSellAdapter(this, list)
         rvUserSell.layoutManager = LinearLayoutManager(this)
         rvUserSell.adapter = adapter
+        setAnimForView(rvUserSell)
     }
 
     fun sellPet(position: Int){
@@ -64,8 +63,22 @@ class UserSellPetActivity : BaseActivity() {
                 if(valuation < 10000){
                     showMessage(resources.getString(R.string.errorPrice),false)
                 }else{
-                    completesellPet(owner.petCategory, owner.petName,
-                        owner.petGender,owner.petWeight,valuation,owner.petImage,owner.ownerID)
+                    var alertDialog1 = AlertDialog.Builder(this)
+                    alertDialog1.setIcon(R.drawable.img_price)
+                    alertDialog1.setTitle(resources.getString(R.string.titleUserSellPet))
+                    var fm = DecimalFormat("###,###,###")
+                    alertDialog1.setMessage("${resources.getString(R.string.messageUserSellPet)} ${owner.petName}\n" +
+                            "${resources.getString(R.string.messageUserSellPet1)} ${fm.format(valuation)} VND?\n" +
+                            "${resources.getString(R.string.messageUserSellPet2)}")
+                    alertDialog1.setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+                        completesellPet(owner.petCategory, owner.petName,
+                            owner.petGender,owner.petWeight,valuation,owner.petImage,owner.ownerID)
+                    })
+                    alertDialog1.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, which ->
+                        dialog.dismiss()
+                    })
+                    var dialog1 = alertDialog1.create()
+                    dialog1.show()
                 }
             }catch (e: NumberFormatException){
                 showMessage(resources.getString(R.string.errorNumberFormat2),false)

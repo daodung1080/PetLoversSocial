@@ -1,11 +1,12 @@
-package com.dung.dungdaopetstore.adapter
+package com.dung.dungdaopetstore.adapter.user
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.ScaleAnimation
 import com.dung.dungdaopetstore.R
 import com.dung.dungdaopetstore.firebase.Constants
 import com.dung.dungdaopetstore.model.NewFeed
@@ -15,7 +16,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
-import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.list_item_user_new_feed.view.*
 
 class NewFeedAdapter(var context: Context, var list: ArrayList<NewFeed>,var fragment: UserNewFeedFragment)
@@ -36,9 +36,6 @@ class NewFeedAdapter(var context: Context, var list: ArrayList<NewFeed>,var frag
         holder.txtNewFeedTitle.text = newFeed.title
         holder.txtNewFeedComment.text = newFeed.userComment
         Picasso.get().load(newFeed.petImage).into(holder.imgNewFeedBackground)
-        holder.cvNewFeed.setOnClickListener {
-            Toasty.success(context, "You need to chat with ${newFeed.username}? please wait for the next version").show()
-        }
         holder.cvNewFeedImageClick.setOnClickListener {
             fragment.getPetImage(p1)
         }
@@ -57,6 +54,12 @@ class NewFeedAdapter(var context: Context, var list: ArrayList<NewFeed>,var frag
 
             })
 
+        holder.cvNewFeed.setOnClickListener {
+            fragment.meetPeople(p1)
+        }
+
+        setAnimation(holder.itemView,p1)
+
     }
 
     class NewFeedHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -67,5 +70,16 @@ class NewFeedAdapter(var context: Context, var list: ArrayList<NewFeed>,var frag
         var imgNewFeedBackground = itemView.imgNewFeedBackground
         var cvNewFeed = itemView.cvNewFeed
         var cvNewFeedImageClick = itemView.cvNewFeedImageClick
+    }
+    private fun setAnimation(viewToAnimate: View, position: Int) {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        var lastPosition = -1
+        if (position > lastPosition) {
+            val anim = ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f,
+                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+            anim.duration = 700
+            viewToAnimate.startAnimation(anim)
+            lastPosition = position
+        }
     }
 }

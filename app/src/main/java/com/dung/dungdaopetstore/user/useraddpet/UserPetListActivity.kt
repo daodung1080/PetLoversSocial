@@ -12,7 +12,7 @@ import android.view.MenuItem
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import com.dung.dungdaopetstore.R
-import com.dung.dungdaopetstore.adapter.UserPetListAdapter
+import com.dung.dungdaopetstore.adapter.user.UserPetListAdapter
 import com.dung.dungdaopetstore.base.BaseActivity
 import com.dung.dungdaopetstore.firebase.Constants
 import com.dung.dungdaopetstore.firebase.OwnerDatabase
@@ -60,8 +60,9 @@ class UserPetListActivity : BaseActivity() {
     private fun initView() {
         rUsername = getRootUsername()
         list = ArrayList()
-        adapter = UserPetListAdapter(this,list)
+        adapter = UserPetListAdapter(this, list)
         rvUserPetList.layoutManager = LinearLayoutManager(this)
+        rvUserPetList.setHasFixedSize(true)
         rvUserPetList.adapter = adapter
         ownerDatabase = OwnerDatabase(this)
     }
@@ -90,6 +91,8 @@ class UserPetListActivity : BaseActivity() {
     fun removePet(position: Int){
         var owner = list.get(position)
         var alertDialog = AlertDialog.Builder(this)
+        alertDialog.setIcon(R.drawable.img_trash)
+        alertDialog.setTitle(resources.getString(R.string.titleRemovePet))
         alertDialog.setMessage("${resources.getString(R.string.removePet)} ${owner.petName}?")
         alertDialog.setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
             var mData = FirebaseDatabase.getInstance().reference

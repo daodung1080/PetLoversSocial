@@ -11,5 +11,7 @@
     <color name="colorEndBtn">#92a107</color>
     <color name="colorCardView">#fdc1c1c1</color>
     <color name="colorProfile">#0bcce6</color>
+    <color name="colorChat">#e2e2e2</color>
+    <color name="colorBackgroundChat">#00a199</color>
 
 </resources>

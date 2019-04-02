@@ -1,4 +1,4 @@
-package com.dung.dungdaopetstore.adapter
+package com.dung.dungdaopetstore.adapter.user
 
 import android.content.Context
 import android.support.transition.FragmentTransitionSupport

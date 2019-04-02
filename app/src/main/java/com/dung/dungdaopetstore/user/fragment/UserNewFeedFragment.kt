@@ -1,7 +1,7 @@
 package com.dung.dungdaopetstore.user.fragment
 
-import android.animation.Animator
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -13,13 +13,15 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import com.dung.dungdaopetstore.R
-import com.dung.dungdaopetstore.adapter.NewFeedAdapter
+import com.dung.dungdaopetstore.adapter.user.NewFeedAdapter
 import com.dung.dungdaopetstore.base.BaseFragment
 import com.dung.dungdaopetstore.firebase.NewFeedDatabase
 import com.dung.dungdaopetstore.model.NewFeed
+import com.dung.dungdaopetstore.user.userchat.UserChatActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.dialog_new_feed_pet_image.view.*
 import kotlinx.android.synthetic.main.fragment_user_new_feed.view.*
+import java.util.*
 
 class UserNewFeedFragment: BaseFragment() {
 
@@ -28,6 +30,7 @@ class UserNewFeedFragment: BaseFragment() {
     lateinit var list: ArrayList<NewFeed>
     lateinit var adapter: NewFeedAdapter
     lateinit var newFeedDatabase: NewFeedDatabase
+    lateinit var rUsername: String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -41,11 +44,14 @@ class UserNewFeedFragment: BaseFragment() {
     }
 
     private fun createNewFeed() {
+        rUsername = getRootUsername()
         newFeedDatabase = NewFeedDatabase(context!!)
         list = ArrayList()
         adapter = NewFeedAdapter(context!!, list, this)
         rvNewFeed.layoutManager = LinearLayoutManager(context)
+        rvNewFeed.setHasFixedSize(true)
         rvNewFeed.adapter = adapter
+        setAnimForView(rvNewFeed)
 
         newFeedDatabase.getAllNewFeed(list,adapter)
 
@@ -73,6 +79,17 @@ class UserNewFeedFragment: BaseFragment() {
     fun dissmissDialog(alertDialog: AlertDialog, img: ImageView){
         img.setOnClickListener {
             alertDialog.dismiss()
+        }
+    }
+
+    fun meetPeople(position: Int){
+        var intent = Intent(context, UserChatActivity::class.java)
+        var newfeed = list.get(position)
+        if(newfeed.username.equals(rUsername)){
+            showMessage(resources.getString(R.string.errorChat),false)
+        }else{
+            intent.putExtra("people",newfeed.username)
+            startActivity(intent)
         }
     }
 

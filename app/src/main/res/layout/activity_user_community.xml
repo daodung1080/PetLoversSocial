@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".user.usercommunity.UserCommunityActivity"
-        android:background="@color/colorBackground"
+        android:background="@drawable/bg_community"
         android:padding="@dimen/layout_padding_size">
 
     <android.support.v7.widget.RecyclerView

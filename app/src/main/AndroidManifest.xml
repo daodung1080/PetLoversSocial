@@ -10,6 +10,7 @@
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
+            android:largeHeap="true"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
@@ -30,7 +31,8 @@
                 android:name=".user.UserActivity"
                 android:label="@string/title_activity_user">
         </activity>
-        <activity android:name=".user.userbuy.UserBuyActivity">
+        <activity android:name=".user.userbuy.UserBuyActivity"
+                  android:theme="@style/AppTheme.PlusNoActionBar">
         </activity>
         <activity android:name=".user.userorder.UserOrderActivity">
         </activity>
@@ -58,6 +60,14 @@
         <activity android:name=".user.useraddpet.UserPetUpdateActivity">
         </activity>
         <activity android:name=".user.useraddpet.UserPetShareActivity">
+        </activity>
+        <activity android:name=".user.userchat.UserChatActivity"
+                  android:theme="@style/AppTheme.PlusNoActionBar"
+                  android:label="">
+        </activity>
+        <activity android:name=".staff.StaffChatActivity"
+                  android:theme="@style/AppTheme.PlusNoActionBar"
+                  android:label="">
         </activity>
     </application>
 

@@ -8,5 +8,6 @@ class Constants {
     var headquatersTable = "headerquaters"
     var newfeedTable =  "newfeeds"
     var ownerTable = "owners"
+    var chatTable  = "chats"
 
 }

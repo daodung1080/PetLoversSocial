@@ -3,12 +3,12 @@ package com.dung.dungdaopetstore.user
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import com.dung.dungdaopetstore.R
 import com.dung.dungdaopetstore.base.BaseActivity
 import com.dung.dungdaopetstore.user.fragment.UserMainScreenFragment
 import com.dung.dungdaopetstore.user.fragment.UserNewFeedFragment
 import com.dung.dungdaopetstore.user.fragment.UserProfileFragment
+import com.dung.dungdaopetstore.user.fragment.UserRecentChatFragment
 import kotlinx.android.synthetic.main.activity_user.*
 
 class UserActivity : BaseActivity() {
@@ -20,7 +20,8 @@ class UserActivity : BaseActivity() {
         when (item.itemId) {
             R.id.navigationUserMain -> fragment = UserMainScreenFragment()
             R.id.navigationUserNewFeed -> fragment = UserNewFeedFragment()
-            R.id.navigationProfile -> fragment = UserProfileFragment()
+            R.id.navigationUserRecentChat -> fragment = UserRecentChatFragment()
+            R.id.navigationProfile -> fragment =  UserProfileFragment()
         }
         this.replaceFragment(R.id.flUser, fragment!!)
         true
@@ -31,7 +32,8 @@ class UserActivity : BaseActivity() {
         setContentView(R.layout.activity_user)
 
         this.replaceFragment(R.id.flUser, UserMainScreenFragment())
-
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
     }
+
 }

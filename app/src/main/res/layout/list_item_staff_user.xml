@@ -11,15 +11,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardElevation="2dp"
+                android:clickable="true"
+                android:id="@+id/cvChat"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="10dp"
                 android:layout_margin="10dp">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:weightSum="10"
                     android:orientation="horizontal"
-                    android:padding="20dp">
+                    android:padding="10dp">
 
                 <LinearLayout
                         android:layout_width="0dp"
@@ -29,16 +37,16 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
+                            android:layout_height="80dp"
                             android:src="@drawable/img_user"
                             app:civ_border_width="2dp"
                             android:id="@+id/imgStaffUserImage"
-                            app:civ_border_color="@color/colorStartBtn"/>
+                            app:civ_border_color="@color/colorCardView"/>
                     <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Dao Dung"
-                            android:textSize="15dp"
+                            android:textSize="14dp"
                             android:textColor="@color/colorStartBtn"
                             android:gravity="center"
                             android:textStyle="bold"
@@ -65,11 +73,13 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="@string/txtFullName"
+                                android:textSize="@dimen/edt_txt_size"
                                 android:textStyle="bold"/>
                         <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:textSize="@dimen/edt_txt_size"
                                 android:text="Dao Viet Dung"
                                 android:id="@+id/txtStaffFullname"/>
 
@@ -84,11 +94,13 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="@string/txtPassword"
+                                android:textSize="@dimen/edt_txt_size"
                                 android:textStyle="bold"/>
                         <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:textSize="@dimen/edt_txt_size"
                                 android:text="admin1234"
                                 android:id="@+id/txtStaffPassword"/>
 
@@ -102,12 +114,14 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:textSize="@dimen/edt_txt_size"
                                 android:text="@string/txtPhone"
                                 android:textStyle="bold"/>
                         <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:textSize="@dimen/edt_txt_size"
                                 android:text="1234567899"
                                 android:id="@+id/txtStaffPhone"/>
 
@@ -121,12 +135,14 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:textSize="@dimen/edt_txt_size"
                                 android:text="@string/txtBannedTime"
                                 android:textStyle="bold"/>
                         <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:textSize="@dimen/edt_txt_size"
                                 android:text="3 times"
                                 android:id="@+id/txtStaffBannedTime"/>
 
@@ -140,12 +156,14 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:textSize="@dimen/edt_txt_size"
                                 android:text="@string/txtTradeTime"
                                 android:textStyle="bold"/>
                         <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:textSize="@dimen/edt_txt_size"
                                 android:text="1 times"
                                 android:id="@+id/txtStaffTradeTime"/>
 
@@ -159,12 +177,14 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:textSize="@dimen/edt_txt_size"
                                 android:text="@string/txtMoney"
                                 android:textStyle="bold"/>
                         <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:textSize="@dimen/edt_txt_size"
                                 android:text="2.200.000 VND"
                                 android:id="@+id/txtStaffMoney"/>
 
@@ -173,6 +193,28 @@
 
                 </LinearLayout>
 
+
+            </LinearLayout>
+
+                <android.support.v7.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="2dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:layout_gravity="right"
+                        android:id="@+id/cvBan"
+                        android:layout_margin="@dimen/margin_cv_size"
+                        app:cardCornerRadius="@dimen/margin_cv_size">
+
+                    <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_margin="@dimen/margin_cv_size"
+                            android:id="@+id/imgBan"
+                            android:src="@drawable/img_ban"/>
+
+                </android.support.v7.widget.CardView>
 
             </LinearLayout>
 

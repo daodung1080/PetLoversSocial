@@ -7,21 +7,13 @@ import android.graphics.drawable.BitmapDrawable
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import com.dung.dungdaopetstore.adapter.UserMarketAdapter
-import com.dung.dungdaopetstore.base.BaseActivity
+import com.dung.dungdaopetstore.adapter.user.UserMarketAdapter
 import com.dung.dungdaopetstore.model.Animal
-import com.dung.dungdaopetstore.model.User
-import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
-import es.dmoral.toasty.Toasty
 import java.io.ByteArrayOutputStream
-import java.lang.Exception
-import java.lang.IndexOutOfBoundsException
 import java.text.DecimalFormat
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -105,53 +97,27 @@ class PetDatabase(var context: Context){
         return result
     }
 
-    fun getAllAnimals(adapter: UserMarketAdapter,list: ArrayList<Animal>){
+    fun getAllAnimals(adapter: UserMarketAdapter, list: ArrayList<Animal>){
         var mData = FirebaseDatabase.getInstance().reference
 
-        mData.child(Constants().petTable).orderByChild("confirm").equalTo(true)
-            .addChildEventListener(object : ChildEventListener{
-                var totalChild = -1
+        mData.child(Constants().petTable).addValueEventListener(object: ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
             }
 
-            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-                var animal = p0.getValue(Animal::class.java)
-                for(i in 0..totalChild){
-                    var same = list.get(i)
-                    if((animal!!.id).equals(same.id) ){
-                        var position = i
-                        list.set(position, animal)
-                        adapter.notifyDataSetChanged()
+            override fun onDataChange(p0: DataSnapshot) {
+                list.clear()
+                p0.children.forEach {
+                    var animal = it.getValue(Animal::class.java)
+                    if(animal!!.confirm == true && animal.amount > 0){
+                        list.add(animal)
                     }
                 }
-            }
-
-            override fun onChildRemoved(p0: DataSnapshot) {
-                var animal = p0.getValue(Animal::class.java)
-                for(i in 0..totalChild){
-                    var same = list.get(i)
-                    if((animal!!.id).equals(same.id) ){
-                        var position = i
-                        list.removeAt(position)
-                        adapter.notifyDataSetChanged()
-                        totalChild--
-                    }
-                }
-            }
-
-            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                var animal = p0.getValue(Animal::class.java)
-                list.add(animal!!)
                 adapter.notifyDataSetChanged()
-
-                totalChild++
             }
+
         })
+
     }
 
     fun getInformationByName(petID: String, img: ImageView, name: TextView,

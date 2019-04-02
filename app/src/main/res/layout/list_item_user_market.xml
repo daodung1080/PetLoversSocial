@@ -11,7 +11,7 @@
             android:layout_height="wrap_content"
             app:cardCornerRadius="10dp"
             app:cardElevation="2dp"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/margin_cv_size"
             android:id="@+id/cvUserMarket"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground">

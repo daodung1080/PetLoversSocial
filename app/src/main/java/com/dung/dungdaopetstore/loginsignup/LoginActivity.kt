@@ -36,6 +36,12 @@ class LoginActivity : BaseActivity() {
             startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
         }
 
+        edtDone()
+
+    }
+
+    private fun edtDone() {
+        imeOption(edtPassword,btnLogin)
     }
 
     private fun userValidation() {
@@ -72,11 +78,19 @@ class LoginActivity : BaseActivity() {
 
                 override fun onDataChange(p0: DataSnapshot) {
                     if (p0.childrenCount > 0){
-                        clearAllEDT()
-                        clearAllTIL()
-                        var intent = Intent(this@LoginActivity, UserActivity::class.java)
-                        startActivity(intent)
-                        rememberUser(username)
+                        p0.children.forEach {
+                            var user = it.getValue(User::class.java)
+                            if(user!!.ban == true){
+                                clearAllTIL()
+                                showMessage(resources.getString(R.string.errorLoginBanned),false)
+                            }else{
+                                clearAllEDT()
+                                clearAllTIL()
+                                var intent = Intent(this@LoginActivity, UserActivity::class.java)
+                                startActivity(intent)
+                                rememberUser(username)
+                            }
+                        }
                     }else{
                         clearAllTIL()
                         showMessage(resources.getString(R.string.errorLoginFailed),false)

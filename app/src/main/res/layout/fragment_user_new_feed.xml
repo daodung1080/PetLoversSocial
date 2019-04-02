@@ -8,7 +8,7 @@
 
     <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="535dp"
+            android:layout_height="540dp"
             android:id="@+id/rvNewFeed"></android.support.v7.widget.RecyclerView>
 
 </android.support.constraint.ConstraintLayout>

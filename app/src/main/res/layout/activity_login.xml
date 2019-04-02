@@ -9,9 +9,9 @@
         android:background="@color/colorBackground">
 
     <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/img_logo"
+            app:srcCompat="@drawable/img_logo_1"
             android:id="@+id/imageView2"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="8dp"
@@ -52,6 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
+                    android:imeOptions="actionNext"
                     android:textSize="@dimen/edt_txt_size"
                     android:id="@+id/edtUserName"
                     android:hint="@string/edtUsername"/>
@@ -87,11 +88,12 @@
                 android:inputType="textPassword"
                 android:id="@+id/edtPassword"
                 android:textSize="@dimen/edt_txt_size"
+                android:imeOptions="actionDone"
                 android:hint="@string/edtPassword"/>
     </android.support.design.widget.TextInputLayout>
 
     <Button
-            android:text="@string/btnLogin"
+            android:text="@string/app_title_login"
             android:layout_width="@dimen/btn_size"
             android:layout_height="wrap_content"
             android:id="@+id/btnLogin"

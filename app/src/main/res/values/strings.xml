@@ -6,13 +6,14 @@
     <string name="edtUsername">Username</string>
     <string name="edtPassword">Password</string>
     <string name="btnLogin">Confirm</string>
-    <string name="txtSignUp"><u>Sign Up to be a Pet Lovers</u></string>
+    <string name="txtSignUp"><u>Create an new Account</u></string>
     <string name="txtBuyer">Pet Lovers</string>
+    <string name="txtBuyer1">Buyer:</string>
     <string name="txtStaff">Supervisors Staff</string>
     <string name="errorLoginComplete">Login Successfully</string>
     <string name="errorLoginFailed">Login Failed because Username or Password does not exists</string>
-    <string name="errorLoginBanned">Your Account have been Banned by Supervisors please wait 5 days to take it back</string>
-
+    <string name="errorLoginBanned">Your Account have been Banned by Supervisors please wait 5 day to login again</string>
+    <string name="errorChat">You cannot chat with yourself</string>
 
     <!--Staff-->
     <string name="title_activity_staff">Staff</string>
@@ -22,6 +23,8 @@
     <string name="title_order_list">Orders List</string>
     <string name="edtAnimalName">Pet Name</string>
     <string name="txtAnimalGender">Gender:</string>
+    <string name="titleRemovePet">Remove Pet</string>
+    <string name="titleCheckPet">Accept Pet join Market</string>
     <string name="txtMale">Male</string>
     <string name="txtFemale">Female</string>
     <string name="edtAnimalPrice">Pet Price(VND)</string>
@@ -52,7 +55,7 @@
     <string name="errorWeight">Pet Weight must be bigger than 0</string>
     <string name="completeAnimalAdded">Insert Pet Completed</string>
     <string name="failedAnimalAdded">Insert Pet Failed</string>
-    <string name="errorUserSellPetComplete">Completed step 1. Now you need to wait Pet Lovers store accept your order, you can see your bill status in Order Screen</string>
+    <string name="errorUserSellPetComplete">You can check your bill in Order Screen</string>
     <string name="errorUserSellPetFailed">You cannot sell your pet. Please your internet connection then try it again</string>
 
     <!--User-->
@@ -60,6 +63,10 @@
     <string name="titleUserMain">Main Screen</string>
     <string name="titleUserNewFeed">New Feeds</string>
     <string name="titleUserProfile">My Profile</string>
+    <string name="titleUserSellPet">Confirm your information</string>
+    <string name="messageUserSellPet">Are you really want to sell</string>
+    <string name="messageUserSellPet1">with</string>
+    <string name="messageUserSellPet2">You will lost your pet in your profile</string>
     <string name="txtProfileSurplus">Surplus Money:</string>
 
     <string name="vpPetBuy">My Pets Order</string>
@@ -148,6 +155,7 @@
     <string name="txtUserMarketSoldOut">This pet is out of stock. You can buy it next time</string>
 
     <!--Pet name-->
+    <string name="all">All</string>
     <string name="dog">Dog</string>
     <string name="cat">Cat</string>
     <string name="turtle">Turtle</string>
@@ -157,6 +165,14 @@
     <string name="another">Difference</string>
     <string name="txtAnimalWeight">Weight:</string>
     <string name="txtAnimalCategory">Category:</string>
+
+    <string name="titleUserBan">Ban Member</string>
+    <string name="titleUserUnBan">Release Member</string>
+
+    <string name="warningBanMember">Are you really want to ban member</string>
+    <string name="warningBanMember1">this Member will not login (his/her) account anymore</string>
+    <string name="warningUnBanMember">Are you really want to release member</string>
+    <string name="warningUnBanMember1">this Member can join this account again</string>
 
     <!--User Sell-->
     <string name="txtUserSellValuation">Typing Pet price</string>
@@ -172,8 +188,11 @@
     <string name="txtUserUpdatePetWeight">Update your Pet weight</string>
 
     <string name="removePet">Are you really want to remove</string>
+    <string name="checkPet1">get into Market? Every member can buy this pet anytime</string>
+    <string name="checkPet">Are you really want to allow</string>
     <string name="imgProfileFailed">Update profile avatar failed. Please check your internet connection then try update again</string>
     <string name="petRemoveFailed">Remove pet failed. Please check your internet connection then try it again</string>
+    <string name="checkInternet">Please check your internet connection then try again</string>
     <string name="txtWriteTitle">Write your title...</string>
     <string name="txtWriteDescription">Write your desciption...</string>
 
@@ -181,5 +200,14 @@
     <string name="errorShareDescribe">Desciption characters length Min is 0 and Max is 250</string>
     <string name="errorShareComplete">Share completed</string>
     <string name="errorShareFailed">Share Failed. Please check your internet connection then try it again</string>
+    <string name="typeMessage">Type your message...</string>
+    <string name="titleUserRecentChat">Recent Chat</string>
+    <string name="title_question">Member Feed Back</string>
+    <string name="title_log_out">Log Out</string>
+    <string name="warningSellPet">Please add pet first then you can sell it</string>
+    <string name="warningSellPet1">Select a pet you wanna sell</string>
+    <string name="title_user_market">Pet Market</string>
+    <string name="title_pet_lovers">Pet Lovers Support</string>
+    <string name="titleContactUs">Contact Us</string>
 
 </resources>

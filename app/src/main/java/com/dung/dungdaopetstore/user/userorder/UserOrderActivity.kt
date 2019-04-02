@@ -3,7 +3,7 @@ package com.dung.dungdaopetstore.user.userorder
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.dung.dungdaopetstore.R
-import com.dung.dungdaopetstore.adapter.ViewPagerUserOrderAdapter
+import com.dung.dungdaopetstore.adapter.user.ViewPagerUserOrderAdapter
 import kotlinx.android.synthetic.main.activity_user_order.*
 
 class UserOrderActivity : AppCompatActivity() {
@@ -22,7 +22,7 @@ class UserOrderActivity : AppCompatActivity() {
 
     private fun viewPagerControl() {
 
-        adapterViewPager = ViewPagerUserOrderAdapter(supportFragmentManager,this)
+        adapterViewPager = ViewPagerUserOrderAdapter(supportFragmentManager, this)
         vpUserOrder.adapter = adapterViewPager
         tlUserOrder.setupWithViewPager(vpUserOrder)
 
