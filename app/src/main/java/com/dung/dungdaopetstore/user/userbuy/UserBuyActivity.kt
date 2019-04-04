@@ -1,9 +1,16 @@
 package com.dung.dungdaopetstore.user.userbuy
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.provider.MediaStore
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.GridLayoutManager
+import android.view.ContextMenu
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -33,7 +40,8 @@ class UserBuyActivity : BaseActivity() {
         setContentView(R.layout.activity_user_buy)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
-        supportActionBar!!.setIcon(R.drawable.img_back)
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.img_back)
+        activityAnim(this)
 
         var sharedPreferences = getSharedPreferences("USER", Context.MODE_PRIVATE)
         username = sharedPreferences.getString("username","")
@@ -44,6 +52,7 @@ class UserBuyActivity : BaseActivity() {
 
     }
 
+    // init all View and Class
     private fun initView() {
         petDatabase = PetDatabase(this)
         mData = FirebaseDatabase.getInstance().reference
@@ -55,6 +64,7 @@ class UserBuyActivity : BaseActivity() {
         spnCategoryPet.adapter = petAdapter
     }
 
+    // get all pet when user clicked Category item
     private fun getPetByCategory() {
         spnCategoryPet.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -67,6 +77,7 @@ class UserBuyActivity : BaseActivity() {
         }
     }
 
+    // get all pet by Category
     private fun getPetListByCategory(petCategory: String) {
         if(petCategory.equals(resources.getString(R.string.all))){
             petDatabase.getAllAnimals(adapter,list)
@@ -92,10 +103,12 @@ class UserBuyActivity : BaseActivity() {
     }
 
 
+    // get all pet from database then put into Recycler View
     private fun getAllAnimals() {
         list = ArrayList()
         adapter = UserMarketAdapter(this, list)
 
+        // set adapter for recyclerView
         rvUserBuy.layoutManager = GridLayoutManager(this,2)
         rvUserBuy.setHasFixedSize(true)
         rvUserBuy.adapter = adapter
@@ -104,11 +117,18 @@ class UserBuyActivity : BaseActivity() {
 
     }
 
+    // switch activity when user click into Pet Icon
     fun showPetInformation(position: Int){
         var animal = list.get(position)
         var intent = Intent(this@UserBuyActivity, UserBuyInformationActivity::class.java)
         intent.putExtra("petID",animal.id)
         startActivity(intent)
+    }
+
+    // Back button animation
+    override fun onBackPressed() {
+        super.onBackPressed()
+        activityAnim(this)
     }
 
 }

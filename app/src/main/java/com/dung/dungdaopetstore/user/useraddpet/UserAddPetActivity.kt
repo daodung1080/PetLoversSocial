@@ -44,8 +44,14 @@ class UserAddPetActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_add_pet)
+
+        // Create toolbar with new back button
+        setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
-        supportActionBar!!.setIcon(R.drawable.img_back)
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.img_back)
+
+        // Config animation when switch activity
+        activityAnim(this)
 
         ownerDatabase = OwnerDatabase(this)
         sharedPreferences = getSharedPreferences("USER", Context.MODE_PRIVATE)
@@ -58,6 +64,7 @@ class UserAddPetActivity : BaseActivity() {
 
     }
 
+    // create spinner of Pet Category
     private fun initSpinner() {
         spnList = listOf(resources.getString(R.string.dog),resources.getString(R.string.cat),resources.getString(R.string.fish),
             resources.getString(R.string.turtle),resources.getString(R.string.mouse),resources.getString(R.string.bird),
@@ -67,12 +74,14 @@ class UserAddPetActivity : BaseActivity() {
         spnUserSellCategory.setAdapter(spnAdapter)
     }
 
+    // Button confirm call on click
     private fun onClickConfirm() {
         btnUserSellConfirm.setOnClickListener {
             validationAnimal()
         }
     }
 
+    // register context menu for Image
     fun registerContextMenu(){
         registerForContextMenu(imgUserSellAddition)
         imgUserSellAddition.setOnClickListener {
@@ -80,6 +89,7 @@ class UserAddPetActivity : BaseActivity() {
         }
     }
 
+    // check form validate when clicked button Add Pet
     fun validationAnimal(){
         try {
             var aName = edtUserSellName.text.toString()
@@ -112,16 +122,19 @@ class UserAddPetActivity : BaseActivity() {
         }
     }
 
+    // clear all edit text when finishing Addition
     fun clearAllEditText(){
         edtUserSellName.setText("")
         edtUserSellWeight.setText("")
     }
 
+    // clear all text input layout error when finishing Addition
     fun clearAllTextInputLayout(){
         tilUserSellName.error = null
         tilUserSellWeight.error = null
     }
 
+    // create context menu when clicked Image
     override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
         super.onCreateContextMenu(menu, v, menuInfo)
         menuInflater.inflate(R.menu.menu_user_trade, menu)
@@ -129,6 +142,7 @@ class UserAddPetActivity : BaseActivity() {
         menu!!.setHeaderIcon(R.drawable.img_camera)
     }
 
+    // context menu item Function
     override fun onContextItemSelected(item: MenuItem?): Boolean {
 
         if(item!!.itemId == R.id.menuCamera){
@@ -168,6 +182,8 @@ class UserAddPetActivity : BaseActivity() {
         return true
     }
 
+
+    // get image from Camera or Folder
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == REQUEST_CODE_CAMERA && resultCode == Activity.RESULT_OK && data != null){
@@ -185,6 +201,7 @@ class UserAddPetActivity : BaseActivity() {
         }
     }
 
+    // Get Permission for camera or folder
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
             MY_PERMISSIONS_REQUEST_CAMERA -> {
@@ -203,6 +220,12 @@ class UserAddPetActivity : BaseActivity() {
             else -> {
             }
         }
+    }
+
+    // Button Back Animation
+    override fun onBackPressed() {
+        super.onBackPressed()
+        activityAnim(this)
     }
 
 }

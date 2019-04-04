@@ -27,7 +27,7 @@ class StaffChatActivity : BaseActivity() {
         setContentView(R.layout.activity_user_chat)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
-        supportActionBar!!.setIcon(R.drawable.img_back)
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.img_back)
 
         initView()
         getUserProfile()
@@ -36,6 +36,7 @@ class StaffChatActivity : BaseActivity() {
 
     }
 
+    // Get username profile include Image and Fullname
     private fun getUserProfile() {
         mData.child(Constants().userTable).child(receiver)
             .addListenerForSingleValueEvent(object: ValueEventListener{
@@ -56,6 +57,7 @@ class StaffChatActivity : BaseActivity() {
             })
     }
 
+    // Get all message of 2 member
     private fun getAllMessage() {
         mData.child(Constants().chatTable).addValueEventListener(object: ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
@@ -77,12 +79,14 @@ class StaffChatActivity : BaseActivity() {
         })
     }
 
+    // Button send click
     private fun sendMessage() {
         imgSend.setOnClickListener {
             validation()
         }
     }
 
+    // check form validate when click button Send
     private fun validation() {
         var message = edtMessage.text.toString()
         if(message.isEmpty()){
@@ -93,6 +97,7 @@ class StaffChatActivity : BaseActivity() {
         }
     }
 
+    // init All View and all Class
     private fun initView() {
         mData = FirebaseDatabase.getInstance().reference
         rUsername = getRootUsername()
@@ -104,4 +109,11 @@ class StaffChatActivity : BaseActivity() {
         rvChat.adapter = adapter
         receiver = intent.getStringExtra("people")
     }
+
+    // Back button animation
+    override fun onBackPressed() {
+        super.onBackPressed()
+        activityAnim(this)
+    }
+
 }

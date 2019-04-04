@@ -10,9 +10,11 @@ import com.dung.dungdaopetstore.user.fragment.UserNewFeedFragment
 import com.dung.dungdaopetstore.user.fragment.UserProfileFragment
 import com.dung.dungdaopetstore.user.fragment.UserRecentChatFragment
 import kotlinx.android.synthetic.main.activity_user.*
+import java.lang.NullPointerException
 
 class UserActivity : BaseActivity() {
 
+    // On click item when clicked item of navigation bottom
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
 
         var fragment: Fragment? = null
@@ -30,8 +32,10 @@ class UserActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
+        activityAnim(this)
 
         this.replaceFragment(R.id.flUser, UserMainScreenFragment())
+
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
     }

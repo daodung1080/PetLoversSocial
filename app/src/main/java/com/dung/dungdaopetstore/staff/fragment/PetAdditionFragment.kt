@@ -66,6 +66,7 @@ class PetAdditionFragment: BaseFragment() {
         return rootview
     }
 
+    // Create spinner Category of Pet
     private fun initSpinner() {
         spnAnimalCategory = rootview.spnAnimalCategory
         spnList = listOf(
@@ -82,6 +83,7 @@ class PetAdditionFragment: BaseFragment() {
         spnAnimalCategory.adapter = spnAdapter
     }
 
+    // Validate check form when click button Add Pet
     fun validationAnimal() {
         try {
             var aName = edtAnimalName.text.toString()
@@ -127,6 +129,7 @@ class PetAdditionFragment: BaseFragment() {
         }
     }
 
+    // clear all Text input layout error when finish Addition
     fun clearAllTextInputLayout() {
         tilAnimalName.error = null
         tilAnimalPrice.error = null
@@ -134,6 +137,7 @@ class PetAdditionFragment: BaseFragment() {
         tilAnimalWeight.error = null
     }
 
+    // clear all edittext when finish Addition
     fun clearAllEditText() {
         edtAnimalName.setText("")
         edtAnimalPrice.setText("")
@@ -141,6 +145,7 @@ class PetAdditionFragment: BaseFragment() {
         edtAnimalWeight.setText("")
     }
 
+    // init All view and Class
     fun initView() {
         edtAnimalWeight = rootview.edtAnimalWeight
         petDatabase = PetDatabase(context!!)
@@ -157,11 +162,13 @@ class PetAdditionFragment: BaseFragment() {
         rdMale = rootview.rdMale
         btnAnimalConfirm = rootview.btnAnimalConfirm
 
+        // button add Pet Confirm click
         btnAnimalConfirm.setOnClickListener {
             validationAnimal()
         }
     }
 
+    // Register context menu for image
         fun registerContextMenu() {
             registerForContextMenu(imgAddition)
             imgAddition.setOnClickListener {
@@ -170,6 +177,7 @@ class PetAdditionFragment: BaseFragment() {
         }
 
 
+    // Create context menu for Image
         override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
             super.onCreateContextMenu(menu, v, menuInfo)
             activity!!.menuInflater.inflate(R.menu.menu_user_trade, menu)
@@ -177,6 +185,8 @@ class PetAdditionFragment: BaseFragment() {
             menu!!.setHeaderIcon(R.drawable.img_camera)
         }
 
+
+    // Function when click context menu item
         override fun onContextItemSelected(item: MenuItem?): Boolean {
 
             if (item!!.itemId == R.id.menuCamera) {
@@ -226,6 +236,8 @@ class PetAdditionFragment: BaseFragment() {
             return true
         }
 
+
+    // Get image from camera or folder
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
             super.onActivityResult(requestCode, resultCode, data)
             if (requestCode == REQUEST_CODE_CAMERA && resultCode == Activity.RESULT_OK && data != null) {
@@ -243,11 +255,10 @@ class PetAdditionFragment: BaseFragment() {
             }
         }
 
-        override fun onRequestPermissionsResult(
-            requestCode: Int,
-            permissions: Array<out String>,
-            grantResults: IntArray
-        ) {
+
+    // get Permission camera or folder
+        override fun onRequestPermissionsResult(requestCode: Int,
+            permissions: Array<out String>, grantResults: IntArray) {
             when (requestCode) {
                 MY_PERMISSIONS_REQUEST_CAMERA -> {
                     if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {

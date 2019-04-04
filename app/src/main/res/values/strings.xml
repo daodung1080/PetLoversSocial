@@ -59,7 +59,7 @@
     <string name="errorUserSellPetFailed">You cannot sell your pet. Please your internet connection then try it again</string>
 
     <!--User-->
-    <string name="title_activity_user">Pet Lovers</string>
+    <string name="title_activity_user">Home</string>
     <string name="titleUserMain">Main Screen</string>
     <string name="titleUserNewFeed">New Feeds</string>
     <string name="titleUserProfile">My Profile</string>
@@ -192,7 +192,7 @@
     <string name="checkPet">Are you really want to allow</string>
     <string name="imgProfileFailed">Update profile avatar failed. Please check your internet connection then try update again</string>
     <string name="petRemoveFailed">Remove pet failed. Please check your internet connection then try it again</string>
-    <string name="checkInternet">Please check your internet connection then try again</string>
+    <string name="checkInternet">Error! An error occurred. Please try again later</string>
     <string name="txtWriteTitle">Write your title...</string>
     <string name="txtWriteDescription">Write your desciption...</string>
 
@@ -208,6 +208,23 @@
     <string name="warningSellPet1">Select a pet you wanna sell</string>
     <string name="title_user_market">Pet Market</string>
     <string name="title_pet_lovers">Pet Lovers Support</string>
-    <string name="titleContactUs">Contact Us</string>
+    <string name="title_sign_up">Sign Up</string>
+    <string name="title_user_purchase_complete">Complete your purchase</string>
+    <string name="txtBankAccount">Select your output Account</string>
+    <string name="txtUserPurchase">Total money you wanna purchase:</string>
+    <string name="edtUserPurchase">Enter your Account number</string>
+    <string name="errorUserPurchase">Account number must be not empty</string>
+    <string name="completeUserPurchase">Purchase money successfuly. You can check your money in Profile Screen</string>
+    <string name="errorUserBuyRemove">This pet have been removed by admin. Please choose another pet</string>
+    <string name="title_user_order">Your Order</string>
+    <string name="title_user_sell">Trade Your Pet</string>
+    <string name="title_user_community">Pet Lovers Community</string>
+    <string name="title_user_market_detail">Pet Detail</string>
+    <string name="title_user_update">Config Your Profile Information</string>
+    <string name="title_user_purchase">Purchase</string>
+    <string name="title_user_pet_list">Your Pet</string>
+    <string name="title_user_pet_share">Share Your Pet</string>
+    <string name="title_user_pet_update">Config Your Pet Information</string>
+    <string name="title_user_add_pet">Add More Pet Into Your Profile</string>
 
 </resources>

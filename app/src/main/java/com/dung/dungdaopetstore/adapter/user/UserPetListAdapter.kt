@@ -25,6 +25,7 @@ class UserPetListAdapter(var context: UserPetListActivity, var list: ArrayList<O
 
     override fun onBindViewHolder(holder: UserHolder, p1: Int) {
         var owner = list.get(p1)
+        // get all information then put into View
         holder.txtUserPetListCategory.text = owner.petCategory
         holder.txtUserPetListName.text = owner.petName
         holder.txtUserPetListGender.text = owner.petGender
@@ -46,6 +47,7 @@ class UserPetListAdapter(var context: UserPetListActivity, var list: ArrayList<O
     }
 
     class UserHolder(view: View) : RecyclerView.ViewHolder(view) {
+        // init All view in User Pet List Layout
         var cvUserPetListShow = view.cvUserPetListShow
         var txtUserPetListCategory = view.txtUserPetListCategory
         var txtUserPetListName = view.txtUserPetListName

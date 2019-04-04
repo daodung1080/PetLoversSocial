@@ -24,26 +24,33 @@ class LoginActivity : BaseActivity() {
 
         mData = FirebaseDatabase.getInstance().reference
 
+        // Button login clicked by user
         btnLogin.setOnClickListener {
             if(rdStaff.isChecked){
                 startActivity(Intent(this@LoginActivity, StaffActivity::class.java))
+                activityAnim(this)
             }else{
                 userValidation()
+                activityAnim(this)
             }
         }
 
+        // Button sign up clicked by user
         txtSignUp.setOnClickListener {
             startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
+            activityAnim(this)
         }
 
         edtDone()
 
     }
 
+    // Call login button when finishing type password
     private fun edtDone() {
         imeOption(edtPassword,btnLogin)
     }
 
+    // Check validate form when user click button Login
     private fun userValidation() {
         var username = edtUserName.text.toString()
         var password = edtPassword.text.toString()
@@ -58,16 +65,19 @@ class LoginActivity : BaseActivity() {
         }
     }
 
+    // Clear all characters when finish Login
     fun clearAllEDT(){
         edtUserName.setText("")
         edtPassword.setText("")
     }
 
+    // Clear all error when finish Login
     fun clearAllTIL(){
         tilUsername.error = null
         tilPassword.error = null
     }
 
+    // Check user profile - username and password have signed - this username have not been banned
     fun checkLogin(username: String, password: String){
         var up = "username_password"
         mData.child(Constants().userTable).orderByChild(up).equalTo("$username-$password")
@@ -100,31 +110,19 @@ class LoginActivity : BaseActivity() {
             })
         }
 
-//    fun checkBanned(username: String){
-//        mData.child(Constants().userTable).orderByChild("banned")
-//            .equalTo(true).addListenerForSingleValueEvent(object: ValueEventListener{
-//                override fun onCancelled(p0: DatabaseError) {
-//                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//                }
-//
-//                override fun onDataChange(p0: DataSnapshot) {
-//                    if(p0.childrenCount > 0){
-//                        var user = p0.getValue(User::class.java)
-//                        if (username.equals(user!!.username)){
-//                            showMessage("Your account have been banned",false)
-//                        }else{
-//                            showMessage("Login Successfully",true)
-//                            showMessage(user.username,true)
-//                        }
-//                    }
-//                }
-//
-//            })
-//    }
 
+    // Remember the username when Login
     fun rememberUser(username: String){
         var editor = getSharedPreferences("USER", Context.MODE_PRIVATE).edit()
         editor.putString("username", username)
         editor.commit()
     }
+
+
+    // When user click button Back
+    override fun onBackPressed() {
+        super.onBackPressed()
+        activityAnim(this)
+    }
+
 }

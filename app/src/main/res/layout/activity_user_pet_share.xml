@@ -6,10 +6,40 @@
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
-        android:background="@color/colorBackground"
-        android:padding="@dimen/layout_padding_size"
         tools:context=".user.useraddpet.UserPetShareActivity">
 
+    <android.support.design.widget.AppBarLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                app:contentInsetStartWithNavigation="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_user_pet_share"
+                    android:textColor="@color/colorBackground"
+                    android:textSize="16dp"
+                    android:layout_weight="8"
+                    android:textStyle="bold"/>
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBackground"
+            android:padding="@dimen/layout_padding_size"
+            android:orientation="vertical">
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -306,4 +336,5 @@
             android:layout_margin="@dimen/margin_layout_size"
             android:src="@drawable/img_pet_share"/>
 
+    </LinearLayout>
 </LinearLayout>

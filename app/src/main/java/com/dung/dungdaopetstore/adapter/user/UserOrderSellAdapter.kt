@@ -24,6 +24,7 @@ class UserOrderSellAdapter(var context: Context, var list: ArrayList<Animal>)
 
     override fun onBindViewHolder(holder: UserHolder, p1: Int) {
         var animal = list.get(p1)
+        // get all information then put into View
         Picasso.get().load(animal.image).into(holder.imgUserOrderSellImage)
         holder.txtUserOrderSellPetID.setText(animal.id)
         holder.txtUserOrderSellGender.setText(animal.gender)
@@ -41,7 +42,7 @@ class UserOrderSellAdapter(var context: Context, var list: ArrayList<Animal>)
     }
 
     class UserHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
+        // init All view in User Order Sell Layout
         var imgUserOrderSellImage = itemView.imgUserOrderSellImage
         var txtUserOrderSellPetID = itemView.txtUserOrderSellPetID
         var txtUserOrderSellName = itemView.txtUserOrderSellName

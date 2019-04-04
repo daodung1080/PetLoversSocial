@@ -26,6 +26,7 @@ class UserMarketAdapter(var context: UserBuyActivity, var list: ArrayList<Animal
 
     override fun onBindViewHolder(holder: UserHolder, p1: Int) {
         var animal = list.get(p1)
+        // get all information then put into View
         holder.txtUserMarketPetName.text = animal.name
         holder.txtUserMarketPetGender.text = animal.gender
         var fm = DecimalFormat("###,###,###")
@@ -38,6 +39,7 @@ class UserMarketAdapter(var context: UserBuyActivity, var list: ArrayList<Animal
     }
 
     class UserHolder(view: View) : RecyclerView.ViewHolder(view) {
+        // init All view in User Market Layout
         var txtUserMarketPetName = view.txtUserMarketPetName
         var imgUserMarketProfile = view.imgUserMarketProfile
         var txtUserMarketPetGender = view.txtUserMarketPetGender

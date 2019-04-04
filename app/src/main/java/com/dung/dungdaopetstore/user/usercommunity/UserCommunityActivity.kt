@@ -24,14 +24,22 @@ class UserCommunityActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_community)
+
+        // Create toolbar with new back button
+        setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
-        supportActionBar!!.setIcon(R.drawable.img_back)
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.img_back)
+
+        // Config animation when switch activity
+        activityAnim(this)
+
 
         initView()
         addList()
 
     }
 
+    // get all user then put into recycler View
     private fun addList() {
         mData.child(Constants().userTable).orderByChild("ban").equalTo(false)
             .addChildEventListener(object: ChildEventListener{
@@ -61,11 +69,13 @@ class UserCommunityActivity : BaseActivity() {
     }
 
 
+    // init All View and Class
     private fun initView() {
         mData = FirebaseDatabase.getInstance().reference
         list = ArrayList()
         adapter = UserSocialAdapter(this, list)
         rUsername = getRootUsername()
+        // set adapter for recyclerView
         lvUserCommunity.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
         lvUserCommunity.adapter = adapter
         var mCardScaleHelper = CardScaleHelper()
@@ -73,6 +83,7 @@ class UserCommunityActivity : BaseActivity() {
         mCardScaleHelper.attachToRecyclerView(lvUserCommunity)
     }
 
+    // click People Chat icon Function
     fun meetPeople(position: Int){
         var intent = Intent(this@UserCommunityActivity, UserChatActivity::class.java)
         var user = list.get(position)
@@ -82,6 +93,12 @@ class UserCommunityActivity : BaseActivity() {
             intent.putExtra("people",user.username)
             startActivity(intent)
         }
+    }
+
+    // Back button animation
+    override fun onBackPressed() {
+        super.onBackPressed()
+        activityAnim(this)
     }
 
 }

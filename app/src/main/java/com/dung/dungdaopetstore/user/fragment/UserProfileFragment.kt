@@ -16,6 +16,7 @@ import android.support.v7.widget.CardView
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.dung.dungdaopetstore.R
 import com.dung.dungdaopetstore.user.useraddpet.UserPetListActivity
@@ -51,7 +52,7 @@ class UserProfileFragment: BaseFragment() {
     lateinit var cvProfileUpdate: CardView
     lateinit var cvProfilePurchase: CardView
     lateinit var imgProfileHide: ImageView
-    var hideshow = true
+    lateinit var llMainProfile: LinearLayout
 
     lateinit var mData: DatabaseReference
 
@@ -66,6 +67,7 @@ class UserProfileFragment: BaseFragment() {
         rootview = inflater.inflate(R.layout.fragment_user_profile, container, false)
 
         initView()
+        setLayoutAnimation(llMainProfile)
         registerContextMenu()
         getUserInformation()
         selectFunction()
@@ -74,16 +76,7 @@ class UserProfileFragment: BaseFragment() {
 
     }
 
-    private fun onclickHideShow() {
-        imgProfileHide.setOnClickListener {
-            if(hideshow == true){
-                hideshow = false
-            }else{
-                hideshow = true
-            }
-        }
-    }
-
+    // register context menu for Image
     private fun registerContextMenu() {
         registerForContextMenu(imgProfileUser)
         imgProfileUser.setOnClickListener {
@@ -91,6 +84,7 @@ class UserProfileFragment: BaseFragment() {
         }
     }
 
+    // create context menu for Image
     override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
         super.onCreateContextMenu(menu, v, menuInfo)
         activity!!.menuInflater.inflate(R.menu.menu_user_trade, menu)
@@ -98,6 +92,8 @@ class UserProfileFragment: BaseFragment() {
         menu!!.setHeaderIcon(R.drawable.img_camera)
     }
 
+
+    // context menu clicked Function
     override fun onContextItemSelected(item: MenuItem?): Boolean {
 
         if(item!!.itemId == R.id.menuCamera){
@@ -137,6 +133,7 @@ class UserProfileFragment: BaseFragment() {
         return true
     }
 
+    // get image from Camera or Folder
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == REQUEST_CODE_CAMERA && resultCode == Activity.RESULT_OK && data != null){
@@ -156,6 +153,7 @@ class UserProfileFragment: BaseFragment() {
         }
     }
 
+    // Upload Image to database and get into profile
     fun uploadImageAndSaveIntoDataBase(img: CircleImageView){
         var mStorage = FirebaseStorage.getInstance("gs://dungdaopetstore.appspot.com")
 
@@ -184,6 +182,8 @@ class UserProfileFragment: BaseFragment() {
 
     }
 
+
+    // Request Permission for camera or folder
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
             MY_PERMISSIONS_REQUEST_CAMERA -> {
@@ -204,6 +204,7 @@ class UserProfileFragment: BaseFragment() {
         }
     }
 
+    // on click Icon Function
     private fun selectFunction() {
         cvProfileAddPet.setOnClickListener {
             startActivity(Intent(context, UserPetListActivity::class.java))
@@ -216,13 +217,16 @@ class UserProfileFragment: BaseFragment() {
         }
     }
 
+    // Get all information of user then fill out all View
     private fun getUserInformation() {
         userDatabase.getUserInformation(rUsername,txtProfileUsername,imgProfileUser,txtProfileMoney,
             txtProfileFullname,txtProfilePhone,txtProfileTradeTime,txtProfileLocation,context!!.resources.getString(R.string.txtTimes),imgProfileHide,
             R.drawable.img_show, R.drawable.img_hide)
     }
 
+    // initALl view and Class
     private fun initView() {
+        llMainProfile = rootview.llMainProfile
         rUsername = getRootUsername()
         userDatabase = UserDatabase(context!!)
         imgProfileUser = rootview.imgProfleUser

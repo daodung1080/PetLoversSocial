@@ -12,10 +12,11 @@
             android:label="@string/app_name"
             android:largeHeap="true"
             android:roundIcon="@mipmap/ic_launcher_round"
+            android:screenOrientation="portrait"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".SplashScreen"
+                android:name=".introduce.SplashScreen"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -31,43 +32,90 @@
                 android:name=".user.UserActivity"
                 android:label="@string/title_activity_user">
         </activity>
-        <activity android:name=".user.userbuy.UserBuyActivity"
-                  android:theme="@style/AppTheme.PlusNoActionBar">
+        <activity
+                android:name=".user.userbuy.UserBuyActivity"
+                android:parentActivityName=".user.UserActivity"
+                android:theme="@style/AppTheme.PlusNoActionBar">
         </activity>
-        <activity android:name=".user.userorder.UserOrderActivity">
+        <activity
+                android:name=".user.userorder.UserOrderActivity"
+                android:parentActivityName=".user.UserActivity"
+                android:theme="@style/AppTheme.PlusNoActionBar">
         </activity>
-        <activity android:name=".user.useraddpet.UserAddPetActivity">
+        <activity
+                android:name=".user.useraddpet.UserAddPetActivity"
+                android:parentActivityName=".user.useraddpet.UserPetListActivity"
+                android:theme="@style/AppTheme.PlusNoActionBar">
         </activity>
-        <activity android:name=".user.usercommunity.UserCommunityActivity">
+        <activity
+                android:name=".user.usercommunity.UserCommunityActivity"
+                android:parentActivityName=".user.UserActivity"
+                android:theme="@style/AppTheme.PlusNoActionBar">
         </activity>
-        <activity android:name=".loginsignup.SignUpActivity">
+        <activity
+                android:name=".loginsignup.SignUpActivity"
+                android:label=""
+                android:parentActivityName=".loginsignup.LoginActivity"
+                android:theme="@style/AppTheme.PlusNoActionBar">
         </activity>
         <activity
                 android:name=".staff.StaffActivity"
                 android:label="@string/title_activity_staff"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".user.userbuy.UserBuyInformationActivity">
+        <activity
+                android:name=".user.userbuy.UserBuyInformationActivity"
+                android:parentActivityName=".user.UserActivity"
+                android:theme="@style/AppTheme.PlusNoActionBar">
         </activity>
-        <activity android:name=".user.useraddpet.UserPetListActivity">
+        <activity
+                android:name=".user.useraddpet.UserPetListActivity"
+                android:parentActivityName=".user.userbuy.UserBuyActivity"
+                android:theme="@style/AppTheme.PlusNoActionBar">
         </activity>
-        <activity android:name=".user.usersell.UserSellPetActivity">
+        <activity
+                android:name=".user.usersell.UserSellPetActivity"
+                android:parentActivityName=".user.UserActivity"
+                android:theme="@style/AppTheme.PlusNoActionBar">
         </activity>
-        <activity android:name=".user.userupdate.UserUpdateActivity">
+        <activity
+                android:name=".user.userupdate.UserUpdateActivity"
+                android:parentActivityName=".user.UserActivity"
+                android:theme="@style/AppTheme.PlusNoActionBar">
         </activity>
-        <activity android:name=".user.userpurchase.UserPurchaseActivity">
+        <activity
+                android:name=".user.userpurchase.UserPurchaseActivity"
+                android:parentActivityName=".user.UserActivity"
+                android:theme="@style/AppTheme.PlusNoActionBar">
         </activity>
-        <activity android:name=".user.useraddpet.UserPetUpdateActivity">
+        <activity
+                android:name=".user.useraddpet.UserPetUpdateActivity"
+                android:parentActivityName=".user.useraddpet.UserPetListActivity"
+                android:theme="@style/AppTheme.PlusNoActionBar">
         </activity>
-        <activity android:name=".user.useraddpet.UserPetShareActivity">
+        <activity
+                android:name=".user.useraddpet.UserPetShareActivity"
+                android:parentActivityName=".user.useraddpet.UserPetListActivity"
+                android:theme="@style/AppTheme.PlusNoActionBar">
         </activity>
-        <activity android:name=".user.userchat.UserChatActivity"
-                  android:theme="@style/AppTheme.PlusNoActionBar"
-                  android:label="">
+        <activity
+                android:name=".user.userchat.UserChatActivity"
+                android:label=""
+                android:parentActivityName=".user.UserActivity"
+                android:theme="@style/AppTheme.PlusNoActionBar">
         </activity>
-        <activity android:name=".staff.StaffChatActivity"
-                  android:theme="@style/AppTheme.PlusNoActionBar"
-                  android:label="">
+        <activity
+                android:name=".staff.StaffChatActivity"
+                android:label=""
+                android:parentActivityName=".staff.StaffActivity"
+                android:theme="@style/AppTheme.PlusNoActionBar">
+        </activity>
+        <activity android:name=".introduce.IntroduceActivity">
+        </activity>
+        <activity android:name=".user.userpurchase.UserPurchaseInformationActivity"
+                android:theme="@style/AppTheme.PlusNoActionBar"
+                android:label=""
+                android:parentActivityName=".user.userpurchase.UserPurchaseActivity">
         </activity>
     </application>
 

@@ -31,6 +31,7 @@ class NewFeedAdapter(var context: Context, var list: ArrayList<NewFeed>,var frag
 
     override fun onBindViewHolder(holder: NewFeedHolder, p1: Int) {
         var newFeed = list.get(p1)
+        // get all information then put into View
 
         holder.txtNewFeedName.text = newFeed.username
         holder.txtNewFeedTitle.text = newFeed.title
@@ -63,6 +64,7 @@ class NewFeedAdapter(var context: Context, var list: ArrayList<NewFeed>,var frag
     }
 
     class NewFeedHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        // init All view in User New Feed Layout
         var imgNewFeedProfile = itemView.imgNewFeedProfile
         var txtNewFeedName = itemView.txtNewFeedName
         var txtNewFeedTitle = itemView.txtNewFeedTitle

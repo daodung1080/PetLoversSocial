@@ -29,6 +29,7 @@ class StaffFeedBackAdapter(var context: Context, var list: ArrayList<User>, var 
 
     override fun onBindViewHolder(holder: UserHolder, p1: Int) {
         var user = list.get(p1)
+        // get all information then put into View
         holder.txtRecentChat.setText(user.fullname)
         Picasso.get().load(user.image).into(holder.imgRecentChat)
         holder.cvRecentChat.setOnClickListener {
@@ -38,6 +39,7 @@ class StaffFeedBackAdapter(var context: Context, var list: ArrayList<User>, var 
     }
 
     class UserHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        // init All view in Staff Feed Back Layout
         var imgRecentChat = itemView.imgRecentChat
         var txtRecentChat = itemView.txtRecentChat
         var cvRecentChat = itemView.cvRecentChat

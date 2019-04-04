@@ -30,12 +30,24 @@ class UserMainScreenFragment: BaseFragment() {
         rootview = inflater.inflate(R.layout.fragment_user_main_screen, container, false)
 
         initView()
+        startViewAnim()
         onClickView()
 
         return rootview
 
     }
 
+    // Start animation for Icon
+    private fun startViewAnim() {
+        setViewAnimation(cvMCMarket)
+        setViewAnimation(cvMCSell)
+        setViewAnimation(cvMCOrder)
+        setViewAnimation(cvMCSocial)
+        setViewAnimation(cvMCLocation)
+    }
+
+
+    // Function on click for all Icon
     private fun onClickView() {
 
         cvMCMarket.setOnClickListener { startActivity(Intent(context, UserBuyActivity::class.java)) }
@@ -46,6 +58,7 @@ class UserMainScreenFragment: BaseFragment() {
 
     }
 
+    // init all View and Class
     fun initView(){
         var anim = AnimationUtils.loadAnimation(context,R.anim.anim_main_screen)
         cvMCMarket = rootview.cvMCMarket

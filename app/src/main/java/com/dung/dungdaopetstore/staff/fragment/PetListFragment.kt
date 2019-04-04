@@ -34,6 +34,7 @@ class PetListFragment: BaseFragment() {
         return rootview
     }
 
+    // get all Pet from database
     private fun getList() {
         mData.child(Constants().petTable).addValueEventListener(object: ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
@@ -53,6 +54,7 @@ class PetListFragment: BaseFragment() {
         })
     }
 
+    // init all View and Class
     private fun initView() {
         mData = FirebaseDatabase.getInstance().reference
         rvPetList = rootview.rvPetList
@@ -63,6 +65,7 @@ class PetListFragment: BaseFragment() {
         rvPetList.adapter = adapter
     }
 
+    // function remove Pet from database
     fun removePet(position: Int){
         var animal = list.get(position)
         var alertDialog = AlertDialog.Builder(context)
@@ -83,6 +86,7 @@ class PetListFragment: BaseFragment() {
         dialog.show()
     }
 
+    // function Accept member pet
     fun acceptPet(position: Int){
         var animal = list.get(position)
         var alertDialog = AlertDialog.Builder(context)

@@ -23,8 +23,15 @@ class UserPetUpdateActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_pet_update)
+
+        // Create toolbar with new back button
+        setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
-        supportActionBar!!.setIcon(R.drawable.img_back)
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.img_back)
+
+        // Config animation when switch activity
+        activityAnim(this)
+
 
         initView()
         getPetInformation()
@@ -32,6 +39,7 @@ class UserPetUpdateActivity : BaseActivity() {
 
     }
 
+    // click item Update pet
     private fun onclickFunction() {
         cvUpdateName.setOnClickListener {
             updatePet(1)
@@ -44,9 +52,11 @@ class UserPetUpdateActivity : BaseActivity() {
         }
     }
 
+    // Show dialog Update pet
     fun updatePet(switch: Int){
         var alertDialog = AlertDialog.Builder(this)
         alertDialog.setIcon(R.drawable.img_pet_update)
+        // Update pet name
         when(switch){
             1 -> {
                 alertDialog.setTitle(resources.getString(R.string.txtUserUpdatePetName))
@@ -66,6 +76,7 @@ class UserPetUpdateActivity : BaseActivity() {
                     dialog.dismiss()
                 })
             }
+            // Update pet Weight
             2 -> {
                 alertDialog.setTitle(resources.getString(R.string.txtUserUpdatePetWeight))
                 var view = layoutInflater.inflate(R.layout.dialog_user_update_pet_weight,null)
@@ -88,6 +99,7 @@ class UserPetUpdateActivity : BaseActivity() {
                     dialog.dismiss()
                 })
             }
+            // Update pet Gender
             3 -> {
                 alertDialog.setTitle(resources.getString(R.string.txtUserUpdatePetGender))
                 var view = layoutInflater.inflate(R.layout.dialog_user_update_pet_gender,null)
@@ -110,6 +122,7 @@ class UserPetUpdateActivity : BaseActivity() {
         dialog.show()
     }
 
+    // init all View and Class
     private fun initView() {
         rUsername = getRootUsername()
         mData = FirebaseDatabase.getInstance().reference
@@ -117,6 +130,7 @@ class UserPetUpdateActivity : BaseActivity() {
         ownerID = intent.getStringExtra("ownerID")
     }
 
+    // get Pet information
     private fun getPetInformation() {
         mData.child(Constants().ownerTable).child(ownerID)
             .addValueEventListener(object: ValueEventListener{
@@ -134,4 +148,11 @@ class UserPetUpdateActivity : BaseActivity() {
 
             })
     }
+
+    // Back button animation
+    override fun onBackPressed() {
+        super.onBackPressed()
+        activityAnim(this)
+    }
+
 }

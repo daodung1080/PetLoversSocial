@@ -47,6 +47,7 @@ class StaffActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedLis
         getHqtMoney(txtHqtMoney)
     }
 
+    // get headquarters money from database
     fun getHqtMoney(txt: TextView){
         mData.child(Constants().headquatersTable).child("hqt").child("fund")
             .addValueEventListener(object: ValueEventListener{
@@ -63,6 +64,7 @@ class StaffActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedLis
             })
     }
 
+    // Select item on navigation Screen
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         var fragment: Fragment? = null
@@ -83,4 +85,13 @@ class StaffActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedLis
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
+
+    // Back button animation
+    override fun onBackPressed() {
+        super.onBackPressed()
+        activityAnim(this)
+    }
+
+
+
 }

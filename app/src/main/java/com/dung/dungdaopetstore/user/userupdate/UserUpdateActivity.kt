@@ -22,8 +22,14 @@ class UserUpdateActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_update)
+
+        // Create toolbar with new back button
+        setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
-        supportActionBar!!.setIcon(R.drawable.img_back)
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.img_back)
+
+        // Config animation when switch activity
+        activityAnim(this)
 
         initView()
         userDatabase.getUserInformation1(txtUpdateFullname,txtUpdateAddress,txtUpdatePhone,txtUpdatePassword,rUsername)
@@ -54,12 +60,14 @@ class UserUpdateActivity : BaseActivity() {
         }
     }
 
+    // init All View and Class
     fun initView(){
         userDatabase = UserDatabase(this)
         rUsername = getRootUsername()
         mData = FirebaseDatabase.getInstance().reference
     }
 
+    // show Dialog of User Information
     fun clickToUpdate(title: String, content: String,parent: String, child: String,switch: Int){
         var alertDialog = AlertDialog.Builder(this)
         alertDialog.setIcon(R.drawable.img_update)
@@ -70,6 +78,7 @@ class UserUpdateActivity : BaseActivity() {
         edtUserUpdate.setText(content)
         alertDialog.setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
             var c = edtUserUpdate.text.toString()
+            // Validation for user information
             if(switch == 3){
                 if(c.length != 10){
                     showMessage(resources.getString(R.string.errorSignUpPhone), false)
@@ -108,6 +117,12 @@ class UserUpdateActivity : BaseActivity() {
         alertDialog.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, which -> dialog.dismiss()})
         var dialog = alertDialog.create()
         dialog.show()
+    }
+
+    // Back button Animation
+    override fun onBackPressed() {
+        super.onBackPressed()
+        activityAnim(this)
     }
 
 }

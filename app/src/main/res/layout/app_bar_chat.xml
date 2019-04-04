@@ -17,6 +17,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/colorPrimary"
+                app:contentInsetStartWithNavigation="0dp"
+                android:homeAsUpIndicator="@drawable/img_back"
                 app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <LinearLayout

@@ -31,6 +31,7 @@ class OrderListFragment: BaseFragment() {
         return rootview
     }
 
+    // Get all order from database
     private fun getList() {
         mData.child(Constants().orderTable).addValueEventListener(object: ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
@@ -49,11 +50,14 @@ class OrderListFragment: BaseFragment() {
         })
     }
 
+    // init All view and class
     private fun initView() {
         list = ArrayList()
         adapter = StaffOrderAdapter(context!!,list)
         mData = FirebaseDatabase.getInstance().reference
         rvOrderList = rootview.rvOrderList
+
+        // set adapter for recyclerView
         rvOrderList.layoutManager = GridLayoutManager(context, 2)
         rvOrderList.setHasFixedSize(true)
         rvOrderList.adapter = adapter

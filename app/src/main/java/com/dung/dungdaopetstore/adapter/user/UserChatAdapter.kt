@@ -45,6 +45,7 @@ class UserChatAdapter(var context: Context, var list: ArrayList<Chat>, var rUser
 
     override fun onBindViewHolder(p0: ChatHolder, p1: Int) {
         var chat = list.get(p1)
+        // get all information then put into View
         p0.txtChat.text = chat.message
         getReciverImage(p0.imgChat, chat.sender)
     }
@@ -68,6 +69,7 @@ class UserChatAdapter(var context: Context, var list: ArrayList<Chat>, var rUser
     }
 
     class ChatHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        // init All view in User Chat Layout
         var txtChat = itemView.txtChat
         var imgChat = itemView.imgChat
     }

@@ -30,25 +30,38 @@ class UserSellPetActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_sell_pet)
 
+        // Create toolbar with new back button
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.img_back)
+
+        // Config animation when switch activity
+        activityAnim(this)
+
+
         initView()
         addList()
 
     }
 
+    // get all list then put into Recycler View
     private fun addList() {
         ownerDatabase.getAllMyOwner1(list,adapter,rUsername,txtUserSellInform,resources.getString(R.string.warningSellPet1))
     }
 
+    // init View and Class
     private fun initView() {
         rUsername = getRootUsername()
         ownerDatabase = OwnerDatabase(this)
         list = ArrayList()
         adapter = UserSellAdapter(this, list)
+        // set adapter for recyclerView
         rvUserSell.layoutManager = LinearLayoutManager(this)
         rvUserSell.adapter = adapter
         setAnimForView(rvUserSell)
     }
 
+    // Show dialog when user click Sell Pet Icon
     fun sellPet(position: Int){
         var owner = list.get(position)
         var alertDialog = AlertDialog.Builder(this)
@@ -71,6 +84,7 @@ class UserSellPetActivity : BaseActivity() {
                             "${resources.getString(R.string.messageUserSellPet1)} ${fm.format(valuation)} VND?\n" +
                             "${resources.getString(R.string.messageUserSellPet2)}")
                     alertDialog1.setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+                        // remove pet when user completely sell their own pet
                         completesellPet(owner.petCategory, owner.petName,
                             owner.petGender,owner.petWeight,valuation,owner.petImage,owner.ownerID)
                     })
@@ -92,7 +106,7 @@ class UserSellPetActivity : BaseActivity() {
         dialog.show()
     }
 
-
+    // function complete sell pet when user accept all regulation
     fun completesellPet(category: String, petName: String, petGender: String,
                 petWeight: Int, price: Int,petImage: String, idOwner: String){
         var mData = FirebaseDatabase.getInstance().reference
@@ -107,6 +121,12 @@ class UserSellPetActivity : BaseActivity() {
                 showMessage(resources.getString(R.string.errorUserSellPetComplete),true)
                 mData.child(Constants().ownerTable).child(idOwner).removeValue()
             }
+    }
+
+    // Back button animation
+    override fun onBackPressed() {
+        super.onBackPressed()
+        activityAnim(this)
     }
 
 }

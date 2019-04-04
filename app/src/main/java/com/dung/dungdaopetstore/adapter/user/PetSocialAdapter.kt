@@ -24,10 +24,12 @@ class PetSocialAdapter(var context: Context, var list: ArrayList<Owner>)
 
     override fun onBindViewHolder(p0: PetHolder, p1: Int) {
         var owner = list.get(p1)
+        // get all information then put into View
         Picasso.get().load(owner.petImage).into(p0.imgSocialPet)
     }
 
     class PetHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        // init All view in User Social Pet Layout
         var imgSocialPet = itemView.imgSocialPet
     }
 }

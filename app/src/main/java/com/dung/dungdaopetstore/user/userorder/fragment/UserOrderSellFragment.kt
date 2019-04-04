@@ -32,7 +32,7 @@ class UserOrderSellFragment: BaseFragment() {
         return rootview
     }
 
-
+    // init View and Class
     fun initView(){
         orderDatabase = OrderDatabase(context!!)
         rvUserOrderSell = rootview.rvUserOrderSell
@@ -41,12 +41,14 @@ class UserOrderSellFragment: BaseFragment() {
         adapter = UserOrderSellAdapter(context!!, list)
     }
 
+    // set adapter for Recyler View
     fun startRecycleView(){
         rvUserOrderSell.layoutManager = GridLayoutManager(context!!, 2)
         rvUserOrderSell.setHasFixedSize(true)
         rvUserOrderSell.adapter = adapter
     }
 
+    // get all order sell item
     fun changeListInformation(){
         orderDatabase.getSellOrderByUsername(list,adapter,rUsername)
     }

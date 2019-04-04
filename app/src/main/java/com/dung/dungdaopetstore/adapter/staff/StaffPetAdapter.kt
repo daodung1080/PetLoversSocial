@@ -25,6 +25,7 @@ class StaffPetAdapter(var context: Context, var list: ArrayList<Animal>,var frag
 
     override fun onBindViewHolder(holder: StaffHolder, p1: Int) {
         var animal = list.get(p1)
+        // get all information then put into View
         Picasso.get().load(animal.image).into(holder.imgPet)
         holder.txtCategory.text = animal.category
         holder.txtName.text = animal.name
@@ -51,6 +52,7 @@ class StaffPetAdapter(var context: Context, var list: ArrayList<Animal>,var frag
     }
 
     class StaffHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        // init All view in Staff Pet Layout
         var imgPet = itemView.imgPet
         var txtCategory = itemView.txtCategory
         var txtName = itemView.txtName

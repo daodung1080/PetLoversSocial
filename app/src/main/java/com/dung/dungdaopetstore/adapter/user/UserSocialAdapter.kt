@@ -37,9 +37,11 @@ class UserSocialAdapter(var context: UserCommunityActivity,var list: ArrayList<U
     }
 
     override fun onBindViewHolder(holder: UserHolder, p1: Int) {
+        // Change random background each other User Card
         cardAdapterHelper.onBindViewHolder(holder.itemView,p1,itemCount)
         randomBackground(holder.clSocialBackground)
         var user = list.get(p1)
+        // get all information then put into View
         Picasso.get().load(user.image).into(holder.imgSocial)
         holder.txtProfileFullname.text = user.fullname
         holder.txtProfileLocation.text = user.address
@@ -52,6 +54,7 @@ class UserSocialAdapter(var context: UserCommunityActivity,var list: ArrayList<U
     }
 
     class UserHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        // init All view in User Social Layout
         var cvSocialBackground = itemView.cvSocialBackground
         var clSocialBackground = itemView.clSocialBackground
         var imgSocial = itemView.imgSocial

@@ -17,6 +17,7 @@ import com.dung.dungdaopetstore.base.BaseActivity
 import com.dung.dungdaopetstore.firebase.Constants
 import com.dung.dungdaopetstore.firebase.OwnerDatabase
 import com.dung.dungdaopetstore.model.Owner
+import com.dung.dungdaopetstore.user.UserActivity
 import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_user_pet_list.*
@@ -33,19 +34,27 @@ class UserPetListActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_pet_list)
+
+        // Create toolbar with new back button
+        setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
-        supportActionBar!!.setIcon(R.drawable.img_back)
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.img_back)
+
+        // Config animation when switch activity
+        activityAnim(this)
 
         initView()
         addPetList()
 
     }
 
+    // Create option menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_test,menu)
+        menuInflater.inflate(R.menu.menu_add_pet,menu)
         return true
     }
 
+    // option item Function
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if(item!!.itemId == R.id.menuAddPet){
             startActivity(Intent(this@UserPetListActivity,UserAddPetActivity::class.java))
@@ -53,20 +62,24 @@ class UserPetListActivity : BaseActivity() {
         return true
     }
 
+    // get All pet from Owner Database
     private fun addPetList() {
         ownerDatabase.getAllMyOwner(list,adapter,rUsername)
     }
 
+    // init All View and Class
     private fun initView() {
         rUsername = getRootUsername()
         list = ArrayList()
         adapter = UserPetListAdapter(this, list)
+        // set adapter for recycler View
         rvUserPetList.layoutManager = LinearLayoutManager(this)
         rvUserPetList.setHasFixedSize(true)
         rvUserPetList.adapter = adapter
         ownerDatabase = OwnerDatabase(this)
     }
 
+    // show Pet image when clicked pet Image Icon
     fun getPetImage(position: Int){
         var owner = list.get(position)
         var alertDialog = AlertDialog.Builder(this)
@@ -82,12 +95,14 @@ class UserPetListActivity : BaseActivity() {
         dissmissDialog(dialog,imgDialogNewFeedPetImage)
     }
 
+    // dissmiss dialog when user click the image again
     fun dissmissDialog(alertDialog: AlertDialog, img: ImageView){
         img.setOnClickListener {
             alertDialog.dismiss()
         }
     }
 
+    // Show dialog ask user want to remove pet
     fun removePet(position: Int){
         var owner = list.get(position)
         var alertDialog = AlertDialog.Builder(this)
@@ -96,6 +111,7 @@ class UserPetListActivity : BaseActivity() {
         alertDialog.setMessage("${resources.getString(R.string.removePet)} ${owner.petName}?")
         alertDialog.setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
             var mData = FirebaseDatabase.getInstance().reference
+            // remove pet
             mData.child(Constants().ownerTable).child(owner.ownerID).removeValue()
                 .addOnFailureListener {
                     showMessage(resources.getString(R.string.petRemoveFailed),false)
@@ -108,6 +124,7 @@ class UserPetListActivity : BaseActivity() {
         dialog.show()
     }
 
+    // switch activity update pet information when click Config Icon
     fun configPet(position: Int){
         var owner = list.get(position)
         var intent = Intent(this@UserPetListActivity, UserPetUpdateActivity::class.java)
@@ -115,11 +132,18 @@ class UserPetListActivity : BaseActivity() {
         startActivity(intent)
     }
 
+    // switch activity share pet when click Share Icon
     fun sharePet(position: Int){
         var owner = list.get(position)
         var intent = Intent(this@UserPetListActivity, UserPetShareActivity::class.java)
         intent.putExtra("ownerID",owner.ownerID)
         startActivity(intent)
+    }
+
+    // Back Button animation
+    override fun onBackPressed() {
+        super.onBackPressed()
+        activityAnim(this)
     }
 
 }

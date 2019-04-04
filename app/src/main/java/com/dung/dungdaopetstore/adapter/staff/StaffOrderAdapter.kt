@@ -24,6 +24,7 @@ class StaffOrderAdapter (var context: Context, var list: ArrayList<Order>)
 
     override fun onBindViewHolder(holder: UserHolder, p1: Int) {
         var order = list.get(p1)
+        // get all information then put into View
         holder.txtUserOrderBuyID.setText(order.idOrder)
         holder.txtUserOrderBuyIDPet.setText(order.pet)
         holder.txtUserOrderBuyAmount.setText("${order.amount} ${context.resources.getString(R.string.animals)}")
@@ -34,6 +35,7 @@ class StaffOrderAdapter (var context: Context, var list: ArrayList<Order>)
     }
 
     class UserHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        // init All View from StaffOrder Layout
         var txtUserOrderBuyID = itemView.txtUserOrderBuyID
         var txtUserOrderBuyIDPet = itemView.txtUserOrderBuyIDPet
         var txtUserOrderBuyAmount = itemView.txtUserOrderBuyAmount

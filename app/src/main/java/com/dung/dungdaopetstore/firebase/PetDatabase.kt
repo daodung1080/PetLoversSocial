@@ -1,18 +1,22 @@
 package com.dung.dungdaopetstore.firebase
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
+import android.support.v4.content.ContextCompat.startActivity
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import com.dung.dungdaopetstore.adapter.user.UserMarketAdapter
 import com.dung.dungdaopetstore.model.Animal
+import com.dung.dungdaopetstore.user.userbuy.UserBuyActivity
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import java.io.ByteArrayOutputStream
+import java.lang.NullPointerException
 import java.text.DecimalFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -120,36 +124,5 @@ class PetDatabase(var context: Context){
 
     }
 
-    fun getInformationByName(petID: String, img: ImageView, name: TextView,
-                             gender: TextView, seller: TextView, amount: TextView, price: TextView
-                             , left: String,weight: TextView,category: TextView,soldOut: String){
-        var mData = FirebaseDatabase.getInstance().reference
-        mData.child(Constants().petTable).child(petID)
-            .addValueEventListener(object : ValueEventListener{
-                override fun onCancelled(p0: DatabaseError) {
-
-                }
-
-                override fun onDataChange(p0: DataSnapshot) {
-                    var animal = p0.getValue(Animal::class.java)
-                    Picasso.get().load(animal!!.image).into(img)
-                    name.setText(animal.name)
-                    gender.setText(animal.gender)
-                    seller.setText(animal.seller)
-                    if(animal.amount > 0){
-                        amount.setTextColor(Color.GRAY)
-                        amount.setText("${animal.amount} ${left}")
-                    }else{
-                        amount.setTextColor(Color.RED)
-                        amount.setText(soldOut)
-                    }
-                    var fm = DecimalFormat("###,###,###")
-                    price.setText("${fm.format(animal.price)} VND")
-                    weight.setText("${animal.weight} kg")
-                    category.setText(animal.category)
-                }
-
-            })
-        }
 
 }

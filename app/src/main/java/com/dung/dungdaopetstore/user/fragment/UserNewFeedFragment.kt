@@ -43,11 +43,14 @@ class UserNewFeedFragment: BaseFragment() {
 
     }
 
+    // create new feed list
     private fun createNewFeed() {
         rUsername = getRootUsername()
         newFeedDatabase = NewFeedDatabase(context!!)
         list = ArrayList()
         adapter = NewFeedAdapter(context!!, list, this)
+
+        // set adapter for new feed Recycler View
         rvNewFeed.layoutManager = LinearLayoutManager(context)
         rvNewFeed.setHasFixedSize(true)
         rvNewFeed.adapter = adapter
@@ -57,10 +60,12 @@ class UserNewFeedFragment: BaseFragment() {
 
     }
 
+    // init View
     private fun initView() {
         rvNewFeed = rootview.rvNewFeed
     }
 
+    // get Pet Image when user clicked
     fun getPetImage(position: Int){
         var newFeed = list.get(position)
         var alertDialog = AlertDialog.Builder(context)
@@ -76,12 +81,14 @@ class UserNewFeedFragment: BaseFragment() {
         dissmissDialog(dialog,imgDialogNewFeedPetImage)
     }
 
+    // dissmiss Dialog when user finish seen pet
     fun dissmissDialog(alertDialog: AlertDialog, img: ImageView){
         img.setOnClickListener {
             alertDialog.dismiss()
         }
     }
 
+    // switch chat activity when user clicked Chat icon
     fun meetPeople(position: Int){
         var intent = Intent(context, UserChatActivity::class.java)
         var newfeed = list.get(position)

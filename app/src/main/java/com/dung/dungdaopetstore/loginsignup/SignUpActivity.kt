@@ -40,8 +40,9 @@ class SignUpActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
+        setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
-        supportActionBar!!.setIcon(R.drawable.img_back)
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.img_back)
 
         registerContextMenu()
         confirmRegistration()
@@ -49,17 +50,17 @@ class SignUpActivity : BaseActivity() {
 
     }
 
-//    fun showBoolean(b: Boolean){
-//        showMessage(b.toString(),true)
-//    }
 
+    // user click Button Confirm Sign Up
     fun confirmRegistration(){
         userDatabase = UserDatabase(this)
         btnUserConfirm.setOnClickListener {
             validation()
+            activityAnim(this)
         }
     }
 
+    // check form validate when click button Sign Up
     private fun validation() {
         var fullname = edtUserFullName.text.toString()
         var username = edtUserUsername.text.toString()
@@ -87,6 +88,7 @@ class SignUpActivity : BaseActivity() {
         }
     }
 
+    // Check username form database avoid sign up same username
     fun checkSignUp(username: String,fullname: String,password: String, phone: String,address: String){
         var mData = FirebaseDatabase.getInstance().reference
         var query = mData.child(Constants().userTable).orderByChild("username").equalTo(username)
@@ -116,6 +118,7 @@ class SignUpActivity : BaseActivity() {
         })
     }
 
+    // Clear all text input layout when finish Sign Up
     fun clearAllTIL(){
         tilUserFullName.error = null
         tilUserUsername.error = null
@@ -124,6 +127,7 @@ class SignUpActivity : BaseActivity() {
         tilUserAddress.error = null
     }
 
+    // Clear all edittext when finish Sign Up
     fun clearAllEDT(){
         edtUserFullName.setText("")
         edtUserUsername.setText("")
@@ -139,6 +143,7 @@ class SignUpActivity : BaseActivity() {
         }
     }
 
+    // Show context menu when click the profile Image
     override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
         super.onCreateContextMenu(menu, v, menuInfo)
         menuInflater.inflate(R.menu.menu_user_trade, menu)
@@ -146,6 +151,8 @@ class SignUpActivity : BaseActivity() {
         menu!!.setHeaderIcon(R.drawable.img_camera)
     }
 
+
+    // Function of context menu
     override fun onContextItemSelected(item: MenuItem?): Boolean {
 
         if(item!!.itemId == R.id.menuCamera){
@@ -185,6 +192,7 @@ class SignUpActivity : BaseActivity() {
         return true
     }
 
+    // Receive image from camera or folder
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == REQUEST_CODE_CAMERA && resultCode == Activity.RESULT_OK && data != null){
@@ -202,6 +210,8 @@ class SignUpActivity : BaseActivity() {
         }
     }
 
+
+    // Request permission when open camera or folder
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
             MY_PERMISSIONS_REQUEST_CAMERA -> {
@@ -223,5 +233,10 @@ class SignUpActivity : BaseActivity() {
     }
 
 
+    // Back button animation
+    override fun onBackPressed() {
+        super.onBackPressed()
+        activityAnim(this)
+    }
 
 }

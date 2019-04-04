@@ -25,6 +25,7 @@ class StaffUserAdapter(var context: Context, var list: ArrayList<User>,var fragm
 
     override fun onBindViewHolder(holder: StaffHolder, p1: Int) {
         var user = list.get(p1)
+        // get all information then put into View
         var format = DecimalFormat("###,###,###")
         var ban = true
         if(user.ban == true){
@@ -51,6 +52,7 @@ class StaffUserAdapter(var context: Context, var list: ArrayList<User>,var fragm
     }
 
     class StaffHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        // init All view in Staff User Layout
         var imgStaffUserImage = itemView.imgStaffUserImage
         var txtStaffUsername = itemView.txtStaffUsername
         var txtStaffFullname = itemView.txtStaffFullname

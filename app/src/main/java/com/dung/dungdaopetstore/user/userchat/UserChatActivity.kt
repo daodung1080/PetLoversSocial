@@ -1,5 +1,6 @@
 package com.dung.dungdaopetstore.user.userchat
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import com.dung.dungdaopetstore.R
@@ -8,6 +9,7 @@ import com.dung.dungdaopetstore.base.BaseActivity
 import com.dung.dungdaopetstore.firebase.Constants
 import com.dung.dungdaopetstore.model.Chat
 import com.dung.dungdaopetstore.model.User
+import com.dung.dungdaopetstore.user.UserActivity
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.app_bar_chat.*
@@ -26,7 +28,8 @@ class UserChatActivity : BaseActivity() {
         setContentView(R.layout.activity_user_chat)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
-        supportActionBar!!.setIcon(R.drawable.img_back)
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.img_back)
+        activityAnim(this)
 
         initView()
         getUserProfile()
@@ -35,6 +38,7 @@ class UserChatActivity : BaseActivity() {
 
     }
 
+    // get all user profile include Full name and Image then put into View
     private fun getUserProfile() {
         mData.child(Constants().userTable).child(receiver)
             .addListenerForSingleValueEvent(object: ValueEventListener{
@@ -55,6 +59,7 @@ class UserChatActivity : BaseActivity() {
             })
     }
 
+    // get All message of user
     private fun getAllMessage() {
         mData.child(Constants().chatTable).addValueEventListener(object: ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
@@ -76,12 +81,14 @@ class UserChatActivity : BaseActivity() {
         })
     }
 
+    // button send message on click
     private fun sendMessage() {
         imgSend.setOnClickListener {
             validation()
         }
     }
 
+    // check form validate when clicked Send Button
     private fun validation() {
         var message = edtMessage.text.toString()
         if(message.isEmpty()){
@@ -92,15 +99,24 @@ class UserChatActivity : BaseActivity() {
         }
     }
 
+    // init All view and Class
     private fun initView() {
         mData = FirebaseDatabase.getInstance().reference
         rUsername = getRootUsername()
         list = ArrayList()
         adapter = UserChatAdapter(this, list, rUsername)
+        // set adapter for recyclerView
         var linearLayoutManager = LinearLayoutManager(this)
         linearLayoutManager.stackFromEnd = true
         rvChat.layoutManager = linearLayoutManager
         rvChat.adapter = adapter
         receiver = intent.getStringExtra("people")
     }
+
+    // Back Button animation
+    override fun onBackPressed() {
+        super.onBackPressed()
+        activityAnim(this)
+    }
+
 }

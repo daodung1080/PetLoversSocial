@@ -38,7 +38,7 @@ class QuestionFragment: BaseFragment() {
 
     }
 
-
+    // get all user have question with supporter
     private fun getList() {
         mData.child(Constants().chatTable).addValueEventListener(object: ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
@@ -64,6 +64,7 @@ class QuestionFragment: BaseFragment() {
         })
     }
 
+    // get all user have question with supporter
     private fun readUser() {
         mData.child(Constants().userTable).addValueEventListener(object: ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
@@ -95,6 +96,7 @@ class QuestionFragment: BaseFragment() {
     }
 
 
+    // init all View and Class
     private fun initView() {
         mData = FirebaseDatabase.getInstance().reference
         rvRecentChat = rootview.rvStaffQuestion
@@ -106,6 +108,7 @@ class QuestionFragment: BaseFragment() {
         mList = ArrayList()
     }
 
+    // switch Activity chat
     fun getChat(position: Int){
         var user = list.get(position)
         var intent = Intent(context, StaffChatActivity::class.java)

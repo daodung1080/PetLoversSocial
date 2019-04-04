@@ -31,8 +31,14 @@ class UserPetShareActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_pet_share)
+
+        // Create toolbar with new back button
+        setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
-        supportActionBar!!.setIcon(R.drawable.img_back)
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.img_back)
+
+        // Config animation when switch activity
+        activityAnim(this)
 
         initView()
         getPetInformation()
@@ -42,12 +48,14 @@ class UserPetShareActivity : BaseActivity() {
 
     }
 
+    // Button share clicked
     private fun shareOnClick() {
         fabPetShare.setOnClickListener {
             validation()
         }
     }
 
+    // check form validate when user clicked Share button
     private fun validation() {
         var title = edtPetShareTitle.text.toString()
         var describe = edtPetShareDescribe.text.toString()
@@ -73,16 +81,19 @@ class UserPetShareActivity : BaseActivity() {
         }
     }
 
+    // Clear all edit text when finishing share
     fun clearAllEditText(){
         edtPetShareTitle.setText("")
         edtPetShareDescribe.setText("")
     }
 
+    // Clear all text input layout error when finishing share
     fun clearAllTextInputLayout(){
         tilPetShareTitle.error = null
         tilPetShareDescribe.error = null
     }
 
+    // init All Tag
     private fun tagOnClick() {
         cvPetShareName.setOnClickListener {
             var oldContent = edtPetShareDescribe.text.toString()
@@ -121,6 +132,7 @@ class UserPetShareActivity : BaseActivity() {
         }
     }
 
+    // Get user information
     private fun getUserInformation() {
         mData.child(Constants().userTable).child(rUsername)
             .addListenerForSingleValueEvent(object: ValueEventListener{
@@ -138,6 +150,7 @@ class UserPetShareActivity : BaseActivity() {
             })
     }
 
+    // get pet Infomation
     private fun getPetInformation() {
         mData.child(Constants().ownerTable).child(ownerID)
             .addListenerForSingleValueEvent(object: ValueEventListener{
@@ -158,10 +171,18 @@ class UserPetShareActivity : BaseActivity() {
             })
     }
 
+    // init all View and Class
     private fun initView() {
         rUsername = getRootUsername()
         var intent = intent
         ownerID = intent.getStringExtra("ownerID")
         mData = FirebaseDatabase.getInstance().reference
     }
+
+    // Back Button animation
+    override fun onBackPressed() {
+        super.onBackPressed()
+        activityAnim(this)
+    }
+
 }
