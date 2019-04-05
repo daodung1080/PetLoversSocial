@@ -1,6 +1,7 @@
 package com.dung.dungdaopetstore.base
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -15,6 +16,9 @@ import android.view.animation.ScaleAnimation
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import com.dung.dungdaopetstore.R
+import com.dung.dungdaopetstore.firebase.Constants
+import com.dung.dungdaopetstore.model.Animal
+import com.google.firebase.database.*
 import es.dmoral.toasty.Toasty
 
 open class BaseActivity: AppCompatActivity() {
@@ -74,6 +78,36 @@ open class BaseActivity: AppCompatActivity() {
             Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
         anim.duration = 600
         viewToAnimate.startAnimation(anim)
+    }
+
+    fun notifyUser(context: Activity){
+        var mData = FirebaseDatabase.getInstance().reference
+        var username = getRootUsername()
+        mData.child(Constants().petTable).orderByChild("seller").equalTo(username)
+            .addChildEventListener(object: ChildEventListener{
+                override fun onCancelled(p0: DatabaseError) {
+                }
+
+                override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+                }
+
+                override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+                    var animal = p0.getValue(Animal::class.java)
+                    if(animal!!.amount == 0){
+                        AlertDialog.Builder(context)
+                            .setTitle("Notification")
+                            .setMessage("Your ${animal.name} have been sold")
+                            .show()
+                    }
+                }
+
+                override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+                }
+
+                override fun onChildRemoved(p0: DataSnapshot) {
+                }
+
+            })
     }
 
 }

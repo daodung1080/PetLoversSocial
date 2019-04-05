@@ -65,7 +65,7 @@
         </activity>
         <activity
                 android:name=".user.userbuy.UserBuyInformationActivity"
-                android:parentActivityName=".user.UserActivity"
+                android:parentActivityName=".user.userbuy.UserBuyActivity"
                 android:theme="@style/AppTheme.PlusNoActionBar">
         </activity>
         <activity

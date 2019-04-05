@@ -6,7 +6,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".loginsignup.LoginActivity"
-        android:background="@color/colorBackground">
+        android:background="@color/colorBackground"
+        android:focusable="false"
+        android:focusableInTouchMode="true">
 
     <ImageView
             android:layout_width="match_parent"
@@ -28,7 +30,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="10"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup2"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginEnd="8dp"
@@ -36,7 +38,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:id="@+id/linearLayout"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="8dp">
 
         <android.support.design.widget.TextInputLayout
                 android:layout_width="0dp"
@@ -97,8 +99,6 @@
             android:layout_width="@dimen/btn_size"
             android:layout_height="wrap_content"
             android:id="@+id/btnLogin"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/tilPassword"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
@@ -108,49 +108,11 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"/>
+            android:layout_marginRight="8dp"
+            app:layout_constraintHorizontal_bias="0.488"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/cbLoginRemember"/>
 
-    <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checkedButton="@id/rdBuyer"
-            android:orientation="horizontal"
-            android:background="@drawable/ic_bg_pink"
-            android:weightSum="10"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            android:id="@+id/radioGroup2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp">
-
-        <RadioButton
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:background="@drawable/ic_bg_toggle"
-                android:layout_weight="5"
-                android:id="@+id/rdBuyer"
-                android:text="@string/txtBuyer"
-                android:gravity="center"
-                android:textColor="@color/colorBackground"
-                android:button="@null"
-                />
-
-        <RadioButton
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:background="@drawable/ic_bg_toggle"
-                android:layout_weight="5"
-                android:id="@+id/rdStaff"
-                android:text="@string/txtStaff"
-                android:gravity="center"
-                android:textColor="@color/colorBackground"
-                android:button="@null"
-                />
-    </RadioGroup>
 
     <TextView
             android:text="@string/txtSignUp"
@@ -168,6 +130,16 @@
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="8dp"/>
+
+    <CheckBox
+            android:text="@string/cbLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cbLoginRemember"
+            app:layout_constraintTop_toBottomOf="@+id/tilPassword"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"/>
 
 
 </android.support.constraint.ConstraintLayout>

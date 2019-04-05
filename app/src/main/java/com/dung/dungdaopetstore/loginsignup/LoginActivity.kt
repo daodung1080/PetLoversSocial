@@ -26,13 +26,8 @@ class LoginActivity : BaseActivity() {
 
         // Button login clicked by user
         btnLogin.setOnClickListener {
-            if(rdStaff.isChecked){
-                startActivity(Intent(this@LoginActivity, StaffActivity::class.java))
-                activityAnim(this)
-            }else{
                 userValidation()
                 activityAnim(this)
-            }
         }
 
         // Button sign up clicked by user
@@ -41,8 +36,22 @@ class LoginActivity : BaseActivity() {
             activityAnim(this)
         }
 
+        fillAllUserInformation()
+
         edtDone()
 
+    }
+
+    // get all data and fill out view
+    fun fillAllUserInformation(){
+        var sharedPreferences = getSharedPreferences("USER_REMEMBER_LAST_LOGIN", Context.MODE_PRIVATE)
+        var username = sharedPreferences.getString("username",null)
+        var password = sharedPreferences.getString("password",null)
+        var remember = sharedPreferences.getBoolean("remember",false)
+
+        edtUserName.setText(username)
+        edtPassword.setText(password)
+        cbLoginRemember.isChecked = remember
     }
 
     // Call login button when finishing type password
@@ -60,6 +69,11 @@ class LoginActivity : BaseActivity() {
         }else if(password.length < 5 || password.length > 30){
             tilUsername.error = null
             tilPassword.error = resources.getString(R.string.errorSignUpPassword)
+        }else if(username.equals("admin") && password.equals("admin")){
+            rememberUserForLastTimeLogin("","",false)
+            startActivity(Intent(this@LoginActivity, StaffActivity::class.java))
+            activityAnim(this)
+            this.finish()
         }else{
             checkLogin(username,password)
         }
@@ -94,11 +108,17 @@ class LoginActivity : BaseActivity() {
                                 clearAllTIL()
                                 showMessage(resources.getString(R.string.errorLoginBanned),false)
                             }else{
-                                clearAllEDT()
-                                clearAllTIL()
-                                var intent = Intent(this@LoginActivity, UserActivity::class.java)
-                                startActivity(intent)
-                                rememberUser(username)
+                                if(cbLoginRemember.isChecked == true){
+
+                                    // remember password and username
+                                    rememberUserForLastTimeLogin(username,password,true)
+                                    switchActivityWhenComplete(username)
+
+                                }else{
+                                    // clear data remember profile
+                                    rememberUserForLastTimeLogin(username,password,false)
+                                    switchActivityWhenComplete(username)
+                                }
                             }
                         }
                     }else{
@@ -109,6 +129,15 @@ class LoginActivity : BaseActivity() {
 
             })
         }
+
+    fun switchActivityWhenComplete(username: String){
+        clearAllEDT()
+        clearAllTIL()
+        var intent = Intent(this@LoginActivity, UserActivity::class.java)
+        startActivity(intent)
+        rememberUser(username)
+        this.finish()
+    }
 
 
     // Remember the username when Login
@@ -123,6 +152,20 @@ class LoginActivity : BaseActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         activityAnim(this)
+    }
+
+    // Remember user name and password when user clicked Check Box
+    fun rememberUserForLastTimeLogin(username: String, password: String,remember: Boolean){
+        var sharedPreferences = getSharedPreferences("USER_REMEMBER_LAST_LOGIN", Context.MODE_PRIVATE)
+        var editor = sharedPreferences.edit()
+        if(remember == false){
+            editor.clear()
+        }else {
+            editor.putString("username", username)
+            editor.putString("password", password)
+            editor.putBoolean("remember",remember)
+        }
+        editor.apply()
     }
 
 }

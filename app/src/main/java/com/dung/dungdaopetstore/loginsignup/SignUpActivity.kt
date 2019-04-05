@@ -6,8 +6,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
@@ -18,15 +18,18 @@ import android.view.View
 import com.dung.dungdaopetstore.R
 import com.dung.dungdaopetstore.base.BaseActivity
 import com.dung.dungdaopetstore.firebase.Constants
-import com.dung.dungdaopetstore.firebase.UserDatabase
 import com.dung.dungdaopetstore.model.User
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import java.io.ByteArrayOutputStream
 import java.io.FileNotFoundException
 import java.io.InputStream
+import java.util.*
 
 class SignUpActivity : BaseActivity() {
 
@@ -35,7 +38,6 @@ class SignUpActivity : BaseActivity() {
 
     var REQUEST_CODE_FOLDER = 456
     var MY_PERMISSIONS_REQUEST_READ_STORAGE = 22
-    lateinit var userDatabase: UserDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +55,6 @@ class SignUpActivity : BaseActivity() {
 
     // user click Button Confirm Sign Up
     fun confirmRegistration(){
-        userDatabase = UserDatabase(this)
         btnUserConfirm.setOnClickListener {
             validation()
             activityAnim(this)
@@ -83,6 +84,8 @@ class SignUpActivity : BaseActivity() {
         }else if(address.length < 5 || address.length > 40){
             tilUserPhone.error = null
             tilUserAddress.error = resources.getString(R.string.errorSignUpAddress)
+        }else if(username.equals("admin")){
+            showMessage(resources.getString(R.string.errorSignUpFailed), false)
         }else{
             checkSignUp(username,fullname,password,phone,address)
         }
@@ -104,18 +107,54 @@ class SignUpActivity : BaseActivity() {
                     clearAllTIL()
                     showMessage(resources.getString(R.string.errorSignUpFailed), false)
                 }else{
-                    if(userDatabase.insertUser(imgUserAddition,fullname,username,password
-                            , 10000, 0 ,0, phone,address) == true){
-                        clearAllEDT()
-                        clearAllTIL()
-                        showMessage(resources.getString(R.string.errorSignUpComplete), true)
-                    }else{
-                        showMessage(resources.getString(R.string.errorSignUpFailed1), false)
-                    }
+                    insertUser(imgUserAddition,fullname,username,password
+                        , 10000, 0 ,0, phone,address)
                 }
             }
 
         })
+    }
+
+    // Insert user to Database
+    fun insertUser(img: CircleImageView, fullname: String, username: String,
+                   password: String, money: Int, bannedTime: Int, tradeTime: Int, phoneNumber: String, address: String){
+
+        // Init Database
+        var mData = FirebaseDatabase.getInstance().reference
+        var mStorage = FirebaseStorage.getInstance("gs://dungdaopetstore.appspot.com")
+
+        // Create ID for data
+        var sRef = mStorage.reference
+        var milis = Calendar.getInstance().timeInMillis
+        var imageRef = sRef.child("user$milis.png")
+
+        img.isDrawingCacheEnabled
+        img.buildDrawingCache()
+        var bitmap = (img.drawable as BitmapDrawable).bitmap
+        var baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
+        var data = baos.toByteArray()
+
+        var uploadTask = imageRef.putBytes(data)
+        uploadTask.addOnFailureListener {
+            showMessage(resources.getString(R.string.errorSignUpFailed1), false)
+        }.addOnSuccessListener {
+            imageRef.downloadUrl.addOnSuccessListener {
+                var downloadURL = it.toString()
+                // insert data into Database
+                mData.child(Constants().userTable).child(username).setValue(
+                    User(fullname,username,password,downloadURL, money,
+                        bannedTime, tradeTime,phoneNumber,"$username-$password",false, address)
+                ).addOnFailureListener { showMessage(resources.getString(R.string.errorSignUpFailed1), false) }
+                    .addOnSuccessListener {
+                        clearAllEDT()
+                        clearAllTIL()
+                        showMessage(resources.getString(R.string.errorSignUpComplete), true)
+                        startActivity(Intent(this@SignUpActivity,LoginActivity::class.java))
+                        finish()
+                    }
+            }
+        }
     }
 
     // Clear all text input layout when finish Sign Up

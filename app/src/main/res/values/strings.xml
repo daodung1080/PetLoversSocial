@@ -227,4 +227,17 @@
     <string name="title_user_pet_update">Config Your Pet Information</string>
     <string name="title_user_add_pet">Add More Pet Into Your Profile</string>
 
+    <!--Introduce-->
+    <string name="title_introduce_1">Sign Up An Account</string>
+    <string name="message_introduce_1">You need to sign up an account to join the Application</string>
+
+    <string name="title_introduce_2">Interact With The Application</string>
+    <string name="message_introduce_2">You can interact with the Application</string>
+
+    <string name="title_introduce_3">Communicate with people</string>
+    <string name="message_introduce_3">You can communicate with people who have join the Application before</string>
+    <string name="cbLogin">Remember password?</string>
+    <string name="title_app_exit">Log out</string>
+    <string name="message_app_exit">Do you really want to log out this account?</string>
+
 </resources>

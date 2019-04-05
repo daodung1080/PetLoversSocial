@@ -1,5 +1,7 @@
 package com.dung.dungdaopetstore.staff
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -64,6 +66,27 @@ class StaffActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedLis
             })
     }
 
+    // Create Exit Dialog
+    private fun createExitDialog() {
+        var alertDialog = AlertDialog.Builder(this)
+        alertDialog.setIcon(R.drawable.img_exit)
+        alertDialog.setTitle(resources.getString(R.string.title_app_exit))
+        alertDialog.setMessage(resources.getString(R.string.message_app_exit))
+        alertDialog.setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+            var intent = Intent(this@StaffActivity,LoginActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            startActivity(intent)
+            activityAnim(this)
+            this.finish()
+        })
+        alertDialog.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, which ->
+            dialog.dismiss()
+        })
+        var dialog = alertDialog.create()
+        dialog.show()
+    }
+
     // Select item on navigation Screen
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
@@ -75,13 +98,12 @@ class StaffActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedLis
             R.id.navigationOrderList -> fragment = OrderListFragment()
             R.id.nav_share -> fragment = QuestionFragment()
             R.id.nav_send -> {
-                startActivity(Intent(this@StaffActivity, LoginActivity::class.java))
-                this.finish()
+                createExitDialog()
             }
         }
-
-        replaceFragment(R.id.flStaff, fragment!!)
-
+        if(fragment != null){
+            replaceFragment(R.id.flStaff, fragment)
+        }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }

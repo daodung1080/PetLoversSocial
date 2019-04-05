@@ -15,4 +15,8 @@
     <color name="colorChat">#e2e2e2</color>
     <color name="colorBackgroundChat">#00a199</color>
 
+    <color name="colorIntroduce1">#2e82a1</color>
+    <color name="colorIntroduce2">#afa9d4</color>
+    <color name="colorIntroduce3">#82ac8d</color>
+
 </resources>

@@ -38,41 +38,6 @@ class UserDatabase(var context: Context) {
 //        return result
 //    }
 
-    fun insertUser(img: CircleImageView, fullname: String, username: String,
-                   password: String, money: Int, bannedTime: Int, tradeTime: Int, phoneNumber: String, address: String): Boolean{
-        var result = true
-
-        var mData = FirebaseDatabase.getInstance().reference
-        var mStorage = FirebaseStorage.getInstance("gs://dungdaopetstore.appspot.com")
-
-        var sRef = mStorage.reference
-        var milis = Calendar.getInstance().timeInMillis
-        var imageRef = sRef.child("user$milis.png")
-
-        img.isDrawingCacheEnabled
-        img.buildDrawingCache()
-        var bitmap = (img.drawable as BitmapDrawable).bitmap
-        var baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
-        var data = baos.toByteArray()
-
-        var uploadTask = imageRef.putBytes(data)
-        uploadTask.addOnFailureListener {
-            Log.e("errorUploadImage","ErrorUpLoadImage")
-            result = false
-        }.addOnSuccessListener {
-            imageRef.downloadUrl.addOnSuccessListener {
-                var downloadURL = it.toString()
-                mData.child(Constants().userTable).child(username).setValue(
-                    User(fullname,username,password,downloadURL, money,
-                        bannedTime, tradeTime,phoneNumber,"$username-$password",false, address)
-                ).addOnFailureListener { result = false }
-            }
-        }
-
-        return result
-    }
-
     fun getAllUser(list: ArrayList<User>, adapter: StaffUserAdapter){
         var mData = FirebaseDatabase.getInstance().reference
         mData.child(Constants().userTable).addValueEventListener(object: ValueEventListener{
