@@ -20,7 +20,6 @@ import android.widget.ArrayAdapter
 import com.dung.dungdaopetstore.R
 import com.dung.dungdaopetstore.base.BaseActivity
 import com.dung.dungdaopetstore.firebase.OwnerDatabase
-import com.dung.dungdaopetstore.firebase.PetDatabase
 import kotlinx.android.synthetic.main.activity_user_add_pet.*
 import java.io.FileNotFoundException
 import java.io.InputStream
@@ -66,9 +65,7 @@ class UserAddPetActivity : BaseActivity() {
 
     // create spinner of Pet Category
     private fun initSpinner() {
-        spnList = listOf(resources.getString(R.string.dog),resources.getString(R.string.cat),resources.getString(R.string.fish),
-            resources.getString(R.string.turtle),resources.getString(R.string.mouse),resources.getString(R.string.bird),
-            resources.getString(R.string.another))
+        spnList = listOf("Dog","Cat","Fish","Turtle","Mouse","Bird","Difference")
         spnAdapter = ArrayAdapter(this, R.layout.spinner_custom_text, spnList)
         spnAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spnUserSellCategory.setAdapter(spnAdapter)
@@ -111,7 +108,7 @@ class UserAddPetActivity : BaseActivity() {
                 clearAllTextInputLayout()
                 imgUserSellAddition.setImageResource(R.drawable.img_addition)
                 showMessage(resources.getString(R.string.completeAnimalAdded),true)
-                startActivity(Intent(this@UserAddPetActivity, UserPetListActivity::class.java))
+                startActivity(Intent(this@UserAddPetActivity, UserOwnerPetActivity::class.java))
                 this.finish()
             }else if(ownerDatabase.insertOwner(username,aName,aGender,aWeight,aCategory,imgUserSellAddition) == false){
                 clearAllTextInputLayout()

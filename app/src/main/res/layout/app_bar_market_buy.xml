@@ -20,26 +20,14 @@
                 android:background="@color/colorPrimary"
                 app:popupTheme="@style/AppTheme.PopupOverlay">
 
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="10"
-                    android:paddingRight="@dimen/margin_cv_size">
                 <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/title_user_market"
                         android:textColor="@color/colorBackground"
                         android:textSize="16dp"
                         android:layout_weight="8"
                         android:textStyle="bold"/>
-                <Spinner
-                        android:layout_width="0dp"
-                        android:layout_height="18dp"
-                        android:layout_weight="2"
-                        android:id="@+id/spnCategoryPet"></Spinner>
-            </LinearLayout>
 
         </android.support.v7.widget.Toolbar>
 

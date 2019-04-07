@@ -34,29 +34,39 @@
         </activity>
         <activity
                 android:name=".user.userbuy.UserBuyActivity"
-                android:parentActivityName=".user.UserActivity"
                 android:theme="@style/AppTheme.PlusNoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".user.UserActivity" />
         </activity>
         <activity
                 android:name=".user.userorder.UserOrderActivity"
-                android:parentActivityName=".user.UserActivity"
                 android:theme="@style/AppTheme.PlusNoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".user.UserActivity" />
         </activity>
         <activity
                 android:name=".user.useraddpet.UserAddPetActivity"
-                android:parentActivityName=".user.useraddpet.UserPetListActivity"
                 android:theme="@style/AppTheme.PlusNoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".user.useraddpet.UserOwnerPetActivity" />
         </activity>
         <activity
                 android:name=".user.usercommunity.UserCommunityActivity"
-                android:parentActivityName=".user.UserActivity"
                 android:theme="@style/AppTheme.PlusNoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".user.UserActivity" />
         </activity>
         <activity
                 android:name=".loginsignup.SignUpActivity"
                 android:label=""
-                android:parentActivityName=".loginsignup.LoginActivity"
                 android:theme="@style/AppTheme.PlusNoActionBar">
+            <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".loginsignup.LoginActivity" />
         </activity>
         <activity
                 android:name=".staff.StaffActivity"
@@ -65,57 +75,77 @@
         </activity>
         <activity
                 android:name=".user.userbuy.UserBuyInformationActivity"
-                android:parentActivityName=".user.userbuy.UserBuyActivity"
                 android:theme="@style/AppTheme.PlusNoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".user.userbuy.UserBuyActivity" />
         </activity>
         <activity
-                android:name=".user.useraddpet.UserPetListActivity"
-                android:parentActivityName=".user.userbuy.UserBuyActivity"
+                android:name=".user.useraddpet.UserOwnerPetActivity"
                 android:theme="@style/AppTheme.PlusNoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".user.UserActivity" />
         </activity>
         <activity
                 android:name=".user.usersell.UserSellPetActivity"
-                android:parentActivityName=".user.UserActivity"
                 android:theme="@style/AppTheme.PlusNoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".user.UserActivity" />
         </activity>
         <activity
                 android:name=".user.userupdate.UserUpdateActivity"
-                android:parentActivityName=".user.UserActivity"
                 android:theme="@style/AppTheme.PlusNoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".user.UserActivity" />
         </activity>
         <activity
                 android:name=".user.userpurchase.UserPurchaseActivity"
-                android:parentActivityName=".user.UserActivity"
                 android:theme="@style/AppTheme.PlusNoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".user.UserActivity" />
         </activity>
         <activity
                 android:name=".user.useraddpet.UserPetUpdateActivity"
-                android:parentActivityName=".user.useraddpet.UserPetListActivity"
                 android:theme="@style/AppTheme.PlusNoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".user.useraddpet.UserOwnerPetActivity" />
         </activity>
         <activity
                 android:name=".user.useraddpet.UserPetShareActivity"
-                android:parentActivityName=".user.useraddpet.UserPetListActivity"
                 android:theme="@style/AppTheme.PlusNoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".user.useraddpet.UserOwnerPetActivity" />
         </activity>
         <activity
                 android:name=".user.userchat.UserChatActivity"
                 android:label=""
-                android:parentActivityName=".user.UserActivity"
                 android:theme="@style/AppTheme.PlusNoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".user.UserActivity" />
         </activity>
         <activity
                 android:name=".staff.StaffChatActivity"
                 android:label=""
-                android:parentActivityName=".staff.StaffActivity"
                 android:theme="@style/AppTheme.PlusNoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".staff.StaffActivity" />
         </activity>
         <activity android:name=".introduce.IntroduceActivity">
         </activity>
         <activity android:name=".user.userpurchase.UserPurchaseInformationActivity"
                 android:theme="@style/AppTheme.PlusNoActionBar"
-                android:label=""
-                android:parentActivityName=".user.userpurchase.UserPurchaseActivity">
+                android:label="">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".user.userpurchase.UserPurchaseActivity" />
         </activity>
     </application>
 

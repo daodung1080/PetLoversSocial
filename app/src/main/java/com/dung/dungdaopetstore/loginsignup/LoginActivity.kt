@@ -2,9 +2,8 @@ package com.dung.dungdaopetstore.loginsignup
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.v7.app.ActionBar
 import com.dung.dungdaopetstore.R
 import com.dung.dungdaopetstore.base.BaseActivity
 import com.dung.dungdaopetstore.firebase.Constants
@@ -13,13 +12,16 @@ import com.dung.dungdaopetstore.staff.StaffActivity
 import com.dung.dungdaopetstore.user.UserActivity
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_login.*
+import java.util.*
 
 class LoginActivity : BaseActivity() {
 
     lateinit var mData: DatabaseReference
+    lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        this.getLangData()
         setContentView(R.layout.activity_login)
 
         mData = FirebaseDatabase.getInstance().reference
@@ -37,9 +39,31 @@ class LoginActivity : BaseActivity() {
         }
 
         fillAllUserInformation()
-
         edtDone()
+        changeLanguage()
 
+    }
+
+    // Change your language
+    private fun changeLanguage() {
+        sharedPreferences = getSharedPreferences("LANG", Context.MODE_PRIVATE)
+        var idImage = sharedPreferences!!.getInt("img",2)
+        if(idImage == 1){ imgChangeLanguage.setImageResource(R.drawable.img_america) }
+        else if(idImage == 2){ imgChangeLanguage.setImageResource(R.drawable.img_vietnam) }
+        imgChangeLanguage.setOnClickListener {
+            idImage++
+            if(idImage % 2 == 0){
+                this.changeLang("")
+                this.setLangData("",2)
+                this.recreate()
+                showMessage(resources.getString(R.string.txt_change_lang_complete),true)
+            }else{
+                this.changeLang("vi")
+                this.setLangData("vi",1)
+                this.recreate()
+                showMessage(resources.getString(R.string.txt_change_lang_complete),true)
+            }
+        }
     }
 
     // get all data and fill out view
@@ -166,6 +190,28 @@ class LoginActivity : BaseActivity() {
             editor.putBoolean("remember",remember)
         }
         editor.apply()
+    }
+
+    fun changeLang(lang: String?) {
+        val myLocale = Locale(lang)
+        val res = resources
+        val dm = res.displayMetrics
+        val conf = res.configuration
+        conf.locale = myLocale
+        res.updateConfiguration(conf, dm)
+    }
+
+    fun setLangData(lang: String, img: Int){
+        var editor = getSharedPreferences("LANG", Context.MODE_PRIVATE).edit()
+        editor.putString("lang",lang)
+        editor.putInt("img",img)
+        editor.apply()
+    }
+
+    fun getLangData(){
+        var sharedPreferences = getSharedPreferences("LANG", Context.MODE_PRIVATE)
+        var lang = sharedPreferences!!.getString("lang","")
+        changeLang(lang)
     }
 
 }

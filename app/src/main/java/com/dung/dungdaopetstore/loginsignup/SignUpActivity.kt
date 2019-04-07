@@ -1,6 +1,7 @@
 package com.dung.dungdaopetstore.loginsignup
 
 import android.Manifest
+import android.app.ActionBar
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -8,8 +9,10 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.support.annotation.RequiresApi
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.view.ContextMenu
@@ -39,12 +42,18 @@ class SignUpActivity : BaseActivity() {
     var REQUEST_CODE_FOLDER = 456
     var MY_PERMISSIONS_REQUEST_READ_STORAGE = 22
 
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
         setSupportActionBar(toolbar)
+
+        // Create toolbar with new back button
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.img_back)
+
+        // Config animation when switch activity
+        activityAnim(this)
 
         registerContextMenu()
         confirmRegistration()
@@ -271,6 +280,14 @@ class SignUpActivity : BaseActivity() {
         }
     }
 
+//    // set physical for back button toolbar
+//    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+//        return super.onOptionsItemSelected(item)
+//        if(item!!.itemId == android.R.id.home){
+//            onBackPressed()
+//            return true
+//        }
+//    }
 
     // Back button animation
     override fun onBackPressed() {

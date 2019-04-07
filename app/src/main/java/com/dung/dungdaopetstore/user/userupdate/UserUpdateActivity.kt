@@ -3,6 +3,7 @@ package com.dung.dungdaopetstore.user.userupdate
 import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import android.view.MenuItem
 import android.widget.TextView
 import com.dung.dungdaopetstore.R
 import com.dung.dungdaopetstore.base.BaseActivity
@@ -26,6 +27,7 @@ class UserUpdateActivity : BaseActivity() {
         // Create toolbar with new back button
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
+        supportActionBar!!.setHomeButtonEnabled(true)
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.img_back)
 
         // Config animation when switch activity
@@ -117,6 +119,14 @@ class UserUpdateActivity : BaseActivity() {
         alertDialog.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, which -> dialog.dismiss()})
         var dialog = alertDialog.create()
         dialog.show()
+    }
+
+    // set physical for back button like the same android original back button
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item!!.itemId == android.R.id.home){
+            onBackPressed()
+        }
+        return true
     }
 
     // Back button Animation

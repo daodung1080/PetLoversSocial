@@ -2,6 +2,7 @@ package com.dung.dungdaopetstore.staff
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.MenuItem
 import com.dung.dungdaopetstore.R
 import com.dung.dungdaopetstore.adapter.user.UserChatAdapter
 import com.dung.dungdaopetstore.base.BaseActivity
@@ -25,8 +26,11 @@ class StaffChatActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_chat)
+
+        // create tool bar and set up new back button
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
+        supportActionBar!!.setHomeButtonEnabled(true)
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.img_back)
 
         initView()
@@ -95,6 +99,14 @@ class StaffChatActivity : BaseActivity() {
             mData.child(Constants().chatTable).push().setValue(Chat(message,receiver,"hqt"))
             edtMessage.setText("")
         }
+    }
+
+    // set physical for back button like the same android original back button
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item!!.itemId == android.R.id.home){
+            onBackPressed()
+        }
+        return true
     }
 
     // init All View and all Class

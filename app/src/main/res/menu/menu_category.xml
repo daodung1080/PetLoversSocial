@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/all" android:id="@+id/menuAll"></item>
+    <item android:title="@string/dog" android:id="@+id/menuDog"></item>
+    <item android:title="@string/cat" android:id="@+id/menuCat"></item>
+    <item android:title="@string/fish" android:id="@+id/menuFish"></item>
+    <item android:title="@string/turtle" android:id="@+id/menuTurtle"></item>
+    <item android:title="@string/mouse" android:id="@+id/menuMouse"></item>
+    <item android:title="@string/bird" android:id="@+id/menuBird"></item>
+    <item android:title="@string/another" android:id="@+id/menuAnother"></item>
+</menu>

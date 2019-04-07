@@ -1,25 +1,27 @@
 package com.dung.dungdaopetstore.base
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TextInputEditText
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
+import android.view.Gravity
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.ScaleAnimation
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
+import com.crowdfire.cfalertdialog.CFAlertDialog
 import com.dung.dungdaopetstore.R
 import com.dung.dungdaopetstore.firebase.Constants
 import com.dung.dungdaopetstore.model.Animal
 import com.google.firebase.database.*
 import es.dmoral.toasty.Toasty
+import java.util.*
+import kotlin.concurrent.schedule
 
 open class BaseActivity: AppCompatActivity() {
 
@@ -94,9 +96,10 @@ open class BaseActivity: AppCompatActivity() {
                 override fun onChildChanged(p0: DataSnapshot, p1: String?) {
                     var animal = p0.getValue(Animal::class.java)
                     if(animal!!.amount == 0){
-                        AlertDialog.Builder(context)
-                            .setTitle("Notification")
-                            .setMessage("Your ${animal.name} have been sold")
+                        CFAlertDialog.Builder(context)
+                            .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
+                            .setIcon(R.drawable.img_notify)
+                            .setTitle("${animal!!.name} ${resources.getString(R.string.message_notification)}")
                             .show()
                     }
                 }

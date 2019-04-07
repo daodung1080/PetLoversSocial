@@ -2,6 +2,7 @@ package com.dung.dungdaopetstore.user.userpurchase
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import com.dung.dungdaopetstore.R
 import com.dung.dungdaopetstore.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_user_purchase.*
@@ -15,6 +16,7 @@ class UserPurchaseActivity : BaseActivity() {
         // Create toolbar with new back button
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
+        supportActionBar!!.setHomeButtonEnabled(true)
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.img_back)
 
         // Config animation when switch activity
@@ -44,6 +46,14 @@ class UserPurchaseActivity : BaseActivity() {
         intent.putExtra("purchaseValue",value)
         startActivity(intent)
         activityAnim(this)
+    }
+
+    // set physical for back button like the same android original back button
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item!!.itemId == android.R.id.home){
+            onBackPressed()
+        }
+        return true
     }
 
     // Back button Animation

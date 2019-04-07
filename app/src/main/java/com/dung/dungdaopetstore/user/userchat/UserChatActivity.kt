@@ -3,6 +3,7 @@ package com.dung.dungdaopetstore.user.userchat
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.MenuItem
 import com.dung.dungdaopetstore.R
 import com.dung.dungdaopetstore.adapter.user.UserChatAdapter
 import com.dung.dungdaopetstore.base.BaseActivity
@@ -26,8 +27,11 @@ class UserChatActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_chat)
+
+        // register toolbar and create new back button
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
+        supportActionBar!!.setHomeButtonEnabled(true)
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.img_back)
         activityAnim(this)
 
@@ -36,6 +40,14 @@ class UserChatActivity : BaseActivity() {
         sendMessage()
         getAllMessage()
 
+    }
+
+    // set physical for back button like the same android original back button
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item!!.itemId == android.R.id.home){
+            onBackPressed()
+        }
+        return true
     }
 
     // get all user profile include Full name and Image then put into View
@@ -107,7 +119,6 @@ class UserChatActivity : BaseActivity() {
         adapter = UserChatAdapter(this, list, rUsername)
         // set adapter for recyclerView
         var linearLayoutManager = LinearLayoutManager(this)
-        linearLayoutManager.stackFromEnd = true
         rvChat.layoutManager = linearLayoutManager
         rvChat.adapter = adapter
         receiver = intent.getStringExtra("people")

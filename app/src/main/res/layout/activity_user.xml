@@ -9,12 +9,6 @@
         tools:context=".user.UserActivity"
         android:background="@color/colorBackground">
 
-    <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/flUser"
-            ></FrameLayout>
-
     <android.support.design.widget.BottomNavigationView
             android:id="@+id/navigation"
             android:layout_width="match_parent"
@@ -22,5 +16,12 @@
             android:layout_gravity="bottom"
             android:background="@color/colorBackground"
             app:menu="@menu/navigation_user"/>
+
+    <FrameLayout
+            android:id="@+id/flUser"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    </FrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>

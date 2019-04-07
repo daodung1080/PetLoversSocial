@@ -69,15 +69,7 @@ class PetAdditionFragment: BaseFragment() {
     // Create spinner Category of Pet
     private fun initSpinner() {
         spnAnimalCategory = rootview.spnAnimalCategory
-        spnList = listOf(
-            resources.getString(R.string.dog),
-            resources.getString(R.string.cat),
-            resources.getString(R.string.fish),
-            resources.getString(R.string.turtle),
-            resources.getString(R.string.mouse),
-            resources.getString(R.string.bird),
-            resources.getString(R.string.another)
-        )
+        spnList = listOf("Dog","Cat","Fish","Turtle","Mouse","Bird","Difference")
         spnAdapter = ArrayAdapter(context, R.layout.spinner_custom_text, spnList)
         spnAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spnAnimalCategory.adapter = spnAdapter

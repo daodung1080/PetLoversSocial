@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.GridLayoutManager
 import android.view.ContextMenu
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
@@ -31,8 +32,6 @@ class UserBuyActivity : BaseActivity() {
     lateinit var adapter: UserMarketAdapter
     lateinit var list: ArrayList<Animal>
     lateinit var username: String
-    lateinit var petAdapter: ArrayAdapter<String>
-    lateinit var petList: List<String>
     lateinit var mData : DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,38 +47,48 @@ class UserBuyActivity : BaseActivity() {
 
         initView()
         getAllAnimals()
-        getPetByCategory()
 
+    }
+
+    // Create option menu
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_category,menu)
+        return true
+    }
+
+    // get all pet when user clicked Category item
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item!!.itemId == R.id.menuAll){
+            getPetListByCategory("All")
+        }else if(item!!.itemId == R.id.menuDog){
+            getPetListByCategory("Dog")
+        }else if(item!!.itemId == R.id.menuCat){
+            getPetListByCategory("Cat")
+        }else if(item!!.itemId == R.id.menuTurtle){
+            getPetListByCategory("Turtle")
+        }else if(item!!.itemId == R.id.menuMouse){
+            getPetListByCategory("Mouse")
+        }else if(item!!.itemId == R.id.menuBird){
+            getPetListByCategory("Bird")
+        }else if(item!!.itemId == R.id.menuAnother){
+            getPetListByCategory("Difference")
+        }else if(item!!.itemId == R.id.menuFish){
+            getPetListByCategory("Fish")
+        }else if(item.itemId == android.R.id.home){
+            onBackPressed()
+        }
+        return true
     }
 
     // init all View and Class
     private fun initView() {
         petDatabase = PetDatabase(this)
         mData = FirebaseDatabase.getInstance().reference
-        petList = listOf(resources.getString(R.string.all),resources.getString(R.string.dog),resources.getString(R.string.cat),resources.getString(R.string.fish),
-            resources.getString(R.string.turtle),resources.getString(R.string.mouse),resources.getString(R.string.bird),
-            resources.getString(R.string.another))
-        petAdapter = ArrayAdapter(this,R.layout.spinner_custom_text_category,petList)
-        petAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spnCategoryPet.adapter = petAdapter
-    }
-
-    // get all pet when user clicked Category item
-    private fun getPetByCategory() {
-        spnCategoryPet.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                getPetListByCategory(petList.get(position))
-            }
-
-        }
     }
 
     // get all pet by Category
     private fun getPetListByCategory(petCategory: String) {
-        if(petCategory.equals(resources.getString(R.string.all))){
+        if(petCategory.equals("All")){
             petDatabase.getAllAnimals(adapter,list)
         }else{
             mData.child(Constants().petTable).addValueEventListener(object: ValueEventListener{

@@ -17,13 +17,12 @@ import com.dung.dungdaopetstore.base.BaseActivity
 import com.dung.dungdaopetstore.firebase.Constants
 import com.dung.dungdaopetstore.firebase.OwnerDatabase
 import com.dung.dungdaopetstore.model.Owner
-import com.dung.dungdaopetstore.user.UserActivity
 import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_user_pet_list.*
+import kotlinx.android.synthetic.main.activity_user_pet_owner.*
 import kotlinx.android.synthetic.main.dialog_new_feed_pet_image.view.*
 
-class UserPetListActivity : BaseActivity() {
+class UserOwnerPetActivity : BaseActivity() {
 
     lateinit var list: ArrayList<Owner>
     lateinit var adapter: UserPetListAdapter
@@ -33,11 +32,12 @@ class UserPetListActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_pet_list)
+        setContentView(R.layout.activity_user_pet_owner)
 
         // Create toolbar with new back button
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
+        supportActionBar!!.setHomeButtonEnabled(true)
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.img_back)
 
         // Config animation when switch activity
@@ -57,7 +57,9 @@ class UserPetListActivity : BaseActivity() {
     // option item Function
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if(item!!.itemId == R.id.menuAddPet){
-            startActivity(Intent(this@UserPetListActivity,UserAddPetActivity::class.java))
+            startActivity(Intent(this@UserOwnerPetActivity,UserAddPetActivity::class.java))
+        }else if(item.itemId == android.R.id.home){
+            onBackPressed()
         }
         return true
     }
@@ -127,7 +129,7 @@ class UserPetListActivity : BaseActivity() {
     // switch activity update pet information when click Config Icon
     fun configPet(position: Int){
         var owner = list.get(position)
-        var intent = Intent(this@UserPetListActivity, UserPetUpdateActivity::class.java)
+        var intent = Intent(this@UserOwnerPetActivity, UserPetUpdateActivity::class.java)
         intent.putExtra("ownerID",owner.ownerID)
         startActivity(intent)
     }
@@ -135,7 +137,7 @@ class UserPetListActivity : BaseActivity() {
     // switch activity share pet when click Share Icon
     fun sharePet(position: Int){
         var owner = list.get(position)
-        var intent = Intent(this@UserPetListActivity, UserPetShareActivity::class.java)
+        var intent = Intent(this@UserOwnerPetActivity, UserPetShareActivity::class.java)
         intent.putExtra("ownerID",owner.ownerID)
         startActivity(intent)
     }

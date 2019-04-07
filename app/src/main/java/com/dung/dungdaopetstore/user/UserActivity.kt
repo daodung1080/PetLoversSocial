@@ -1,6 +1,7 @@
 package com.dung.dungdaopetstore.user
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
@@ -70,6 +71,7 @@ class UserActivity : BaseActivity() {
         alertDialog.setMessage(resources.getString(R.string.message_app_exit))
         alertDialog.setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
             var intent = Intent(this@UserActivity,LoginActivity::class.java)
+            disableRememberUser()
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
@@ -81,6 +83,13 @@ class UserActivity : BaseActivity() {
         })
         var dialog = alertDialog.create()
         dialog.show()
+    }
+
+    // disable remember user
+    fun disableRememberUser(){
+        var editor = getSharedPreferences("USER", Context.MODE_PRIVATE).edit()
+        editor.clear()
+        editor.commit()
     }
 
 }

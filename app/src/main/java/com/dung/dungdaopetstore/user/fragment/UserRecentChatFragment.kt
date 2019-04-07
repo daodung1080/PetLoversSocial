@@ -17,6 +17,9 @@ import com.dung.dungdaopetstore.user.userchat.UserChatActivity
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_user_recent_chat.view.*
 import java.util.concurrent.ConcurrentLinkedQueue
+import android.text.method.TextKeyListener.clear
+
+
 
 class UserRecentChatFragment: BaseFragment() {
 
@@ -75,10 +78,11 @@ class UserRecentChatFragment: BaseFragment() {
                 list.clear()
                     p0.children.forEach {
                         var user = it.getValue(User::class.java)
-                        mList.forEach {
-                            if(user!!.username.equals(it)){
-                                // try catch exception
-                                try {
+                        try {
+                            mList.forEach {
+                                if(user!!.username.equals(it)){
+                                    // try catch exception
+
                                     if(list.size != 0){
                                         list.forEach {
                                             if(!user.username.equals(it.username)){
@@ -88,12 +92,16 @@ class UserRecentChatFragment: BaseFragment() {
                                     }else{
                                         list.add(user)
                                     }
-                                }catch (e: ConcurrentModificationException){
-
                                 }
                             }
+                        }catch (e: ConcurrentModificationException){
+
                         }
                     }
+                val hashSet = HashSet<User>()
+                hashSet.addAll(list)
+                list.clear()
+                list.addAll(hashSet)
                 adapter.notifyDataSetChanged()
             }
 

@@ -19,7 +19,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.dung.dungdaopetstore.R
-import com.dung.dungdaopetstore.user.useraddpet.UserPetListActivity
+import com.dung.dungdaopetstore.user.useraddpet.UserOwnerPetActivity
 import com.dung.dungdaopetstore.base.BaseFragment
 import com.dung.dungdaopetstore.firebase.Constants
 import com.dung.dungdaopetstore.firebase.UserDatabase
@@ -207,7 +207,7 @@ class UserProfileFragment: BaseFragment() {
     // on click Icon Function
     private fun selectFunction() {
         cvProfileAddPet.setOnClickListener {
-            startActivity(Intent(context, UserPetListActivity::class.java))
+            startActivity(Intent(context, UserOwnerPetActivity::class.java))
         }
         cvProfileUpdate.setOnClickListener {
             startActivity(Intent(context, UserUpdateActivity::class.java))

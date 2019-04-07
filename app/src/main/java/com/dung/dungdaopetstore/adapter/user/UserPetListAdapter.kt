@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
 import com.dung.dungdaopetstore.R
-import com.dung.dungdaopetstore.user.useraddpet.UserPetListActivity
+import com.dung.dungdaopetstore.user.useraddpet.UserOwnerPetActivity
 import com.dung.dungdaopetstore.model.Owner
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_item_user_pet_list.view.*
 
-class UserPetListAdapter(var context: UserPetListActivity, var list: ArrayList<Owner>)
+class UserPetListAdapter(var context: UserOwnerPetActivity, var list: ArrayList<Owner>)
     : RecyclerView.Adapter<UserPetListAdapter.UserHolder>() {
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): UserHolder {
         var view = LayoutInflater.from(context).inflate(R.layout.list_item_user_pet_list, p0, false)

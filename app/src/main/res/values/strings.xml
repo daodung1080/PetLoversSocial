@@ -7,12 +7,10 @@
     <string name="edtPassword">Password</string>
     <string name="btnLogin">Confirm</string>
     <string name="txtSignUp"><u>Create an new Account</u></string>
-    <string name="txtBuyer">Pet Lovers</string>
     <string name="txtBuyer1">Buyer:</string>
-    <string name="txtStaff">Supervisors Staff</string>
     <string name="errorLoginComplete">Login Successfully</string>
     <string name="errorLoginFailed">Login Failed because Username or Password does not exists</string>
-    <string name="errorLoginBanned">Your Account have been Banned by Supervisors please wait 5 day to login again</string>
+    <string name="errorLoginBanned">Your Account have been Banned by Supervisors please wait at least 5 day to login again</string>
     <string name="errorChat">You cannot chat with yourself</string>
 
     <!--Staff-->
@@ -123,7 +121,7 @@
     <string name="errorSignUpFullname">Full Name characters length Min is 5 and Max is 30</string>
     <string name="errorSignUpUsername">Username characters length Min is 5 and Max is 30</string>
     <string name="errorSignUpPassword">Password characters length Min is 5 and Max is 30</string>
-    <string name="errorSignUpPhone">Phone Number must have 5 characters</string>
+    <string name="errorSignUpPhone">Phone Number must have 10 characters</string>
     <string name="errorSignUpAddress">Address characters length Min is 5 and Max is 40</string>
     <string name="errorSignUpComplete">Sign up Successfully, for now you can login with this Account</string>
     <string name="errorSignUpFailed1">Sign up Failed please check your internet connection again</string>
@@ -212,7 +210,7 @@
     <string name="title_user_purchase_complete">Complete your purchase</string>
     <string name="txtBankAccount">Select your output Account</string>
     <string name="txtUserPurchase">Total money you wanna purchase:</string>
-    <string name="edtUserPurchase">Enter your Account number</string>
+    <string name="edtUserPurchase">Enter your account number</string>
     <string name="errorUserPurchase">Account number must be not empty</string>
     <string name="completeUserPurchase">Purchase money successfuly. You can check your money in Profile Screen</string>
     <string name="errorUserBuyRemove">This pet have been removed by admin. Please choose another pet</string>
@@ -239,5 +237,7 @@
     <string name="cbLogin">Remember password?</string>
     <string name="title_app_exit">Log out</string>
     <string name="message_app_exit">Do you really want to log out this account?</string>
+    <string name="message_notification">have sold</string>
+    <string name="txt_change_lang_complete">Change language successfully</string>
 
 </resources>
