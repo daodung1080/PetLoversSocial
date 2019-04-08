@@ -69,8 +69,7 @@ class UserPurchaseInformationActivity : BaseActivity() {
                     }
                     .addOnSuccessListener {
                         showMessage(resources.getString(R.string.completeUserPurchase),true)
-                        startActivity(Intent(this@UserPurchaseInformationActivity,UserPurchaseActivity::class.java))
-                        this.finish()
+                        onBackPressed()
                     }
                 clearAllView()
             }

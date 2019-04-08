@@ -74,18 +74,9 @@ open class BaseActivity: AppCompatActivity() {
         activity.overridePendingTransition(R.anim.anim_enter, R.anim.anim_exit)
     }
 
-    // Set animation for Activity when switch
-    fun setViewAnimation(viewToAnimate: View){
-        val anim = ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f,
-            Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
-        anim.duration = 600
-        viewToAnimate.startAnimation(anim)
-    }
-
-    fun notifyUser(context: Activity){
+    fun getNotification(){
         var mData = FirebaseDatabase.getInstance().reference
-        var username = getRootUsername()
-        mData.child(Constants().petTable).orderByChild("seller").equalTo(username)
+        mData.child(Constants().petTable).orderByChild("seller").equalTo(getRootUsername())
             .addChildEventListener(object: ChildEventListener{
                 override fun onCancelled(p0: DatabaseError) {
                 }
@@ -96,10 +87,9 @@ open class BaseActivity: AppCompatActivity() {
                 override fun onChildChanged(p0: DataSnapshot, p1: String?) {
                     var animal = p0.getValue(Animal::class.java)
                     if(animal!!.amount == 0){
-                        CFAlertDialog.Builder(context)
-                            .setDialogStyle(CFAlertDialog.CFAlertStyle.NOTIFICATION)
+                        CFAlertDialog.Builder(applicationContext)
+                            .setTitle("${animal.name} have sold")
                             .setIcon(R.drawable.img_notify)
-                            .setTitle("${animal!!.name} ${resources.getString(R.string.message_notification)}")
                             .show()
                     }
                 }
@@ -111,6 +101,14 @@ open class BaseActivity: AppCompatActivity() {
                 }
 
             })
+    }
+
+    // Set animation for Activity when switch
+    fun setViewAnimation(viewToAnimate: View){
+        val anim = ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f,
+            Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        anim.duration = 600
+        viewToAnimate.startAnimation(anim)
     }
 
 }

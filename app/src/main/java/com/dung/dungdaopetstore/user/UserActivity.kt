@@ -26,7 +26,7 @@ class UserActivity : BaseActivity() {
         setContentView(R.layout.activity_user)
         activityAnim(this)
 
-        notifyUser(this)
+        getNotification()
 
         this.replaceFragment(R.id.flUser, UserMainScreenFragment())
 

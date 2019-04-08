@@ -159,8 +159,7 @@ class SignUpActivity : BaseActivity() {
                         clearAllEDT()
                         clearAllTIL()
                         showMessage(resources.getString(R.string.errorSignUpComplete), true)
-                        startActivity(Intent(this@SignUpActivity,LoginActivity::class.java))
-                        finish()
+                        onBackPressed()
                     }
             }
         }

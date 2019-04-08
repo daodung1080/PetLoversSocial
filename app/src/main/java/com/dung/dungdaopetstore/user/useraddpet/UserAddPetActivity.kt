@@ -108,8 +108,7 @@ class UserAddPetActivity : BaseActivity() {
                 clearAllTextInputLayout()
                 imgUserSellAddition.setImageResource(R.drawable.img_addition)
                 showMessage(resources.getString(R.string.completeAnimalAdded),true)
-                startActivity(Intent(this@UserAddPetActivity, UserOwnerPetActivity::class.java))
-                this.finish()
+                onBackPressed()
             }else if(ownerDatabase.insertOwner(username,aName,aGender,aWeight,aCategory,imgUserSellAddition) == false){
                 clearAllTextInputLayout()
                 showMessage(resources.getString(R.string.failedAnimalAdded),false)
