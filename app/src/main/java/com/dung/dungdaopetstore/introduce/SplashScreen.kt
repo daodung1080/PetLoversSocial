@@ -4,11 +4,22 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
+import android.view.View
 import com.dung.dungdaopetstore.R
 import com.dung.dungdaopetstore.base.BaseActivity
+import com.dung.dungdaopetstore.firebase.UserDatabase
 import com.dung.dungdaopetstore.loginsignup.LoginActivity
+import kotlinx.android.synthetic.main.activity_splash_screen.*
+import java.net.InetAddress
+import java.net.UnknownHostException
 import java.util.*
 import kotlin.concurrent.schedule
+import android.support.v4.content.ContextCompat.getSystemService
+import android.net.ConnectivityManager
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+
 
 class SplashScreen : BaseActivity() {
 
@@ -22,6 +33,7 @@ class SplashScreen : BaseActivity() {
 
         this.initView()
         this.memberIntroduce()
+        this.initAnimation()
 
     }
 
@@ -52,13 +64,35 @@ class SplashScreen : BaseActivity() {
     // Start to switch into Login Screen
     fun startAnim(){
 
-        var timer = Timer()
-        timer.schedule(100){
-            startActivity(Intent(this@SplashScreen, LoginActivity::class.java))
-            this@SplashScreen.finish()
+        var handler = Handler()
+        var runnable = Runnable {
+            var checkInternet = checkInternet(this)
+            if(checkInternet == true){
+                imgLoading.clearAnimation()
+                imgLoading.visibility = View.GONE
+                startActivity(Intent(this@SplashScreen, LoginActivity::class.java))
+                this@SplashScreen.finish()
+            }else{
+                imgLoading.clearAnimation()
+                imgLoading.visibility = View.GONE
+                txtCheckInternet.visibility = View.VISIBLE
+            }
         }
-
+        handler.postDelayed(runnable,3000)
     }
+
+    // Check internet
+    fun checkInternet(context: Context): Boolean{
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return connectivityManager.activeNetworkInfo != null && connectivityManager.activeNetworkInfo.isConnected
+    }
+
+    // set animation for loading View
+    fun initAnimation(){
+        var anim_loading: Animation = AnimationUtils.loadAnimation(this,R.anim.anim_loading)
+        imgLoading.startAnimation(anim_loading)
+    }
+
 
 }
 
