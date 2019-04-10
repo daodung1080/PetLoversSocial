@@ -187,7 +187,7 @@
     <string name="errorUserBuyRemove">"Thú cưng này đã bị xóa. Vui lòng chọn 1 em khác "</string>
     <string name="title_user_order">Đơn hàng của bạn</string>
     <string name="title_user_sell">Giao dịch thú cưng</string>
-    <string name="title_user_community">Cộng đồng thành viên đã tham gia</string>
+    <string name="title_user_community">Cộng đồng thành viên</string>
     <string name="title_user_market_detail">Chi tiết thú cưng</string>
     <string name="title_user_update">Chỉnh sửa thông tin cá nhân</string>
     <string name="title_user_purchase">Nạp tiền</string>
@@ -206,4 +206,6 @@
     <string name="message_app_exit">Bạn có chắc muốn thoát khỏi tài khoản này?</string>
     <string name="message_notification">đã bán</string>
     <string name="txt_change_lang_complete">Thay đổi ngôn ngữ thành công</string>
+    <string name="title_activity_user_location">Địa điểm</string>
+    <string name="txtCheckInternet">Không thể kết nối mạng</string>
 </resources>
