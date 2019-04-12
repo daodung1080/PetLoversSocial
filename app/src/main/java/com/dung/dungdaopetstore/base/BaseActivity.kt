@@ -25,6 +25,10 @@ import kotlin.concurrent.schedule
 
 open class BaseActivity: AppCompatActivity() {
 
+    // share preferences USER
+    var sUser = "USER"
+    var sUsername = "username"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -32,9 +36,9 @@ open class BaseActivity: AppCompatActivity() {
     // Show message instead Toast
     fun showMessage(message: String, switch: Boolean){
         if(switch == true){
-            Toasty.success(applicationContext, message).show()
+            Toasty.success(applicationContext, message,1500).show()
         }else{
-            Toasty.info(applicationContext, message).show()
+            Toasty.info(applicationContext, message,1500).show()
         }
     }
 
@@ -47,7 +51,7 @@ open class BaseActivity: AppCompatActivity() {
 
     // get Root username who Login into Application
     fun getRootUsername(): String{
-        return getSharedPreferences("USER", Context.MODE_PRIVATE).getString("username","")
+        return getSharedPreferences(sUser, Context.MODE_PRIVATE).getString(sUsername,"")
     }
 
     // Set animation for Recycler View when create
@@ -85,13 +89,6 @@ open class BaseActivity: AppCompatActivity() {
                 }
 
                 override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-                    var animal = p0.getValue(Animal::class.java)
-                    if(animal!!.amount == 0){
-                        CFAlertDialog.Builder(applicationContext)
-                            .setTitle("${animal.name} have sold")
-                            .setIcon(R.drawable.img_notify)
-                            .show()
-                    }
                 }
 
                 override fun onChildAdded(p0: DataSnapshot, p1: String?) {
