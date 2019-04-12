@@ -19,6 +19,15 @@ class LoginActivity : BaseActivity() {
     lateinit var mData: DatabaseReference
     lateinit var sharedPreferences: SharedPreferences
 
+    // Language remember
+    var sLang = "LANG"
+    var sImg = "img"
+
+    // User remember
+    var sRemember = "remember"
+    var sPassword = "password"
+    var sUserLastTime = "USER_REMEMBER_LAST_LOGIN"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.getLangData()
@@ -28,8 +37,9 @@ class LoginActivity : BaseActivity() {
 
         // Button login clicked by user
         btnLogin.setOnClickListener {
-                userValidation()
-                activityAnim(this)
+            btnLogin.isEnabled = false
+            userValidation()
+            activityAnim(this)
         }
 
         // Button sign up clicked by user
@@ -46,32 +56,35 @@ class LoginActivity : BaseActivity() {
 
     // Change your language
     private fun changeLanguage() {
-        sharedPreferences = getSharedPreferences("LANG", Context.MODE_PRIVATE)
-        var idImage = sharedPreferences!!.getInt("img",2)
-        if(idImage == 1){ imgChangeLanguage.setImageResource(R.drawable.img_america) }
-        else if(idImage == 2){ imgChangeLanguage.setImageResource(R.drawable.img_vietnam) }
+        sharedPreferences = getSharedPreferences(sLang, Context.MODE_PRIVATE)
+        var idImage = sharedPreferences!!.getInt(sImg, 2)
+        if (idImage == 1) {
+            imgChangeLanguage.setImageResource(R.drawable.img_america)
+        } else if (idImage == 2) {
+            imgChangeLanguage.setImageResource(R.drawable.img_vietnam)
+        }
         imgChangeLanguage.setOnClickListener {
             idImage++
-            if(idImage % 2 == 0){
+            if (idImage % 2 == 0) {
                 this.changeLang("")
-                this.setLangData("",2)
+                this.setLangData("", 2)
                 this.recreate()
-                showMessage(resources.getString(R.string.txt_change_lang_complete),true)
-            }else{
+                showMessage(resources.getString(R.string.txt_change_lang_complete), true)
+            } else {
                 this.changeLang("vi")
-                this.setLangData("vi",1)
+                this.setLangData("vi", 1)
                 this.recreate()
-                showMessage(resources.getString(R.string.txt_change_lang_complete),true)
+                showMessage(resources.getString(R.string.txt_change_lang_complete), true)
             }
         }
     }
 
     // get all data and fill out view
-    fun fillAllUserInformation(){
-        var sharedPreferences = getSharedPreferences("USER_REMEMBER_LAST_LOGIN", Context.MODE_PRIVATE)
-        var username = sharedPreferences.getString("username",null)
-        var password = sharedPreferences.getString("password",null)
-        var remember = sharedPreferences.getBoolean("remember",false)
+    fun fillAllUserInformation() {
+        var sharedPreferences = getSharedPreferences(sUserLastTime, Context.MODE_PRIVATE)
+        var username = sharedPreferences.getString(sUsername, null)
+        var password = sharedPreferences.getString(sPassword, null)
+        var remember = sharedPreferences.getBoolean(sRemember, false)
 
         edtUserName.setText(username)
         edtPassword.setText(password)
@@ -80,81 +93,86 @@ class LoginActivity : BaseActivity() {
 
     // Call login button when finishing type password
     private fun edtDone() {
-        imeOption(edtPassword,btnLogin)
+        imeOption(edtPassword, btnLogin)
     }
 
     // Check validate form when user click button Login
     private fun userValidation() {
         var username = edtUserName.text.toString()
         var password = edtPassword.text.toString()
-        if(username.length < 5 || username.length > 30){
+        if (username.length < 5 || username.length > 30) {
             tilPassword.error = null
             tilUsername.error = resources.getString(R.string.errorSignUpUsername)
-        }else if(password.length < 5 || password.length > 30){
+            btnLogin.isEnabled = true
+        } else if (password.length < 5 || password.length > 30) {
             tilUsername.error = null
             tilPassword.error = resources.getString(R.string.errorSignUpPassword)
-        }else if(username.equals("admin") && password.equals("admin")){
-            rememberUserForLastTimeLogin("","",false)
+            btnLogin.isEnabled = true
+        } else if (username.equals("admin") && password.equals("admin")) {
+            rememberUserForLastTimeLogin("", "", false)
             startActivity(Intent(this@LoginActivity, StaffActivity::class.java))
             activityAnim(this)
             this.finish()
-        }else{
-            checkLogin(username,password)
+        } else {
+            checkLogin(username, password)
         }
     }
 
     // Clear all characters when finish Login
-    fun clearAllEDT(){
+    fun clearAllEDT() {
         edtUserName.setText("")
         edtPassword.setText("")
     }
 
     // Clear all error when finish Login
-    fun clearAllTIL(){
+    fun clearAllTIL() {
         tilUsername.error = null
         tilPassword.error = null
     }
 
     // Check user profile - username and password have signed - this username have not been banned
-    fun checkLogin(username: String, password: String){
+    fun checkLogin(username: String, password: String) {
         var up = "username_password"
         mData.child(Constants().userTable).orderByChild(up).equalTo("$username-$password")
-            .addListenerForSingleValueEvent(object: ValueEventListener{
+            .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {
                     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                 }
 
                 override fun onDataChange(p0: DataSnapshot) {
-                    if (p0.childrenCount > 0){
+                    if (p0.childrenCount > 0) {
                         p0.children.forEach {
                             var user = it.getValue(User::class.java)
-                            if(user!!.ban == true){
+                            if (user!!.ban == true) {
                                 clearAllTIL()
-                                showMessage(resources.getString(R.string.errorLoginBanned),false)
-                            }else{
-                                if(cbLoginRemember.isChecked == true){
+                                showMessage(resources.getString(R.string.errorLoginBanned), false)
+                                btnLogin.isEnabled = true
+                            } else {
+                                if (cbLoginRemember.isChecked == true) {
 
                                     // remember password and username
-                                    rememberUserForLastTimeLogin(username,password,true)
+                                    rememberUserForLastTimeLogin(username, password, true)
                                     switchActivityWhenComplete(username)
 
-                                }else{
+                                } else {
                                     // clear data remember profile
-                                    rememberUserForLastTimeLogin(username,password,false)
+                                    rememberUserForLastTimeLogin(username, password, false)
                                     switchActivityWhenComplete(username)
                                 }
                             }
                         }
-                    }else{
+                    } else {
                         clearAllTIL()
-                        showMessage(resources.getString(R.string.errorLoginFailed),false)
+                        showMessage(resources.getString(R.string.errorLoginFailed), false)
+                        btnLogin.isEnabled = true
                     }
                 }
 
             })
-        }
+    }
 
-    fun switchActivityWhenComplete(username: String){
+    // finish this activity when complete login
+    fun switchActivityWhenComplete(username: String) {
         clearAllEDT()
         clearAllTIL()
         var intent = Intent(this@LoginActivity, UserActivity::class.java)
@@ -165,9 +183,9 @@ class LoginActivity : BaseActivity() {
 
 
     // Remember the username when Login
-    fun rememberUser(username: String){
-        var editor = getSharedPreferences("USER", Context.MODE_PRIVATE).edit()
-        editor.putString("username", username)
+    fun rememberUser(username: String) {
+        var editor = getSharedPreferences(sUser, Context.MODE_PRIVATE).edit()
+        editor.putString(sUsername, username)
         editor.commit()
     }
 
@@ -179,15 +197,15 @@ class LoginActivity : BaseActivity() {
     }
 
     // Remember user name and password when user clicked Check Box
-    fun rememberUserForLastTimeLogin(username: String, password: String,remember: Boolean){
-        var sharedPreferences = getSharedPreferences("USER_REMEMBER_LAST_LOGIN", Context.MODE_PRIVATE)
+    fun rememberUserForLastTimeLogin(username: String, password: String, remember: Boolean) {
+        var sharedPreferences = getSharedPreferences(sUserLastTime, Context.MODE_PRIVATE)
         var editor = sharedPreferences.edit()
-        if(remember == false){
+        if (remember == false) {
             editor.clear()
-        }else {
-            editor.putString("username", username)
-            editor.putString("password", password)
-            editor.putBoolean("remember",remember)
+        } else {
+            editor.putString(sUsername, username)
+            editor.putString(sPassword, password)
+            editor.putBoolean(sRemember, remember)
         }
         editor.apply()
     }
@@ -201,16 +219,16 @@ class LoginActivity : BaseActivity() {
         res.updateConfiguration(conf, dm)
     }
 
-    fun setLangData(lang: String, img: Int){
-        var editor = getSharedPreferences("LANG", Context.MODE_PRIVATE).edit()
-        editor.putString("lang",lang)
-        editor.putInt("img",img)
+    fun setLangData(lang: String, img: Int) {
+        var editor = getSharedPreferences(sLang, Context.MODE_PRIVATE).edit()
+        editor.putString("lang", lang)
+        editor.putInt(sImg, img)
         editor.apply()
     }
 
-    fun getLangData(){
-        var sharedPreferences = getSharedPreferences("LANG", Context.MODE_PRIVATE)
-        var lang = sharedPreferences!!.getString("lang","")
+    fun getLangData() {
+        var sharedPreferences = getSharedPreferences(sLang, Context.MODE_PRIVATE)
+        var lang = sharedPreferences!!.getString("lang", "")
         changeLang(lang)
     }
 
