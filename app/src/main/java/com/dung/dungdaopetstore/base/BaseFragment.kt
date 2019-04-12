@@ -18,18 +18,22 @@ import es.dmoral.toasty.Toasty
 
 open class BaseFragment: Fragment() {
 
+    // share preferences User
+    var sUser = "USER"
+    var sUsername = "username"
+
     // Show message instead Toast
     fun showMessage(message: String, switch: Boolean){
         if(switch == true){
-            Toasty.success(context!!, message).show()
+            Toasty.success(context!!, message,1500).show()
         }else{
-            Toasty.info(context!!, message).show()
+            Toasty.info(context!!, message,1500).show()
         }
     }
 
     // get Root username who Login into Application
     fun getRootUsername(): String{
-        return context!!.getSharedPreferences("USER",Context.MODE_PRIVATE).getString("username","")
+        return context!!.getSharedPreferences(sUser,Context.MODE_PRIVATE).getString(sUsername,"")
     }
 
     // Set animation for Recycler View when create
