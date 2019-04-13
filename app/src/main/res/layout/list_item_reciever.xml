@@ -27,10 +27,20 @@
                 android:maxWidth="250dp"
                 android:layout_gravity="left"
                 android:text="Hello"
+                android:visibility="visible"
                 android:background="@drawable/bg_chat_left"
                 android:textColor="@android:color/black"
                 android:padding="12dp"
                 android:id="@+id/txtChat"/>
+        <ImageView
+                android:layout_width="250dp"
+                android:layout_height="120dp"
+                android:visibility="gone"
+                android:background="@drawable/bg_chat_left"
+                android:src="@drawable/img_user_profile"
+                android:padding="@dimen/margin_cv_size"
+                android:id="@+id/imgSender"/>
+
     </LinearLayout>
 
 

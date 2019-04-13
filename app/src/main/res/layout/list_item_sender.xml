@@ -17,10 +17,20 @@
                     android:maxWidth="250dp"
                     android:background="@drawable/bg_chat_right"
                     android:layout_gravity="right"
+                    android:visibility="visible"
                     android:padding="12dp"
                     android:text="Hello everybody"
                     android:textColor="@color/colorBackground"
                     android:id="@+id/txtChat"/>
+
+            <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="120dp"
+                    android:visibility="gone"
+                    android:background="@drawable/bg_chat_box"
+                    android:padding="@dimen/margin_cv_size"
+                    android:src="@drawable/img_user_profile"
+                    android:id="@+id/imgSender"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="0dp"
