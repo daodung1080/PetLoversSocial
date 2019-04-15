@@ -219,17 +219,29 @@ class UserChatActivity : BaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == REQUEST_CODE_CAMERA && resultCode == Activity.RESULT_OK && data != null){
             var bitmap: Bitmap = data.extras.get("data") as Bitmap
+            disableAllButton()
             uploadPictureToDatabase(bitmap)
         }else if(requestCode == REQUEST_CODE_FOLDER && resultCode == Activity.RESULT_OK && data != null){
             var uri: Uri = data.data
             try {
                 var inputStream: InputStream = this.contentResolver.openInputStream(uri)
                 var bitmap = BitmapFactory.decodeStream(inputStream)
+                disableAllButton()
                 uploadPictureToDatabase(bitmap)
             }catch(e: FileNotFoundException){
 
             }
         }
+    }
+
+    fun disableAllButton(){
+        imgSend.isEnabled = false
+        imgChat.isEnabled = false
+    }
+
+    fun enableAllButton(){
+        imgSend.isEnabled = true
+        imgChat.isEnabled = true
     }
 
     // Get Permission for camera or folder
@@ -274,7 +286,9 @@ class UserChatActivity : BaseActivity() {
                 mData.child(Constants().chatTable)
                     .push()
                     .setValue(Chat(downloadURL,receiver,rUsername,true))
-                    .addOnFailureListener { showMessage(resources.getString(R.string.checkInternet),false) }
+                    .addOnSuccessListener { enableAllButton() }
+                    .addOnFailureListener { enableAllButton()
+                        showMessage(resources.getString(R.string.checkInternet),false) }
             }
         }
     }
